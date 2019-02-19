@@ -1,0 +1,2 @@
+# KPIDotNetLabs
+Educational project foruniversity.
