@@ -13,12 +13,12 @@ namespace AcademicPerformanceUI.ViewModels
 
         public MenuViewModel()
         {
-            this.Menu.Add(new MenuItem() { Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.ObjectGroupRegular }, Text = "Groups", NavigationDestination = new Uri("Views/GroupView.xaml", UriKind.RelativeOrAbsolute) });
-            this.Menu.Add(new MenuItem() { Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.UserSolid }, Text = "Student", NavigationDestination = new Uri("Views/StudentView.xaml", UriKind.RelativeOrAbsolute) });
-            this.Menu.Add(new MenuItem() { Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.CoffeeSolid }, Text = "TEST", NavigationDestination = new Uri("Views/SubjectView.xaml", UriKind.RelativeOrAbsolute) });
-            this.Menu.Add(new MenuItem() { Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.FontAwesomeBrands }, Text = "TEST", NavigationDestination = new Uri("Views/TeacherView.xaml", UriKind.RelativeOrAbsolute) });
-            this.Menu.Add(new MenuItem() { Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.FontAwesomeBrands }, Text = "TEST", NavigationDestination = new Uri("Views/TestView.xaml", UriKind.RelativeOrAbsolute) });
-            this.Menu.Add(new MenuItem() { Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.FontAwesomeBrands }, Text = "TEST", NavigationDestination = new Uri("Views/TestResultView.xaml", UriKind.RelativeOrAbsolute) });
+            this.Menu.Add(new MenuItem() { Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.UserFriendsSolid }, Text = "Groups", NavigationDestination = new Uri("Views/GroupView.xaml", UriKind.RelativeOrAbsolute) });
+            this.Menu.Add(new MenuItem() { Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.UserSolid }, Text = "Students", NavigationDestination = new Uri("Views/StudentView.xaml", UriKind.RelativeOrAbsolute) });
+            this.Menu.Add(new MenuItem() { Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.CoffeeSolid }, Text = "Subjects", NavigationDestination = new Uri("Views/SubjectView.xaml", UriKind.RelativeOrAbsolute) });
+            this.Menu.Add(new MenuItem() { Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.UserSlashSolid }, Text = "Teachers", NavigationDestination = new Uri("Views/TeacherView.xaml", UriKind.RelativeOrAbsolute) });
+            this.Menu.Add(new MenuItem() { Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.MarkerSolid }, Text = "Tests", NavigationDestination = new Uri("Views/TestView.xaml", UriKind.RelativeOrAbsolute) });
+            this.Menu.Add(new MenuItem() { Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.MoonSolid }, Text = "Results", NavigationDestination = new Uri("Views/TestResultView.xaml", UriKind.RelativeOrAbsolute) });
             this.Menu.Add(new MenuItem() { Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.FontAwesomeBrands }, Text = "TEST", NavigationDestination = new Uri("Views/SubjectInGroupView.xaml", UriKind.RelativeOrAbsolute) });
             this.Menu.Add(new MenuItem() { Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.FontAwesomeBrands }, Text = "TEST", NavigationDestination = new Uri("Views/StudentInInGroupView.xaml", UriKind.RelativeOrAbsolute) });
 
