@@ -23,7 +23,7 @@ namespace AcademicPerformanceUI.ViewModels
             set => SetProperty(ref _SelectedGroup, value);
         }
 
-        public ObservableCollection<Group> DriverShifts
+        public ObservableCollection<Group> Groups
         {
             get => _Groups;
             set => SetProperty(ref _Groups, value);
@@ -50,7 +50,7 @@ namespace AcademicPerformanceUI.ViewModels
             ObjectLists.Groups = ObjectLists.Groups
                                             .Where(x => x.Id != _SelectedGroup.Id)
                                             .ToList();
-            DriverShifts.Remove(SelectedGroup);
+            Groups.Remove(SelectedGroup);
             SelectedGroup = new Group();
         }
     }
