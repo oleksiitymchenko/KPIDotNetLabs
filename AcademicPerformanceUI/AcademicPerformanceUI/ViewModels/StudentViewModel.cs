@@ -10,6 +10,7 @@ namespace AcademicPerformanceUI.ViewModels
     {
         private ObservableCollection<Student> _Students;
         private Student _SelectedStudent;
+        public ObservableCollection<Guid> GroupIds { get; set; }
 
         public StudentViewModel()
         {
@@ -32,6 +33,7 @@ namespace AcademicPerformanceUI.ViewModels
         public void LoadData()
         {
             _Students = new ObservableCollection<Student>(ObjectLists.Students);
+            GroupIds = new ObservableCollection<Guid>(ObjectLists.Groups.Select(o => o.Id));
         }
 
         public void AddData()

@@ -9,7 +9,7 @@ namespace DataAccess.Models
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
 
-        private Guid GroupId { get; set; }
+        public Guid GroupId { get; set; }
         public Group Group
         {
             get => ObjectLists.Groups.Find(g => g.Id == GroupId);
