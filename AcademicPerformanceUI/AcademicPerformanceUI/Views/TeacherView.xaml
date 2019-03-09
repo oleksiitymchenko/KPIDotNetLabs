@@ -24,7 +24,7 @@
                             <TextBlock FontSize="15" FontWeight="Bold" Text="{Binding FirstName, StringFormat='Firstname: {0}'}"/>
                             <TextBlock FontSize="15" FontWeight="Bold" Text="{Binding LastName, StringFormat='Lastname: {0}'}"/>
                             <TextBlock FontSize="15" Text="{Binding PhoneNumber, StringFormat='Number: {0}'}"/>
-                            <TextBlock FontSize="15" Text="{Binding Subject.Name, StringFormat='Group: {0}'}"/>
+                            <TextBlock FontSize="15" Text="{Binding SubjectId, StringFormat='Group: {0}'}"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>

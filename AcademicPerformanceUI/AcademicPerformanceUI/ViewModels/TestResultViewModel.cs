@@ -49,6 +49,7 @@ namespace AcademicPerformanceUI.ViewModels
             };
             ObjectLists.TestResults.Add(newTestResult);
             TestResults.Add(newTestResult);
+            var x = TestResults;
         }
 
         public void RemoveData()

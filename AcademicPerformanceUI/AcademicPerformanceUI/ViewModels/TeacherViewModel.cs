@@ -46,8 +46,11 @@ namespace AcademicPerformanceUI.ViewModels
                 PhoneNumber = _SelectedTeacher.PhoneNumber,
                 SubjectId = _SelectedTeacher.SubjectId
             };
-            ObjectLists.Teachers.Add(newTeacher);
             Teachers.Add(newTeacher);
+            ObjectLists.Teachers.Add(newTeacher);
+            Console.WriteLine(newTeacher.SubjectId);
+            SelectedTeacher = new Teacher();
+
         }
 
         public void RemoveData()

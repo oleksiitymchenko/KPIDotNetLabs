@@ -7,7 +7,7 @@ namespace DataAccess.Models
         public Guid Id { get; set; }
         public int Mark { get; set; }
 
-        public Guid TestId;
+        public Guid TestId { get; set; }
         public Test Test
         {
             get => ObjectLists.Tests.Find(o => o.Id == TestId);
@@ -19,7 +19,7 @@ namespace DataAccess.Models
             }
         }
 
-        public Guid StudentId;
+        public Guid StudentId { get; set; }
         public Student Student
         {
             get => ObjectLists.Students.Find(o => o.Id == StudentId);

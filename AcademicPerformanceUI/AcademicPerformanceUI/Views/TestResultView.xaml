@@ -21,10 +21,8 @@
                         <StackPanel Orientation="Vertical">
                             <TextBlock FontSize="15" Text="{Binding Id, StringFormat='Id: {0}'}"/>
                             <TextBlock FontSize="15" FontWeight="Bold" Text="{Binding Mark, StringFormat='Mark: {0}'}"/>
-                            <TextBlock FontSize="15" Text="{Binding Test.Name, StringFormat='Test name: {0}'}"/>
-                            <TextBlock FontSize="15" Text="{Binding Test.Theme, StringFormat='Test theme: {0}'}"/>
-                            <TextBlock FontSize="15" Text="{Binding Student.FirstName, StringFormat='Student`s firstname: {0}'}"/>
-                            <TextBlock FontSize="15" Text="{Binding Student.FirstName, StringFormat='Student`s lastname: {0}'}"/>
+                            <TextBlock FontSize="15" FontWeight="Bold" Text="{Binding TestId, StringFormat='Test id: {0}'}"/>
+                            <TextBlock FontSize="15" FontWeight="Bold" Text="{Binding StudentId, StringFormat='Student id: {0}'}"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>

@@ -6,7 +6,7 @@ namespace DataAccess.Models
     {
         public Guid Id { get; set; }
 
-        public Guid SubjectId;
+        public Guid SubjectId { get; set; }
         public Subject Subject
         {
             get => ObjectLists.Subjects.Find((Predicate<Subject>)(o => o.Id == this.SubjectId));
