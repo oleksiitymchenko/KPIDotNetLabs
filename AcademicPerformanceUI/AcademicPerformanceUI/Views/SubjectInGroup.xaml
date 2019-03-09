@@ -1,0 +1,43 @@
+﻿<Page x:Class="AcademicPerformanceUI.Views.SubjectInGroupView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:viewModels="clr-namespace:AcademicPerformanceUI.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SubjectInGroupView">
+
+    <Page.DataContext>
+        <viewModels:SubjectInGroupViewModel>
+        </viewModels:SubjectInGroupViewModel>
+    </Page.DataContext>
+    <Grid>
+        <ListBox Margin="1,0,478,0" SelectedItem="{Binding Path=SelectedSubjectInGroup, Mode=TwoWay}" ItemsSource="{Binding SubjectInGroups}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock FontSize="15" Text="{Binding Id, StringFormat='Id: {0}'}"/>
+                            <TextBlock FontSize="15" FontWeight="Bold" Text="{Binding Subject.Name, StringFormat='Subject: {0}'}"/>
+                            <TextBlock FontSize="15" Text="{Binding Group.GroupName, StringFormat='Group name: {0}'}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Orientation="Vertical" Margin="404,0,0,10">
+            <Label Margin="10,0,10,0" Content="Input subject id:"></Label>
+            <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedSubjectInGroup.SubjectId}"
+                      ItemsSource="{Binding SubjectIds}"/>
+            <Label Margin="10,0,10,0" Content="Input group id:"></Label>
+            <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedSubjectInGroup.GroupId}"
+                      ItemsSource="{Binding GroupsIds}"/>
+
+            <Button Margin="80,20,80,0" Content="Create" Click="Add_SubjectInGroup_OnClick"/>
+            <Button Margin="80,20,80,0" Content="Delete" Click="Remove_SubjectInGroup_OnClick"/>
+         <!--   <Button Margin="80,20,80,0" Content="Update" Click="Update_SubjectInGroup_OnClick"/>-->
+        </StackPanel>
+    </Grid>
+</Page>

@@ -6,10 +6,10 @@ namespace DataAccess.Models
     {
         public Guid Id { get; set; }
 
-        private Guid SubjectId;
+        public Guid SubjectId;
         public Subject Subject
         {
-            get => ObjectLists.Subjects.Find(o => o.Id == SubjectId);
+            get => ObjectLists.Subjects.Find((Predicate<Subject>)(o => o.Id == this.SubjectId));
             set
             {
                 SubjectId = ObjectLists.Subjects.Exists(s => s.Id == value.Id)
@@ -18,7 +18,7 @@ namespace DataAccess.Models
             }
         }
 
-        private Guid GroupId { get; set; }
+        public Guid GroupId { get; set; }
         public Group Group
         {
             get => ObjectLists.Groups.Find(g => g.Id == GroupId);

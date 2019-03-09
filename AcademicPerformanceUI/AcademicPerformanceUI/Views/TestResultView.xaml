@@ -11,7 +11,6 @@
 
     <Page.DataContext>
         <viewModels:TestResultViewModel>
-
         </viewModels:TestResultViewModel>
     </Page.DataContext>
     <Grid>
@@ -32,21 +31,18 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Orientation="Vertical" Margin="404,0,0,10">
-            <Label Margin="10,70,10,0" Content="Input mark:"></Label>
+            <Label Margin="10,10,10,0" Content="Input mark:"></Label>
             <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedTestResult.Mark}"/>
-           
-
             <Label Margin="10,0,10,0" Content="Input student id:"></Label>
             <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedTestResult.StudentId}"
                       ItemsSource="{Binding StudentIds}"/>
-
             <Label Margin="10,0,10,0" Content="Input test id:"></Label>
             <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedTestResult.TestId}"
                       ItemsSource="{Binding TestIds}"/>
-
+            
             <Button Margin="80,20,80,0" Content="Create" Click="Add_TestResult_OnClick"/>
             <Button Margin="80,20,80,0" Content="Delete" Click="Remove_TestResult_OnClick"/>
-            <Button Margin="80,20,80,0" Content="Update" Click="Update_TestResult_OnClick"/>
+            <!--<Button Margin="80,20,80,0" Content="Update" Click="Update_TestResult_OnClick"/>-->
         </StackPanel>
     </Grid>
 </Page>
