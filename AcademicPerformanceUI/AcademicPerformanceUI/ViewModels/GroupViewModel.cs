@@ -38,7 +38,7 @@ namespace AcademicPerformanceUI.ViewModels
         {
             var newGroup = new Group() {
                 Id = Guid.NewGuid(),
-                FacultyName = _SelectedGroup.FacultyName,
+                GroupName = _SelectedGroup.GroupName,
                 StudyYear = _SelectedGroup.StudyYear,
                 MaxStudents = _SelectedGroup.MaxStudents
             };

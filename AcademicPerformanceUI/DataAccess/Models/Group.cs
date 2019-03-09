@@ -5,8 +5,7 @@ namespace DataAccess.Models
     public class Group : IEntity
     {
         public Guid Id { get; set; }
-        public string FacultyName { get; set; }
-
+        public string GroupName { get; set; }
         private int maxStudents;
         public int MaxStudents
         {

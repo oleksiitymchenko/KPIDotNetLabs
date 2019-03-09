@@ -3,12 +3,43 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:AcademicPerformanceUI.Views"
+      xmlns:local="clr-namespace:AcademicPerfomanceUI.Views"
+      xmlns:viewModels="clr-namespace:AcademicPerformanceUI.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GroupView">
 
+    <Page.DataContext>
+        <viewModels:GroupViewModel>
+
+        </viewModels:GroupViewModel>
+    </Page.DataContext>
     <Grid>
-        
+        <ListBox Margin="1,0,401,0" SelectedItem="{Binding Path=SelectedGroup, Mode=TwoWay}" ItemsSource="{Binding Groups}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding Id, StringFormat='Id: {0}'}"/>
+                            <TextBlock FontSize="20" FontWeight="Bold" Text="{Binding GroupName, StringFormat='Name: {0}'}"/>
+                            <TextBlock FontSize="20" Text="{Binding StudyYear, StringFormat='Study year: {0}'}"/>
+                            <TextBlock FontSize="20" Text="{Binding MaxStudents, StringFormat='Max students: {0}'}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Orientation="Vertical" Margin="404,0,0,10">
+            <Label Margin="10,70,10,0" Content="Input name:"></Label>
+            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedDriver.GroupName}"/>
+            <Label Margin="10,0,10,0" Content="Input study year:"></Label>
+            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedDriver.StudyYear}"/>
+            <Label Margin="10,0,10,0" Content="Input max students:"></Label>
+            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedDriver.MaxStudents}"/>
+
+            <Button Margin="80,20,80,0" Content="Create" Click="Add_Group_OnClick"/>
+            <Button Margin="80,20,80,0" Content="Delete" Click="Remove_Group_OnClick"/>
+        <!--    <Button Margin="80,20,80,0" Visibility="{Binding UpdateBtnVisibility}" Content="Update" Click="Update_DriverShift_OnClick"/>
+       --> </StackPanel>
     </Grid>
 </Page>
