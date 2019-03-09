@@ -1,11 +1,8 @@
 ﻿using DataAccess;
 using DataAccess.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AcademicPerformanceUI.ViewModels
 {
@@ -36,6 +33,7 @@ namespace AcademicPerformanceUI.ViewModels
         public void LoadData()
         {
             _Teachers = new ObservableCollection<Teacher>(ObjectLists.Teachers);
+            SubjectIds = new ObservableCollection<Guid>(ObjectLists.Subjects.Select(o => o.Id));
         }
 
         public void AddData()
@@ -46,7 +44,7 @@ namespace AcademicPerformanceUI.ViewModels
                 FirstName = _SelectedTeacher.FirstName,
                 LastName = _SelectedTeacher.LastName,
                 PhoneNumber = _SelectedTeacher.PhoneNumber,
-                Subject = _SelectedTeacher.Subject
+                SubjectId = _SelectedTeacher.SubjectId
             };
             ObjectLists.Teachers.Add(newTeacher);
             Teachers.Add(newTeacher);
@@ -70,7 +68,7 @@ namespace AcademicPerformanceUI.ViewModels
                 FirstName = _SelectedTeacher.FirstName,
                 LastName = _SelectedTeacher.LastName,
                 PhoneNumber = _SelectedTeacher.PhoneNumber,
-                Subject = _SelectedTeacher.Subject
+                SubjectId = _SelectedTeacher.SubjectId
             };
             var x = Teachers.ToList().Find(o => o.Id == SelectedTeacher.Id);
             x = data;

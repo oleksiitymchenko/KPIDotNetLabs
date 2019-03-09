@@ -8,9 +8,8 @@ namespace DataAccess.Models
         public string Name { get; set; }
         public string Theme { get; set; }
         public DateTime Date { get; set; }
-        public FinalTestType FinalTestType { get; set; }
 
-        private Guid TeacherId;
+        public Guid TeacherId;
         public Teacher Teacher
         {
             get => ObjectLists.Teachers.Find(t => t.Id == TeacherId);

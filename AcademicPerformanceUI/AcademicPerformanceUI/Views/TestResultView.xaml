@@ -1,0 +1,52 @@
+﻿<Page x:Class="AcademicPerformanceUI.Views.TestResultView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:viewModels="clr-namespace:AcademicPerformanceUI.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TestResultView">
+
+    <Page.DataContext>
+        <viewModels:TestResultViewModel>
+
+        </viewModels:TestResultViewModel>
+    </Page.DataContext>
+    <Grid>
+        <ListBox Margin="1,0,401,0" SelectedItem="{Binding Path=SelectedTestResult, Mode=TwoWay}" ItemsSource="{Binding TestResults}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock FontSize="15" Text="{Binding Id, StringFormat='Id: {0}'}"/>
+                            <TextBlock FontSize="15" FontWeight="Bold" Text="{Binding Mark, StringFormat='Mark: {0}'}"/>
+                            <TextBlock FontSize="15" Text="{Binding Test.Name, StringFormat='Test name: {0}'}"/>
+                            <TextBlock FontSize="15" Text="{Binding Test.Theme, StringFormat='Test theme: {0}'}"/>
+                            <TextBlock FontSize="15" Text="{Binding Student.FirstName, StringFormat='Student`s firstname: {0}'}"/>
+                            <TextBlock FontSize="15" Text="{Binding Student.FirstName, StringFormat='Student`s lastname: {0}'}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Orientation="Vertical" Margin="404,0,0,10">
+            <Label Margin="10,70,10,0" Content="Input mark:"></Label>
+            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedTestResult.Mark}"/>
+           
+
+            <Label Margin="10,0,10,0" Content="Input student id:"></Label>
+            <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedTestResult.StudentId}"
+                      ItemsSource="{Binding StudentIds}"/>
+
+            <Label Margin="10,0,10,0" Content="Input test id:"></Label>
+            <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedTestResult.TestId}"
+                      ItemsSource="{Binding TestIds}"/>
+
+            <Button Margin="80,20,80,0" Content="Create" Click="Add_TestResult_OnClick"/>
+            <Button Margin="80,20,80,0" Content="Delete" Click="Remove_TestResult_OnClick"/>
+            <Button Margin="80,20,80,0" Content="Update" Click="Update_TestResult_OnClick"/>
+        </StackPanel>
+    </Grid>
+</Page>
