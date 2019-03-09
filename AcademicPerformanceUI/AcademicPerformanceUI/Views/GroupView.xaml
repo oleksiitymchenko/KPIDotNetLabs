@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
       xmlns:viewModels="clr-namespace:AcademicPerformanceUI.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -17,13 +18,13 @@
         <ListBox Margin="1,0,401,0" SelectedItem="{Binding Path=SelectedGroup, Mode=TwoWay}" ItemsSource="{Binding Groups}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding Id, StringFormat='Id: {0}'}"/>
-                            <TextBlock FontSize="20" FontWeight="Bold" Text="{Binding GroupName, StringFormat='Name: {0}'}"/>
-                            <TextBlock FontSize="20" Text="{Binding StudyYear, StringFormat='Study year: {0}'}"/>
-                            <TextBlock FontSize="20" Text="{Binding MaxStudents, StringFormat='Max students: {0}'}"/>
-                        </StackPanel>
+                           <StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock FontSize="15" Text="{Binding Id, StringFormat='Id: {0}'}"/>
+                                <TextBlock FontSize="15" FontWeight="Bold" Text="{Binding GroupName, StringFormat='Name: {0}'}"/>
+                                <TextBlock FontSize="15" Text="{Binding StudyYear, StringFormat='Study year: {0}'}"/>
+                                <TextBlock FontSize="15" Text="{Binding MaxStudents, StringFormat='Max students: {0}'}"/>
+                            </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -38,7 +39,7 @@
 
             <Button Margin="80,20,80,0" Content="Create" Click="Add_Group_OnClick"/>
             <Button Margin="80,20,80,0" Content="Delete" Click="Remove_Group_OnClick"/>
-        <!--    <Button Margin="80,20,80,0" Visibility="{Binding UpdateBtnVisibility}" Content="Update" Click="Update_DriverShift_OnClick"/>
-       --> </StackPanel>
+            <Button Margin="80,20,80,0" Content="Update" Click="Update_Group_OnClick"/>
+        </StackPanel>
     </Grid>
 </Page>

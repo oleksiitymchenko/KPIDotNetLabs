@@ -23,9 +23,9 @@ namespace AcademicPerformanceUI.Views
             GroupViewModel.AddData();
         }
 
-        private void Update_DriverShift_OnClick(object sender, RoutedEventArgs e)
+        private void Update_Group_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            GroupViewModel.UpdateData();
         }
 
         private void Remove_Group_OnClick(object sender, RoutedEventArgs e)

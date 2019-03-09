@@ -43,6 +43,7 @@ namespace AcademicPerformanceUI.ViewModels
                 MaxStudents = _SelectedGroup.MaxStudents
             };
             ObjectLists.Groups.Add(newGroup);
+            Groups.Add(newGroup);
         }
 
         public void RemoveData()
@@ -52,6 +53,20 @@ namespace AcademicPerformanceUI.ViewModels
                                             .ToList();
             Groups.Remove(SelectedGroup);
             SelectedGroup = new Group();
+        }
+
+        public void UpdateData()
+        {
+            var data = ObjectLists.Groups.Find(o => o.Id == SelectedGroup.Id);
+            data = new Group()
+            {
+                Id = _SelectedGroup.Id,
+                GroupName = _SelectedGroup.GroupName,
+                StudyYear = _SelectedGroup.StudyYear,
+                MaxStudents = _SelectedGroup.MaxStudents
+            };
+            var x = Groups.ToList().Find(o => o.Id == SelectedGroup.Id);
+            x = data;
         }
     }
 }
