@@ -7,8 +7,6 @@ namespace DataAccess.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public FinalTestType FinalTestType { get; set; }
-
         public double Hours { get; set; }
-      
     }
 }

@@ -9,7 +9,7 @@ namespace DataAccess.Models
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
 
-        private Guid SubjectId;
+        public Guid SubjectId;
         public Subject Subject
         {
             get => ObjectLists.Subjects.Find(s => s.Id == SubjectId);
