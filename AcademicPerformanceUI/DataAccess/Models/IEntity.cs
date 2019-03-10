@@ -2,7 +2,7 @@
 
 namespace DataAccess.Models
 {
-    public interface IEntity
+    public interface IEntity:ICloneable
     {
         Guid Id { get; set; }
     }

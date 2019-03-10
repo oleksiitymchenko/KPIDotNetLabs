@@ -13,12 +13,15 @@ namespace DataAccess.Models
         public Group Group
         {
             get => ObjectLists.Groups.Find(g => g.Id == GroupId);
-            set
-            {
-                GroupId = ObjectLists.Groups.Exists(g => g.Id == value.Id) ? 
-                                                                  value.Id : 
-                                                                  throw new FormatException("Group with specified Id not exists");
-            }
         }
+
+        public object Clone() => new Student()
+            {
+                Id = this.Id,
+                FirstName = this.FirstName,
+                LastName = this.LastName,
+                PhoneNumber = this.PhoneNumber,
+                GroupId = this.GroupId
+            };
     }
 }

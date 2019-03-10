@@ -8,5 +8,13 @@ namespace DataAccess.Models
         public string Name { get; set; }
         public FinalTestType FinalTestType { get; set; }
         public double Hours { get; set; }
+
+        public object Clone() => new Subject()
+        {
+            Id = this.Id,
+            Name = this.Name,
+            FinalTestType = this.FinalTestType,
+            Hours = this.Hours
+        };
     }
 }

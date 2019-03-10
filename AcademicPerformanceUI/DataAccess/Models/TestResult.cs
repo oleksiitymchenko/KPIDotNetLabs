@@ -11,24 +11,20 @@ namespace DataAccess.Models
         public Test Test
         {
             get => ObjectLists.Tests.Find(o => o.Id == TestId);
-            set
-            {
-                TestId = ObjectLists.Subjects.Exists(s => s.Id == value.Id)
-                    ? value.Id
-                    : throw new FormatException("Test with specified Id not exists");
-            }
         }
 
         public Guid StudentId { get; set; }
         public Student Student
         {
             get => ObjectLists.Students.Find(o => o.Id == StudentId);
-            set
-            {
-                StudentId = ObjectLists.Subjects.Exists(s => s.Id == value.Id)
-                    ? value.Id
-                    : throw new FormatException("Student with specified Id not exists");
-            }
         }
+
+        public object Clone() => new TestResult()
+        {
+            Id = this.Id,
+            Mark = this.Mark,
+            TestId = this.TestId,
+            StudentId = this.StudentId
+        };
     }
 }

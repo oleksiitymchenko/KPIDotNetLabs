@@ -13,12 +13,15 @@ namespace DataAccess.Models
         public Teacher Teacher
         {
             get => ObjectLists.Teachers.Find(t => t.Id == TeacherId);
-            set
-            {
-                TeacherId = ObjectLists.Teachers.Exists(t => t.Id == value.Id)
-                    ? value.Id
-                    : throw new FormatException("Teacher with specified Id not exists");
-            }
         }
+
+        public object Clone() => new Test()
+        {
+            Id = this.Id,
+            Name = this.Name,
+            Theme = this.Theme,
+            Date = this.Date,
+            TeacherId = this.TeacherId
+        };
     }
 }

@@ -13,12 +13,15 @@ namespace DataAccess.Models
         public Subject Subject
         {
             get => ObjectLists.Subjects.Find(s => s.Id == SubjectId);
-            set
-            {
-                SubjectId = ObjectLists.Subjects.Exists(s => s.Id == value.Id) 
-                    ? value.Id 
-                    : throw new FormatException("Subject with specified Id not exists"); 
-            }
         }
+
+        public object Clone() => new Teacher()
+        {
+            Id = this.Id,
+            FirstName = this.FirstName,
+            LastName = this.LastName,
+            PhoneNumber = this.PhoneNumber,
+            SubjectId = this.SubjectId
+        };
     }
 }

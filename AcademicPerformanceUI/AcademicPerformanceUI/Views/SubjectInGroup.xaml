@@ -14,7 +14,7 @@
         </viewModels:SubjectInGroupViewModel>
     </Page.DataContext>
     <Grid>
-        <ListBox Margin="1,0,478,0" SelectedItem="{Binding Path=SelectedSubjectInGroup, Mode=TwoWay}" ItemsSource="{Binding SubjectInGroups}">
+        <ListBox Margin="1,0,401,0" SelectedItem="{Binding Path=SelectedSubjectInGroup, Mode=TwoWay}" ItemsSource="{Binding SubjectInGroups}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
