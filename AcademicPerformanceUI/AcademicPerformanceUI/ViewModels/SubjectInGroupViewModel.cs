@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace AcademicPerformanceUI.ViewModels
 {
-    public class SubjectInGroupViewModel:BaseViewModel
+    public class SubjectInGroupViewModel:BaseViewModel<SubjectInGroup>
     {
         private ObservableCollection<SubjectInGroup> _SubjectInGroups;
         private SubjectInGroup _SelectedSubjectInGroup;
@@ -33,9 +33,9 @@ namespace AcademicPerformanceUI.ViewModels
 
         public void LoadData()
         {
-            _SubjectInGroups = new ObservableCollection<SubjectInGroup>(ObjectLists.SubjectInGroups);
-            SubjectIds = new ObservableCollection<Guid>(ObjectLists.Subjects.Select(o => o.Id));
-            GroupsIds = new ObservableCollection<Guid>(ObjectLists.Groups.Select(o => o.Id));
+            _SubjectInGroups = new ObservableCollection<SubjectInGroup>(InMemory.SubjectInGroups);
+            SubjectIds = new ObservableCollection<Guid>(InMemory.Subjects.Select(o => o.Id));
+            GroupsIds = new ObservableCollection<Guid>(InMemory.Groups.Select(o => o.Id));
         }
 
         public void AddData()
@@ -46,13 +46,13 @@ namespace AcademicPerformanceUI.ViewModels
                 GroupId = SelectedSubjectInGroup.GroupId,
                 SubjectId = SelectedSubjectInGroup.SubjectId
             };
-            ObjectLists.SubjectInGroups.Add(newSubjectInGroup);
+            InMemory.SubjectInGroups.Add(newSubjectInGroup);
             SubjectInGroups.Add(newSubjectInGroup);
         }
 
         public void RemoveData()
         {
-            ObjectLists.SubjectInGroups = ObjectLists.SubjectInGroups
+            InMemory.SubjectInGroups = InMemory.SubjectInGroups
                                             .Where(x => x.Id != _SelectedSubjectInGroup.Id)
                                             .ToList();
             SubjectInGroups.Remove(SelectedSubjectInGroup);
@@ -61,7 +61,7 @@ namespace AcademicPerformanceUI.ViewModels
 
         public void UpdateData()
         {
-            var data = ObjectLists.SubjectInGroups.Find(o => o.Id == SelectedSubjectInGroup.Id);
+            var data = InMemory.SubjectInGroups.Find(o => o.Id == SelectedSubjectInGroup.Id);
             data = new SubjectInGroup()
             {
                 Id = _SelectedSubjectInGroup.Id,

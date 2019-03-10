@@ -12,7 +12,7 @@ namespace DataAccess.Models
         public Guid SubjectId { get; set; }
         public Subject Subject
         {
-            get => ObjectLists.Subjects.Find(s => s.Id == SubjectId);
+            get => InMemory.Subjects.Find(s => s.Id == SubjectId);
         }
 
         public object Clone() => new Teacher()

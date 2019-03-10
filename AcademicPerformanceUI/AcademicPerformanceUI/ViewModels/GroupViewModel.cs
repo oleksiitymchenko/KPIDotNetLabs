@@ -6,7 +6,7 @@ using DataAccess.Models;
 
 namespace AcademicPerformanceUI.ViewModels
 {
-    public class GroupViewModel:BaseViewModel
+    public class GroupViewModel:BaseViewModel<Group>
     {
         private ObservableCollection<Group> _Groups;
         private Group _SelectedGroup;
@@ -31,7 +31,7 @@ namespace AcademicPerformanceUI.ViewModels
 
         public void LoadData()
         {
-           _Groups = new ObservableCollection<Group>(ObjectLists.Groups);
+           _Groups = new ObservableCollection<Group>(InMemory.Groups);
         }
 
         public void AddData()
@@ -42,13 +42,13 @@ namespace AcademicPerformanceUI.ViewModels
                 StudyYear = _SelectedGroup.StudyYear,
                 MaxStudents = _SelectedGroup.MaxStudents
             };
-            ObjectLists.Groups.Add(newGroup);
+            InMemory.Groups.Add(newGroup);
             Groups.Add(newGroup);
         }
 
         public void RemoveData()
         {
-            ObjectLists.Groups = ObjectLists.Groups
+            InMemory.Groups = InMemory.Groups
                                             .Where(x => x.Id != _SelectedGroup.Id)
                                             .ToList();
             Groups.Remove(SelectedGroup);
@@ -57,7 +57,7 @@ namespace AcademicPerformanceUI.ViewModels
 
         public void UpdateData()
         {
-            var data = ObjectLists.Groups.Find(o => o.Id == SelectedGroup.Id);
+            var data = InMemory.Groups.Find(o => o.Id == SelectedGroup.Id);
             data = new Group()
             {
                 Id = _SelectedGroup.Id,

@@ -15,7 +15,7 @@
         </viewModels:TeacherViewModel>
     </Page.DataContext>
     <Grid>
-        <ListBox Margin="1,0,401,0" SelectedItem="{Binding Path=SelectedTeacher, Mode=TwoWay}" ItemsSource="{Binding Teachers}">
+        <ListBox Margin="1,0,401,0" SelectedItem="{Binding Path=SelectedEntity, Mode=TwoWay}" ItemsSource="{Binding Entities}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -32,13 +32,13 @@
         </ListBox>
         <StackPanel Orientation="Vertical" Margin="404,0,0,10">
             <Label Margin="10,70,10,0" Content="Input firstname:"></Label>
-            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedTeacher.FirstName}"/>
+            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedEntity.FirstName}"/>
             <Label Margin="10,0,10,0" Content="Input lastname:"></Label>
-            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedTeacher.LastName}"/>
+            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedEntity.LastName}"/>
             <Label Margin="10,0,10,0" Content="Input phone:"></Label>
-            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedTeacher.PhoneNumber}"/>
+            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedEntity.PhoneNumber}"/>
             <Label Margin="10,0,10,0" Content="Input subject id:"></Label>
-            <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedTeacher.SubjectId}"
+            <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedEntity.SubjectId}"
                       ItemsSource="{Binding SubjectIds}"/>
 
             <Button Margin="80,20,80,0" Content="Create" Click="Add_Teacher_OnClick"/>

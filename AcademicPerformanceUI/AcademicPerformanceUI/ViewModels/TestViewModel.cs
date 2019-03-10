@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace AcademicPerformanceUI.ViewModels
 {
-    public class TestViewModel: BaseViewModel
+    public class TestViewModel: BaseViewModel<Test>
     {
         private ObservableCollection<Test> _Tests;
         private Test _SelectedTest;
@@ -32,8 +32,8 @@ namespace AcademicPerformanceUI.ViewModels
 
         public void LoadData()
         {
-            _Tests = new ObservableCollection<Test>(ObjectLists.Tests);
-            TeacherIds = new ObservableCollection<Guid>(ObjectLists.Teachers.Select(o => o.Id));
+            _Tests = new ObservableCollection<Test>(InMemory.Tests);
+            TeacherIds = new ObservableCollection<Guid>(InMemory.Teachers.Select(o => o.Id));
         }
 
         public void AddData()
@@ -46,13 +46,13 @@ namespace AcademicPerformanceUI.ViewModels
                 TeacherId = _SelectedTest.TeacherId,
                 Date = _SelectedTest.Date
             };
-            ObjectLists.Tests.Add(newTest);
+            InMemory.Tests.Add(newTest);
             Tests.Add(newTest);
         }
 
         public void RemoveData()
         {
-            ObjectLists.Tests = ObjectLists.Tests
+            InMemory.Tests = InMemory.Tests
                                             .Where(x => x.Id != _SelectedTest.Id)
                                             .ToList();
             Tests.Remove(SelectedTest);
@@ -61,7 +61,7 @@ namespace AcademicPerformanceUI.ViewModels
 
         public void UpdateData()
         {
-            var data = ObjectLists.Tests.Find(o => o.Id == SelectedTest.Id);
+            var data = InMemory.Tests.Find(o => o.Id == SelectedTest.Id);
             data = new Test()
             {
                 Id = _SelectedTest.Id,

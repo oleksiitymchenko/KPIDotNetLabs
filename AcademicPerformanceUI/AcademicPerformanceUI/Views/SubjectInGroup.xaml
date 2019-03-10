@@ -14,7 +14,7 @@
         </viewModels:SubjectInGroupViewModel>
     </Page.DataContext>
     <Grid>
-        <ListBox Margin="1,0,401,0" SelectedItem="{Binding Path=SelectedSubjectInGroup, Mode=TwoWay}" ItemsSource="{Binding SubjectInGroups}">
+        <ListBox Margin="1,0,401,0" SelectedItem="{Binding Path=SelectedEntity, Mode=TwoWay}" ItemsSource="{Binding Entities}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -29,10 +29,10 @@
         </ListBox>
         <StackPanel Orientation="Vertical" Margin="404,0,0,10">
             <Label Margin="10,0,10,0" Content="Input subject id:"></Label>
-            <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedSubjectInGroup.SubjectId}"
+            <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedEntity.SubjectId}"
                       ItemsSource="{Binding SubjectIds}"/>
             <Label Margin="10,0,10,0" Content="Input group id:"></Label>
-            <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedSubjectInGroup.GroupId}"
+            <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedEntity.GroupId}"
                       ItemsSource="{Binding GroupsIds}"/>
 
             <Button Margin="80,20,80,0" Content="Create" Click="Add_SubjectInGroup_OnClick"/>

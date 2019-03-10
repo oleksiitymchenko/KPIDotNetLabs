@@ -15,7 +15,7 @@
         </viewModels:TestViewModel>
     </Page.DataContext>
     <Grid>
-        <ListBox Margin="1,0,401,0" SelectedItem="{Binding Path=SelectedTest, Mode=TwoWay}" ItemsSource="{Binding Tests}">
+        <ListBox Margin="1,0,401,0" SelectedItem="{Binding Path=SelectedEntity, Mode=TwoWay}" ItemsSource="{Binding Entities}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -33,13 +33,13 @@
         </ListBox>
         <StackPanel Orientation="Vertical" Margin="404,0,0,10">
             <Label Margin="10,10,10,0" Content="Input Name:"></Label>
-            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedTest.Name}"/>
+            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedEntity.Name}"/>
             <Label Margin="10,10,10,0" Content="Input Theme:"></Label>
-            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedTest.Theme}"/>
+            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedEntity.Theme}"/>
             <Label Margin="10,10,10,0" Content="Input Date:"></Label>
-            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedTest.Date}"/>
+            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedEntity.Date}"/>
             <Label Margin="10,0,10,0" Content="Input teacher id:"></Label>
-            <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedTest.TeacherId}"
+            <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedEntity.TeacherId}"
                       ItemsSource="{Binding TeacherIds}"/>
 
             <Button Margin="80,20,80,0" Content="Create" Click="Add_Test_OnClick"/>

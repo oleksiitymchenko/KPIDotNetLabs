@@ -23,7 +23,7 @@
         </viewModels:SubjectViewModel>
     </Page.DataContext>
     <Grid>
-        <ListBox Margin="1,0,401,0" SelectedItem="{Binding Path=SelectedSubject, Mode=TwoWay}" ItemsSource="{Binding Subjects}">
+        <ListBox Margin="1,0,401,0" SelectedItem="{Binding Path=SelectedEntity, Mode=TwoWay}" ItemsSource="{Binding Entities}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -39,11 +39,11 @@
         </ListBox>
         <StackPanel Orientation="Vertical" Margin="404,0,0,10">
             <Label Margin="10,70,10,0" Content="Input name:"></Label>
-            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedSubject.Name}"/>
+            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedEntity.Name}"/>
             <Label Margin="10,0,10,0" Content="Input hours:"></Label>
-            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedSubject.Hours}"/>
+            <TextBox Margin="10,0,10,0" Height="23" Text="{Binding SelectedEntity.Hours}"/>
             <Label Margin="10,0,10,0" Content="Input final test type:"></Label>
-            <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedSubject.FinalTestType}"
+            <ComboBox Margin="10,0,10,0" Height="23" SelectedItem="{Binding SelectedEntity.FinalTestType}"
                       ItemsSource="{Binding Source={StaticResource FinalTestType}}"/>
 
             <Button Margin="80,20,80,0" Content="Create" Click="Add_Subject_OnClick"/>

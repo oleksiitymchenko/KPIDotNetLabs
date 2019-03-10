@@ -12,7 +12,7 @@ namespace DataAccess.Models
         public Guid TeacherId;
         public Teacher Teacher
         {
-            get => ObjectLists.Teachers.Find(t => t.Id == TeacherId);
+            get => InMemory.Teachers.Find(t => t.Id == TeacherId);
         }
 
         public object Clone() => new Test()

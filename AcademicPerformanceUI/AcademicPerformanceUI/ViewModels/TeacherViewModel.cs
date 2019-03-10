@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace AcademicPerformanceUI.ViewModels
 {
-    public class TeacherViewModel:BaseViewModel
+    public class TeacherViewModel:BaseViewModel<Teacher>
     {
         private ObservableCollection<Teacher> _Teachers;
         private Teacher _SelectedTeacher;
@@ -32,8 +32,8 @@ namespace AcademicPerformanceUI.ViewModels
 
         public void LoadData()
         {
-            _Teachers = new ObservableCollection<Teacher>(ObjectLists.Teachers);
-            SubjectIds = new ObservableCollection<Guid>(ObjectLists.Subjects.Select(o => o.Id));
+            _Teachers = new ObservableCollection<Teacher>(InMemory.Teachers);
+            SubjectIds = new ObservableCollection<Guid>(InMemory.Subjects.Select(o => o.Id));
         }
 
         public void AddData()
@@ -47,7 +47,7 @@ namespace AcademicPerformanceUI.ViewModels
                 SubjectId = _SelectedTeacher.SubjectId
             };
             Teachers.Add(newTeacher);
-            ObjectLists.Teachers.Add(newTeacher);
+            InMemory.Teachers.Add(newTeacher);
             Console.WriteLine(newTeacher.SubjectId);
             SelectedTeacher = new Teacher();
 
@@ -55,7 +55,7 @@ namespace AcademicPerformanceUI.ViewModels
 
         public void RemoveData()
         {
-            ObjectLists.Teachers = ObjectLists.Teachers
+            InMemory.Teachers = InMemory.Teachers
                                             .Where(x => x.Id != _SelectedTeacher.Id)
                                             .ToList();
             Teachers.Remove(SelectedTeacher);
@@ -64,7 +64,7 @@ namespace AcademicPerformanceUI.ViewModels
 
         public void UpdateData()
         {
-            var data = ObjectLists.Teachers.Find(o => o.Id == SelectedTeacher.Id);
+            var data = InMemory.Teachers.Find(o => o.Id == SelectedTeacher.Id);
             data = new Teacher()
             {
                 Id = _SelectedTeacher.Id,

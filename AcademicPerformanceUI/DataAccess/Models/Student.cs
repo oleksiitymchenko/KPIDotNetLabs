@@ -12,7 +12,7 @@ namespace DataAccess.Models
         public Guid GroupId { get; set; }
         public Group Group
         {
-            get => ObjectLists.Groups.Find(g => g.Id == GroupId);
+            get => InMemory.Groups.Find(g => g.Id == GroupId);
         }
 
         public object Clone() => new Student()

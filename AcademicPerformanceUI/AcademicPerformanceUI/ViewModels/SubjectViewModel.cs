@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace AcademicPerformanceUI.ViewModels
 {
-    public class SubjectViewModel:BaseViewModel
+    public class SubjectViewModel:BaseViewModel<Subject>
     {
         private ObservableCollection<Subject> _Subjects;
         private Subject _SelectedSubject;
@@ -31,7 +31,7 @@ namespace AcademicPerformanceUI.ViewModels
 
         public void LoadData()
         {
-            _Subjects = new ObservableCollection<Subject>(ObjectLists.Subjects);
+            _Subjects = new ObservableCollection<Subject>(InMemory.Subjects);
         }
 
         public void AddData()
@@ -43,13 +43,13 @@ namespace AcademicPerformanceUI.ViewModels
                Name = SelectedSubject.Name,
                FinalTestType = SelectedSubject.FinalTestType
             };
-            ObjectLists.Subjects.Add(newSubject);
+            InMemory.Subjects.Add(newSubject);
             Subjects.Add(newSubject);
         }
 
         public void RemoveData()
         {
-            ObjectLists.Subjects = ObjectLists.Subjects
+            InMemory.Subjects = InMemory.Subjects
                                             .Where(x => x.Id != _SelectedSubject.Id)
                                             .ToList();
             Subjects.Remove(SelectedSubject);
@@ -58,7 +58,7 @@ namespace AcademicPerformanceUI.ViewModels
 
         public void UpdateData()
         {
-            var data = ObjectLists.Subjects.Find(o => o.Id == SelectedSubject.Id);
+            var data = InMemory.Subjects.Find(o => o.Id == SelectedSubject.Id);
             data = new Subject()
             {
                 Id = _SelectedSubject.Id,

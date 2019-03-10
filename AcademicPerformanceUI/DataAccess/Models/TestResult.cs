@@ -10,13 +10,13 @@ namespace DataAccess.Models
         public Guid TestId { get; set; }
         public Test Test
         {
-            get => ObjectLists.Tests.Find(o => o.Id == TestId);
+            get => InMemory.Tests.Find(o => o.Id == TestId);
         }
 
         public Guid StudentId { get; set; }
         public Student Student
         {
-            get => ObjectLists.Students.Find(o => o.Id == StudentId);
+            get => InMemory.Students.Find(o => o.Id == StudentId);
         }
 
         public object Clone() => new TestResult()

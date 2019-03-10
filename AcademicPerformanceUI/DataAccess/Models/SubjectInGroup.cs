@@ -9,13 +9,13 @@ namespace DataAccess.Models
         public Guid SubjectId { get; set; }
         public Subject Subject
         {
-            get => ObjectLists.Subjects.Find((Predicate<Subject>)(o => o.Id == this.SubjectId));
+            get => InMemory.Subjects.Find((Predicate<Subject>)(o => o.Id == this.SubjectId));
         }
 
         public Guid GroupId { get; set; }
         public Group Group
         {
-            get => ObjectLists.Groups.Find(g => g.Id == GroupId);
+            get => InMemory.Groups.Find(g => g.Id == GroupId);
         }
 
         public object Clone() => new SubjectInGroup()

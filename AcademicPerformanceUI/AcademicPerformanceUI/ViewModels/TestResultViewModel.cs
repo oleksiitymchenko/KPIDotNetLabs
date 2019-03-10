@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace AcademicPerformanceUI.ViewModels
 {
-    public class TestResultViewModel:BaseViewModel
+    public class TestResultViewModel:BaseViewModel<TestResult>
     {
         private ObservableCollection<TestResult> _TestResults;
         private TestResult _SelectedTestResult;
@@ -33,9 +33,9 @@ namespace AcademicPerformanceUI.ViewModels
 
         public void LoadData()
         {
-            _TestResults = new ObservableCollection<TestResult>(ObjectLists.TestResults);
-            TestIds = new ObservableCollection<Guid>(ObjectLists.Tests.Select(o => o.Id));
-            StudentIds = new ObservableCollection<Guid>(ObjectLists.Students.Select(o => o.Id));
+            _TestResults = new ObservableCollection<TestResult>(InMemory.TestResults);
+            TestIds = new ObservableCollection<Guid>(InMemory.Tests.Select(o => o.Id));
+            StudentIds = new ObservableCollection<Guid>(InMemory.Students.Select(o => o.Id));
         }
 
         public void AddData()
@@ -47,14 +47,14 @@ namespace AcademicPerformanceUI.ViewModels
                 StudentId = SelectedTestResult.StudentId,
                 TestId = SelectedTestResult.TestId
             };
-            ObjectLists.TestResults.Add(newTestResult);
+            InMemory.TestResults.Add(newTestResult);
             TestResults.Add(newTestResult);
             var x = TestResults;
         }
 
         public void RemoveData()
         {
-            ObjectLists.TestResults = ObjectLists.TestResults
+            InMemory.TestResults = InMemory.TestResults
                                             .Where(x => x.Id != _SelectedTestResult.Id)
                                             .ToList();
             TestResults.Remove(SelectedTestResult);
@@ -63,7 +63,7 @@ namespace AcademicPerformanceUI.ViewModels
 
         public void UpdateData()
         {
-            var data = ObjectLists.TestResults.Find(o => o.Id == SelectedTestResult.Id);
+            var data = InMemory.TestResults.Find(o => o.Id == SelectedTestResult.Id);
             data = new TestResult()
             {
                 Id = _SelectedTestResult.Id,

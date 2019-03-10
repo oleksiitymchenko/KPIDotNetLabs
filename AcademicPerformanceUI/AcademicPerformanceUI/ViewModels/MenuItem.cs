@@ -1,9 +1,10 @@
-﻿using System;
+﻿using DataAccess.Models;
+using System;
 using System.Windows.Input;
 
 namespace AcademicPerformanceUI.ViewModels
 {
-    public class MenuItem : BaseViewModel
+    public class MenuItem : BaseViewModel<Student>
     {
         private object _icon;
         private string _text;
