@@ -1,6 +1,8 @@
 ﻿using DataAccess;
 using DataAccess.Models;
+using Services.Serialization;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -47,7 +49,8 @@ namespace AcademicPerformanceUI.ViewModels
             newEntity.Id = Guid.NewGuid();
             Entities.Add(newEntity);
             InMemory.AddData(newEntity);
-
+            var x  = (IEntity)newEntity;
+            Console.WriteLine(x.GetType());
             _SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
         }
 
@@ -59,11 +62,23 @@ namespace AcademicPerformanceUI.ViewModels
             _SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
         }
 
-        public void UpdateData()
+        public virtual void UpdateData()
         {
             InMemory.UpdateData(SelectedEntity);
             _SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
         }
         public abstract void LoadData();
+
+        public virtual void SaveEntity()
+        {
+            var service = SerializationServiceFactory.GetSerializationService();
+            service.SerializeEntity<Entity>(_SelectedEntity, $"{nameof(Entity)}.xml");
+        }
+
+        public virtual void SaveAllEntities()
+        {
+            var service = SerializationServiceFactory.GetSerializationService();
+            service.SerializeEntity<List<Entity>>(_SelectedEntity, $"{nameof(Entity)}.xml");
+        }
     }
 }

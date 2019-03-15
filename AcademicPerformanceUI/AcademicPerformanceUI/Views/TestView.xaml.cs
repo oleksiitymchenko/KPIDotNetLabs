@@ -32,5 +32,15 @@ namespace AcademicPerformanceUI.Views
         {
             TestViewModel.RemoveData();
         }
+
+        private void Save_Test_OnClick(object sender, RoutedEventArgs e)
+        {
+            TestViewModel.SaveEntity();
+        }
+
+        private void SaveAll__Test_OnClick(object sender, RoutedEventArgs e)
+        {
+            TestViewModel.SaveAllEntities();
+        }
     }
 }

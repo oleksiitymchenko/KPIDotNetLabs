@@ -173,6 +173,10 @@
       <Project>{c89962c7-21ec-4603-99bb-55a50312f19a}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{AF1923E5-567D-4ECE-9CB4-4424E840D209}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
