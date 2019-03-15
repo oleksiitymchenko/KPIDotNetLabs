@@ -1,72 +1,20 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using DataAccess;
-using System.Linq;
 using DataAccess.Models;
 
 namespace AcademicPerformanceUI.ViewModels
 {
     public class GroupViewModel:BaseViewModel<Group>
     {
-        private ObservableCollection<Group> _Groups;
-        private Group _SelectedGroup;
-
         public GroupViewModel()
         {
-            _SelectedGroup = new Group();
+            _SelectedEntity = new Group();
             LoadData();
         }
 
-        public Group SelectedGroup
+        public override void LoadData()
         {
-            get => _SelectedGroup;
-            set => SetProperty(ref _SelectedGroup, value);
-        }
-
-        public ObservableCollection<Group> Groups
-        {
-            get => _Groups;
-            set => SetProperty(ref _Groups, value);
-        }
-
-        public void LoadData()
-        {
-           _Groups = new ObservableCollection<Group>(InMemory.Groups);
-        }
-
-        public void AddData()
-        {
-            var newGroup = new Group() {
-                Id = Guid.NewGuid(),
-                GroupName = _SelectedGroup.GroupName,
-                StudyYear = _SelectedGroup.StudyYear,
-                MaxStudents = _SelectedGroup.MaxStudents
-            };
-            InMemory.Groups.Add(newGroup);
-            Groups.Add(newGroup);
-        }
-
-        public void RemoveData()
-        {
-            InMemory.Groups = InMemory.Groups
-                                            .Where(x => x.Id != _SelectedGroup.Id)
-                                            .ToList();
-            Groups.Remove(SelectedGroup);
-            SelectedGroup = new Group();
-        }
-
-        public void UpdateData()
-        {
-            var data = InMemory.Groups.Find(o => o.Id == SelectedGroup.Id);
-            data = new Group()
-            {
-                Id = _SelectedGroup.Id,
-                GroupName = _SelectedGroup.GroupName,
-                StudyYear = _SelectedGroup.StudyYear,
-                MaxStudents = _SelectedGroup.MaxStudents
-            };
-            var x = Groups.ToList().Find(o => o.Id == SelectedGroup.Id);
-            x = data;
+           Entities = new ObservableCollection<Group>(InMemory.Groups);
         }
     }
 }

@@ -2,12 +2,14 @@
 
 namespace DataAccess.Models
 {
+    [Serializable]
     public class TestResult:IEntity
     {
         public Guid Id { get; set; }
         public int Mark { get; set; }
 
         public Guid TestId { get; set; }
+        
         public Test Test
         {
             get => InMemory.Tests.Find(o => o.Id == TestId);

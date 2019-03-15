@@ -2,6 +2,7 @@
 
 namespace DataAccess.Models
 {
+    [Serializable]
     public class Teacher : IEntity
     {
         public Guid Id { get; set; }

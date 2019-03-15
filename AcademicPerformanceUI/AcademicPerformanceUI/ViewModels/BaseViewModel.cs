@@ -64,5 +64,6 @@ namespace AcademicPerformanceUI.ViewModels
             InMemory.UpdateData(SelectedEntity);
             _SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
         }
+        public abstract void LoadData();
     }
 }

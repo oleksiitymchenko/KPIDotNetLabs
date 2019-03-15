@@ -16,7 +16,7 @@ namespace AcademicPerformanceUI.ViewModels
             LoadData();
         }
 
-        public void LoadData()
+        public override void LoadData()
         {
             Entities = new ObservableCollection<Student>(InMemory.Students);
             GroupIds = new ObservableCollection<Guid>(InMemory.Groups.Select(o => o.Id));

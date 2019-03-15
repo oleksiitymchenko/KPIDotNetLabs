@@ -43,5 +43,10 @@ namespace AcademicPerformanceUI.ViewModels
         }
 
         public bool IsNavigation => _navigationDestination != null;
+
+        public override void LoadData()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

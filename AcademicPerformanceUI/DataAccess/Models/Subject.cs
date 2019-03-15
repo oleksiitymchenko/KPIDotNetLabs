@@ -2,6 +2,7 @@
 
 namespace DataAccess.Models
 {
+    [Serializable]
     public class Subject : IEntity
     {
         public Guid Id { get; set; }
