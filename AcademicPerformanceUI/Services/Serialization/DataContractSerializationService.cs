@@ -29,6 +29,7 @@ namespace Services.Serialization
 
         public bool SerializeEntity<Entity>(Entity entity, string path)
         {
+            path = path + ".xml";
             var ser = new DataContractSerializer(typeof(Entity));
             try
             {

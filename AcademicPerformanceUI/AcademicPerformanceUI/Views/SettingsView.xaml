@@ -12,6 +12,6 @@
         <Button Content="Xml" HorizontalAlignment="Left" Margin="344,188,0,0" VerticalAlignment="Top" Width="75"  Click="Button_Click_Xml"/>
         <Button Content="Json" HorizontalAlignment="Left" Margin="344,239,0,0" VerticalAlignment="Top" Width="75"  Click="Button_Click_Json"/>
         <Button Content="DataContract" HorizontalAlignment="Left" Margin="344,288,0,0" VerticalAlignment="Top" Width="75"  Click="Button_Click_DataContract"/>
-        <Label Content="{Binding SerializationType}" HorizontalAlignment="Left" Margin="344,130,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBlock FontSize="15" Text="{Binding SerializationTypeName, StringFormat='Type: {0}'}"  Width="75" Height="23" Margin="344,-85,382,85"/>
     </Grid>
 </Page>

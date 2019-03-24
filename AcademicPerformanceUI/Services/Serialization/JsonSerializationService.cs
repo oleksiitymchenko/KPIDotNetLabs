@@ -26,6 +26,7 @@ namespace Services.Serialization
 
         public bool SerializeEntity<Entity>(Entity entity, string path)
         {
+            path = path + ".json";
             var serializer = new JsonSerializer();
             serializer.NullValueHandling = NullValueHandling.Ignore;
             try

@@ -10,6 +10,7 @@ namespace Services.Serialization
 
         public virtual bool SerializeEntity<Entity>(Entity entity, string path)
         {
+            path = path + ".xml";
             XmlSerializer = new XmlSerializer(typeof(Entity));
             try
             {

@@ -9,27 +9,35 @@ namespace AcademicPerformanceUI.Views
     /// </summary>
     public partial class SettingsView : Page
     {
-        public SerializationType SerializationType { get; set; }
+        public string SerializationTypeName { get; set; }
+
+        private void ReloadType()
+        {
+            this.SerializationTypeName = SettingList.GetSerializationType.ToString();
+        }
 
         public SettingsView()
         {
-            this.SerializationType = SettingList.GetSerializationType;
             InitializeComponent();
+            ReloadType();
         }
 
         private void Button_Click_Xml(object sender, RoutedEventArgs e)
         {
             SettingList.GetSerializationType = SerializationType.Xml;
+            ReloadType();
         }
 
         private void Button_Click_Json(object sender, RoutedEventArgs e)
         {
-            SettingList.GetSerializationType = SerializationType.Xml;
+            SettingList.GetSerializationType = SerializationType.Json;
+            ReloadType();
         }
 
         private void Button_Click_DataContract(object sender, RoutedEventArgs e)
         {
-            SettingList.GetSerializationType = SerializationType.Xml;
+            SettingList.GetSerializationType = SerializationType.DataContract;
+            ReloadType();
         }
     }
 }

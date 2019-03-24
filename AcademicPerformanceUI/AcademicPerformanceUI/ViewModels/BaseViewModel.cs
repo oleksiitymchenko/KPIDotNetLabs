@@ -72,7 +72,7 @@ namespace AcademicPerformanceUI.ViewModels
         public virtual void SaveEntity()
         {
             var service = SerializationServiceFactory.GetSerializationService();
-            service.SerializeEntity(SelectedEntity, $"{typeof(Entity)}.xml");
+            service.SerializeEntity(SelectedEntity, $"{typeof(Entity)}");
         }
 
         public virtual void SaveAllEntities()
@@ -84,7 +84,7 @@ namespace AcademicPerformanceUI.ViewModels
             {
                 entities.Add(item);
             }
-            service.SerializeEntity(entities, $"{typeof(Entity)}List.xml");
+            service.SerializeEntity(entities, $"{typeof(Entity)}List");
         }
 
         public virtual void DeserializeList(string path)
