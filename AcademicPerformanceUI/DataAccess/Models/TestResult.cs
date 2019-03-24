@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace DataAccess.Models
 {
     [Serializable]
     public class TestResult:IEntity
     {
+        [DataMember()]
         public Guid Id { get; set; }
+        [DataMember()]
         public int Mark { get; set; }
 
+        [DataMember()]
         public Guid TestId { get; set; }
         
         public Test Test
@@ -15,6 +19,7 @@ namespace DataAccess.Models
             get => InMemory.Tests.Find(o => o.Id == TestId);
         }
 
+        [DataMember()]
         public Guid StudentId { get; set; }
         public Student Student
         {

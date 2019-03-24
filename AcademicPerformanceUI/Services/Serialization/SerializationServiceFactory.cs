@@ -10,8 +10,8 @@ namespace Services.Serialization
             switch (type)
             {
                 case SerializationType.Xml: return new XmlSerizalizationService();
-                case SerializationType.Json: return new XmlSerizalizationService();
-                case SerializationType.DataContract: return new XmlSerizalizationService();
+                case SerializationType.Json: return new JsonSerializationService();
+                case SerializationType.DataContract: return new DataContractSerializationService();
                 default: return null;
             }
         }
