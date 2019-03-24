@@ -1,4 +1,5 @@
 ﻿using AcademicPerformanceUI.ViewModels;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,25 @@ namespace AcademicPerformanceUI.Views
         private void Remove_SubjectInGroup_OnClick(object sender, RoutedEventArgs e)
         {
             SubjectInGroupViewModel.RemoveData();
+        }
+
+        private void Save_SubjectInGroup_OnClick(object sender, RoutedEventArgs e)
+        {
+            SubjectInGroupViewModel.SaveEntity();
+        }
+
+        private void SaveAll__SubjectInGroup_OnClick(object sender, RoutedEventArgs e)
+        {
+            SubjectInGroupViewModel.SaveAllEntities();
+        }
+
+        public void Upload_EntityList_OnClick(object sender, RoutedEventArgs e)
+        {
+            var fileDialog = new OpenFileDialog();
+            if (fileDialog.ShowDialog() == true)
+            {
+                SubjectInGroupViewModel.DeserializeList(fileDialog.FileName);
+            }
         }
     }
 }

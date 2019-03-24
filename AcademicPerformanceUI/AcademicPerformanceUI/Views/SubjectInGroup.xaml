@@ -37,7 +37,11 @@
 
             <Button Margin="80,20,80,0" Content="Create" Click="Add_SubjectInGroup_OnClick"/>
             <Button Margin="80,20,80,0" Content="Delete" Click="Remove_SubjectInGroup_OnClick"/>
-         <!--   <Button Margin="80,20,80,0" Content="Update" Click="Update_SubjectInGroup_OnClick"/>-->
+            <Button Margin="80,20,80,0" Content="Save one" Click="Save_SubjectInGroup_OnClick"/>
+            <Button Margin="80,20,80,0" Content="Save all" Click="SaveAll__SubjectInGroup_OnClick"/>
+            <Button Margin="80,20,80,0" Content="UploadList" Click="Upload_EntityList_OnClick"/>
+
+            <!--   <Button Margin="80,20,80,0" Content="Update" Click="Update_SubjectInGroup_OnClick"/>-->
         </StackPanel>
     </Grid>
 </Page>

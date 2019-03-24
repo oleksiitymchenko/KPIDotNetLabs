@@ -8,13 +8,13 @@ namespace AcademicPerformanceUI.ViewModels
     {
         public GroupViewModel()
         {
-            _SelectedEntity = new Group();
             LoadData();
         }
 
         public override void LoadData()
         {
-           Entities = new ObservableCollection<Group>(InMemory.Groups);
+            _SelectedEntity = new Group();
+            Entities = new ObservableCollection<Group>(InMemory.Groups);
         }
     }
 }

@@ -40,6 +40,10 @@
             <Button Margin="80,20,80,0" Content="Create" Click="Add_Group_OnClick"/>
             <Button Margin="80,20,80,0" Content="Delete" Click="Remove_Group_OnClick"/>
             <Button Margin="80,20,80,0" Content="Update" Click="Update_Group_OnClick"/>
+            <Button Margin="80,20,80,0" Content="Save one" Click="Save_Group_OnClick"/>
+            <Button Margin="80,20,80,0" Content="Save all" Click="SaveAll__Group_OnClick"/>
+            <Button Margin="80,20,80,0" Content="UploadList" Click="Upload_EntityList_OnClick"/>
+
         </StackPanel>
     </Grid>
 </Page>

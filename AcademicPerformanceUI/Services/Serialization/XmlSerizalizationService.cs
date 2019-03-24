@@ -1,5 +1,4 @@
-﻿using DataAccess.Models;
-using System;
+﻿using System;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -9,7 +8,7 @@ namespace Services.Serialization
     {
         private XmlSerializer XmlSerializer;
 
-        public virtual bool SerializeEntity<Entity>(IEntity entity, string path)
+        public virtual bool SerializeEntity<Entity>(Entity entity, string path)
         {
             XmlSerializer = new XmlSerializer(typeof(Entity));
             try

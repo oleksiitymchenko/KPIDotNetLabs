@@ -1,10 +1,19 @@
-﻿namespace Services.Serialization
+﻿using Services.Settings;
+
+namespace Services.Serialization
 {
     public static class SerializationServiceFactory
     {
         public static ISerialization GetSerializationService()
         {
-            return new XmlSerizalizationService();
+            var type = SettingList.GetSerializationType;
+            switch (type)
+            {
+                case SerializationType.Xml: return new XmlSerizalizationService();
+                case SerializationType.Json: return new XmlSerizalizationService();
+                case SerializationType.DataContract: return new XmlSerizalizationService();
+                default: return null;
+            }
         }
     }
 }

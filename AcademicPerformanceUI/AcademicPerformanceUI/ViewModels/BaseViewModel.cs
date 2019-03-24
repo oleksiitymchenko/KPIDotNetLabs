@@ -51,7 +51,7 @@ namespace AcademicPerformanceUI.ViewModels
             InMemory.AddData(newEntity);
             var x  = (IEntity)newEntity;
             Console.WriteLine(x.GetType());
-            _SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
+            SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
         }
 
         public virtual void RemoveData()
@@ -59,26 +59,41 @@ namespace AcademicPerformanceUI.ViewModels
             InMemory.RemoveData(_SelectedEntity);
             Entities.Remove(_SelectedEntity);
 
-            _SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
+            SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
         }
 
         public virtual void UpdateData()
         {
             InMemory.UpdateData(SelectedEntity);
-            _SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
+            SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
         }
         public abstract void LoadData();
 
         public virtual void SaveEntity()
         {
             var service = SerializationServiceFactory.GetSerializationService();
-            service.SerializeEntity<Entity>(_SelectedEntity, $"{nameof(Entity)}.xml");
+            service.SerializeEntity(SelectedEntity, $"{typeof(Entity)}.xml");
         }
 
         public virtual void SaveAllEntities()
         {
             var service = SerializationServiceFactory.GetSerializationService();
-            service.SerializeEntity<List<Entity>>(_SelectedEntity, $"{nameof(Entity)}.xml");
+            List<Entity> entities = new List<Entity>();
+
+            foreach (var item in Entities)
+            {
+                entities.Add(item);
+            }
+            service.SerializeEntity(entities, $"{typeof(Entity)}List.xml");
+        }
+
+        public virtual void DeserializeList(string path)
+        {
+            var service = SerializationServiceFactory.GetSerializationService();
+            List<Entity> entities = new List<Entity>();
+            entities = service.DeserizalizeEntity<List<Entity>>(path);
+            InMemory.ReplaceCollection(entities);
+            LoadData();
         }
     }
 }

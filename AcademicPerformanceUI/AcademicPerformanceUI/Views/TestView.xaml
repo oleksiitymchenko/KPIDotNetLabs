@@ -47,6 +47,8 @@
             <Button Margin="80,20,80,0" Content="Update" Click="Update_Test_OnClick"/>
             <Button Margin="80,20,80,0" Content="Save one" Click="Save_Test_OnClick"/>
             <Button Margin="80,20,80,0" Content="Save all" Click="SaveAll__Test_OnClick"/>
+            <Button Margin="80,20,80,0" Content="UploadList" Click="Upload_EntityList_OnClick"/>
+
         </StackPanel>
     </Grid>
 </Page>

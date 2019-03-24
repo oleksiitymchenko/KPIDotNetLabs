@@ -128,6 +128,42 @@ namespace DataAccess
                     }
                 default: throw new Exception("There is no such type");
             }
+
+            
+        }
+        public static void ReplaceCollection<T>(List<T> entities) where T: IEntity
+        {
+            var type = typeof(T);
+            if (type == typeof(Group))
+            {
+                Groups.Clear();
+            }
+            if (type == typeof(Student))
+            {
+                Students.Clear();
+            }
+            if (type == typeof(Subject))
+            {
+                Subjects.Clear();
+            }
+            if (type == typeof(Teacher))
+            {
+                Teachers.Clear();
+            }
+            if (type == typeof(Test))
+            {
+                Tests.Clear();
+            }
+            if (type == typeof(SubjectInGroup))
+            {
+                SubjectInGroups.Clear();
+            }
+            if (type == typeof(TestResult))
+            {
+                TestResults.Clear();
+            }
+            entities.ForEach(item => AddData(item));
+            //throw new Exception("No such types");
         }
     }
 }
