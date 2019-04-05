@@ -1,4 +1,5 @@
-﻿using DataAccess.Interfaces;
+﻿using DataAccess.InMemoryDb.Repository;
+using DataAccess.Interfaces;
 using DataAccess.Models;
 using System;
 
@@ -6,15 +7,28 @@ namespace DataAccess.InMemoryDb
 {
     public class InMemotyUnitOfWork : IUnitOfWork
     {
-       // public IUserCollectionRepository UserCollectionRepository => _userCollectionRepository ?? (_userCollectionRepository = new UserCollectionRepository(_context, _mapper));
+        private IRepository<Group> groupRepository;
+        public IRepository<Group> GroupRepository => groupRepository ?? (groupRepository = new GroupRepository());
 
-        public IRepository<Group> GroupRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IRepository<Student> StudentRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IRepository<Subject> SubjectRepostitory { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IRepository<SubjectInGroup> SubjectInGroupRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IRepository<Teacher> TeacherRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IRepository<Test> TestRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IRepository<TestResult> TestResultRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private IRepository<Student> studentRepository;
+        public IRepository<Student> StudentRepository => studentRepository ?? (studentRepository = new StudentRepository());
+
+        private IRepository<Subject> subjectRepostitory;
+        public IRepository<Subject> SubjectRepostitory => subjectRepostitory ?? (subjectRepostitory = new SubjectRepository());
+
+        private IRepository<SubjectInGroup> subjectInGroupRepository;
+        public IRepository<SubjectInGroup> SubjectInGroupRepository => subjectInGroupRepository ?? (subjectInGroupRepository = new SubjectInGroupRepository());
+
+        private IRepository<Teacher> teacherRepository;
+        public IRepository<Teacher> TeacherRepository => teacherRepository ?? (teacherRepository = new TeacherRepository());
+
+        private IRepository<Test> testRepository;
+        public IRepository<Test> TestRepository => testRepository ?? (testRepository = new TestRepository());
+
+        private IRepository<TestResult> testResultRepository;
+        public IRepository<TestResult> TestResultRepository => testResultRepository ?? (testResultRepository = new TestResultRepository());
+
+
 
         public IRepository<Entity> GetRepositoryByEntityType<Entity>() where Entity : IEntity
         {

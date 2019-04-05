@@ -4,13 +4,13 @@ namespace DataAccess.Interfaces
 {
     public interface IUnitOfWork
     {
-        IRepository<Group>  GroupRepository { get; set; }
-        IRepository<Student>  StudentRepository { get; set; }
-        IRepository<Subject>  SubjectRepostitory { get; set; }
-        IRepository<SubjectInGroup>  SubjectInGroupRepository { get; set; }
-        IRepository<Teacher>  TeacherRepository { get; set; }
-        IRepository<Test>  TestRepository { get; set; }
-        IRepository<TestResult>  TestResultRepository { get; set; }
+        IRepository<Group>  GroupRepository { get; }
+        IRepository<Student>  StudentRepository { get; }
+        IRepository<Subject>  SubjectRepostitory { get; }
+        IRepository<SubjectInGroup>  SubjectInGroupRepository { get; }
+        IRepository<Teacher>  TeacherRepository { get; }
+        IRepository<Test>  TestRepository { get;  }
+        IRepository<TestResult>  TestResultRepository { get; }
 
         IRepository<Entity> GetRepositoryByEntityType<Entity>() where Entity : IEntity;
     }

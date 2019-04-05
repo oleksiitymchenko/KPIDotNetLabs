@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DataAccess.Interfaces;
 using Services;
-using DataAccess.InMemoryDb;
 
 namespace AcademicPerformanceUI.ViewModels
 {
@@ -58,37 +57,27 @@ namespace AcademicPerformanceUI.ViewModels
             set => SetProperty(ref _Entities, value);
         }
 
-        public virtual void AddData()
+        public async virtual void AddData()
         {
             var newEntity = (Entity)_SelectedEntity.Clone();
             newEntity.Id = Guid.NewGuid();
             Entities.Add(newEntity);
-            //InMemory.AddData(newEntity);
-
-
-
-
-
+            await Repository.CreateAsync(newEntity);
             var x  = (IEntity)newEntity;
-            Console.WriteLine(x.GetType());
-            SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
+            SelectedEntity = Repository.CreateEmptyObject();
         }
 
-        public virtual void RemoveData()
+        public async virtual void RemoveData()
         {
-            //InMemory.RemoveData(_SelectedEntity);
-
-
+            await Repository.DeleteAsync(_SelectedEntity.Id);
             Entities.Remove(_SelectedEntity);
-            SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
+            SelectedEntity = Repository.CreateEmptyObject();
         }
 
-        public virtual void UpdateData()
+        public async virtual void UpdateData()
         {
-            //InMemory.UpdateData(SelectedEntity);
-
-
-            SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
+            await Repository.UpdateAsync(SelectedEntity);
+            SelectedEntity = Repository.CreateEmptyObject();
         }
         public abstract void LoadConnectedData();
 
@@ -98,14 +87,14 @@ namespace AcademicPerformanceUI.ViewModels
             service.SerializeEntity(SelectedEntity, $"{typeof(Entity)}");
         }
 
-        public virtual void SaveAllEntities()
+        public virtual async void SaveAllEntities()
         {
             var service = SerializationServiceFactory.GetSerializationService();
             List<Entity> entities = new List<Entity>();
 
             foreach (var item in Entities)
             {
-                entities.Add(item);
+                await Repository.CreateAsync(item);
             }
             service.SerializeEntity(entities, $"{typeof(Entity)}List");
         }
@@ -115,7 +104,7 @@ namespace AcademicPerformanceUI.ViewModels
             var service = SerializationServiceFactory.GetSerializationService();
             List<Entity> entities = new List<Entity>();
             entities = service.DeserizalizeEntity<List<Entity>>(path);
-            InMemory.ReplaceCollection(entities);
+            Repository.ReplaceCollection(entities);
             LoadConnectedData();
         }
     }

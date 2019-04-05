@@ -8,9 +8,11 @@ namespace DataAccess.Interfaces
     public interface IRepository<TEntity> where TEntity:IEntity
     {
         Task<TEntity> CreateAsync(TEntity entity);
-        Task<bool> DeleteAsync(int id);
+        Task<bool> DeleteAsync(Guid id);
         Task<TEntity> UpdateAsync(TEntity entity);
         Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null);
         Task<List<TEntity>> GetAllEntitiesAsync();
+        void ReplaceCollection(List<TEntity> entities);
+        TEntity CreateEmptyObject();
     }
 }
