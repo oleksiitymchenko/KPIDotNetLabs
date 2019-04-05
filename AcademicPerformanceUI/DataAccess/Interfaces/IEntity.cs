@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataAccess.Models
+namespace DataAccess.Interfaces
 {
     public interface IEntity:ICloneable
     {

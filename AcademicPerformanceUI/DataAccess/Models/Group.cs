@@ -1,4 +1,5 @@
 ﻿using System;
+using DataAccess.Interfaces;
 using System.Runtime.Serialization;
 
 namespace DataAccess.Models

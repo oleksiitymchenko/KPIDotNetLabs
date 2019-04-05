@@ -1,8 +1,8 @@
 ﻿using AcademicPerformanceUI.ViewModels;
-using DataAccess.Models;
 using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
+using DataAccess.Interfaces;
 
 namespace AcademicPerformanceUI.Views
 {
