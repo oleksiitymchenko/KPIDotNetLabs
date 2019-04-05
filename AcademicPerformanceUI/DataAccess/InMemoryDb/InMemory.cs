@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DataAccess
+namespace DataAccess.InMemoryDb
 {
     public static class InMemory
     {

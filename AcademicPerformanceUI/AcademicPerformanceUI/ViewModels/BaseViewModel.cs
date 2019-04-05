@@ -1,12 +1,12 @@
-﻿using DataAccess;
-using DataAccess.Models;
-using Services.Serialization;
+﻿using Services.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DataAccess.Interfaces;
+using Services;
+using DataAccess.InMemoryDb;
 
 namespace AcademicPerformanceUI.ViewModels
 {
@@ -32,6 +32,16 @@ namespace AcademicPerformanceUI.ViewModels
         public ObservableCollection<Entity> _Entities;
         public Entity _SelectedEntity;
 
+        protected virtual IUnitOfWork UnitOfWork
+        {
+            get => UnitOfWorkFactory.GetUnitOfWork();
+        }
+
+        protected virtual IRepository<Entity> Repository
+        {
+            get => UnitOfWork.GetRepositoryByEntityType<Entity>();
+        }
+
         public virtual Entity SelectedEntity
         {
             get => _SelectedEntity;
@@ -49,7 +59,12 @@ namespace AcademicPerformanceUI.ViewModels
             var newEntity = (Entity)_SelectedEntity.Clone();
             newEntity.Id = Guid.NewGuid();
             Entities.Add(newEntity);
-            InMemory.AddData(newEntity);
+            //InMemory.AddData(newEntity);
+
+
+
+
+
             var x  = (IEntity)newEntity;
             Console.WriteLine(x.GetType());
             SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
@@ -57,15 +72,18 @@ namespace AcademicPerformanceUI.ViewModels
 
         public virtual void RemoveData()
         {
-            InMemory.RemoveData(_SelectedEntity);
-            Entities.Remove(_SelectedEntity);
+            //InMemory.RemoveData(_SelectedEntity);
 
+
+            Entities.Remove(_SelectedEntity);
             SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
         }
 
         public virtual void UpdateData()
         {
-            InMemory.UpdateData(SelectedEntity);
+            //InMemory.UpdateData(SelectedEntity);
+
+
             SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
         }
         public abstract void LoadData();

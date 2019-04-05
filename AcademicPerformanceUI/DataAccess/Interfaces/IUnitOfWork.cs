@@ -11,5 +11,7 @@ namespace DataAccess.Interfaces
         IRepository<Teacher>  TeacherRepository { get; set; }
         IRepository<Test>  TestRepository { get; set; }
         IRepository<TestResult>  TestResultRepository { get; set; }
+
+        IRepository<Entity> GetRepositoryByEntityType<Entity>() where Entity : IEntity;
     }
 }

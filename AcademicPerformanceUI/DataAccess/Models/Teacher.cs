@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using DataAccess.InMemoryDb;
 using DataAccess.Interfaces;
 
 namespace DataAccess.Models
