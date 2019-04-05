@@ -1,5 +1,4 @@
-﻿using DataAccess;
-using DataAccess.InMemoryDb;
+﻿using DataAccess.InMemoryDb;
 using DataAccess.Models;
 using System;
 using System.Collections.ObjectModel;
@@ -19,7 +18,7 @@ namespace AcademicPerformanceUI.ViewModels
 
         public override void LoadConnectedData()
         {
-            GroupIds = new ObservableCollection<Guid>(InMemory.Groups.Select(o => o.Id));
+            GroupIds = new ObservableCollection<Guid>(InMemoryLists.Groups.Select(o => o.Id));
         }
     }
 }

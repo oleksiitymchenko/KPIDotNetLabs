@@ -4,7 +4,7 @@ using System;
 
 namespace DataAccess.SqlDbConnection
 {
-    public class InMemoryUnitOfWork : IUnitOfWork
+    public class SqlDbConnectionUnitOfWork : IUnitOfWork
     {
         public IRepository<Group> GroupRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public IRepository<Student> StudentRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

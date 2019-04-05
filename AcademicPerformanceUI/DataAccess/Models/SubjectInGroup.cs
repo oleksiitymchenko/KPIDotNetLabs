@@ -13,18 +13,10 @@ namespace DataAccess.Models
 
         [DataMember()]
         public Guid SubjectId { get; set; }
-        public Subject Subject
-        {
-            get => InMemory.Subjects.Find((Predicate<Subject>)(o => o.Id == this.SubjectId));
-        }
-
+       
         [DataMember()]
         public Guid GroupId { get; set; }
-        public Group Group
-        {
-            get => InMemory.Groups.Find(g => g.Id == GroupId);
-        }
-
+       
         public object Clone() => new SubjectInGroup()
         {
             Id = this.Id,

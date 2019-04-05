@@ -19,11 +19,7 @@ namespace DataAccess.Models
 
         [DataMember()]
         public Guid SubjectId { get; set; }
-        public Subject Subject
-        {
-            get => InMemory.Subjects.Find(s => s.Id == SubjectId);
-        }
-
+        
         public object Clone() => new Teacher()
         {
             Id = this.Id,

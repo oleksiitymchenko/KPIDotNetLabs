@@ -41,7 +41,7 @@ namespace AcademicPerformanceUI.Views
 
         private void SaveAll__Student_OnClick(object sender, RoutedEventArgs e)
         {
-            StudentViewModel.SaveAllEntitiesAsync();
+            StudentViewModel.SaveAllEntities();
         }
 
         public void Upload_EntityList_OnClick(object sender, RoutedEventArgs e)

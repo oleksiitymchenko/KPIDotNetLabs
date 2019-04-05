@@ -41,7 +41,7 @@ namespace AcademicPerformanceUI.Views
 
         private void SaveAll__Test_OnClick(object sender, RoutedEventArgs e)
         {
-            TestViewModel.SaveAllEntitiesAsync();
+            TestViewModel.SaveAllEntities();
         }
 
 

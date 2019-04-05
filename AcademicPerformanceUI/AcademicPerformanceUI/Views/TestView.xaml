@@ -23,8 +23,8 @@
                             <TextBlock FontSize="15" FontWeight="Bold" Text="{Binding Name, StringFormat='Name: {0}'}"/>
                             <TextBlock FontSize="15" FontWeight="Bold" Text="{Binding Theme, StringFormat='Theme: {0}'}"/>
                             <TextBlock FontSize="15" Text="{Binding Date, StringFormat='Date: {0}'}"/>
-                            <TextBlock FontSize="15" Text="{Binding Teacher.FirstName, StringFormat='Teacher`s firstname: {0}'}"/>
-                            <TextBlock FontSize="15" Text="{Binding Teacher.FirstName, StringFormat='Teacher`s lastname: {0}'}"/>
+                            <TextBlock FontSize="15" Text="{Binding TeacherId, StringFormat='Teacher`s firstname: {0}'}"/>
+                            <TextBlock FontSize="15" Text="{Binding TeacherId, StringFormat='Teacher`s lastname: {0}'}"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>

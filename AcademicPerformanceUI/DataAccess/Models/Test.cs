@@ -19,11 +19,7 @@ namespace DataAccess.Models
 
         [DataMember()]
         public Guid TeacherId;
-        public Teacher Teacher
-        {
-            get => InMemory.Teachers.Find(t => t.Id == TeacherId);
-        }
-
+        
         public object Clone() => new Test()
         {
             Id = this.Id,

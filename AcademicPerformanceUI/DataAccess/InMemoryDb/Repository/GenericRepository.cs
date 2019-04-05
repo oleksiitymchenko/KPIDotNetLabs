@@ -14,13 +14,13 @@ namespace DataAccess.InMemoryDb.Repository
         {
             switch (entity)
             {
-                case Group group: InMemory.Groups.Add(group); break;
-                case Student student: InMemory.Students.Add(student); break;
-                case Subject subject: InMemory.Subjects.Add(subject); break;
-                case Teacher teacher: InMemory.Teachers.Add(teacher); break;
-                case Test test: InMemory.Tests.Add(test); break;
-                case SubjectInGroup subjectInGroup: InMemory.SubjectInGroups.Add(subjectInGroup); break;
-                case TestResult testResult: InMemory.TestResults.Add(testResult); break;
+                case Group group: InMemoryLists.Groups.Add(group); break;
+                case Student student: InMemoryLists.Students.Add(student); break;
+                case Subject subject: InMemoryLists.Subjects.Add(subject); break;
+                case Teacher teacher: InMemoryLists.Teachers.Add(teacher); break;
+                case Test test: InMemoryLists.Tests.Add(test); break;
+                case SubjectInGroup subjectInGroup: InMemoryLists.SubjectInGroups.Add(subjectInGroup); break;
+                case TestResult testResult: InMemoryLists.TestResults.Add(testResult); break;
                 default: throw new Exception("There is no such type");
             }
 
@@ -29,19 +29,19 @@ namespace DataAccess.InMemoryDb.Repository
 
         public Task<bool> DeleteAsync(Guid Id)
         {
-            InMemory.Students = InMemory.Students.Where(x => x.Id != Id)
+            InMemoryLists.Students = InMemoryLists.Students.Where(x => x.Id != Id)
                                .ToList();
-            InMemory.Groups = InMemory.Groups.Where(x => x.Id != Id)
+            InMemoryLists.Groups = InMemoryLists.Groups.Where(x => x.Id != Id)
                                .ToList();
-            InMemory.Subjects = InMemory.Subjects.Where(x => x.Id != Id)
+            InMemoryLists.Subjects = InMemoryLists.Subjects.Where(x => x.Id != Id)
                                .ToList();
-            InMemory.Teachers = InMemory.Teachers.Where(x => x.Id != Id)
+            InMemoryLists.Teachers = InMemoryLists.Teachers.Where(x => x.Id != Id)
                                .ToList();
-            InMemory.Tests = InMemory.Tests.Where(x => x.Id != Id)
+            InMemoryLists.Tests = InMemoryLists.Tests.Where(x => x.Id != Id)
                                .ToList();
-            InMemory.SubjectInGroups = InMemory.SubjectInGroups.Where(x => x.Id != Id)
+            InMemoryLists.SubjectInGroups = InMemoryLists.SubjectInGroups.Where(x => x.Id != Id)
                                .ToList();
-            InMemory.TestResults = InMemory.TestResults.Where(x => x.Id != Id)
+            InMemoryLists.TestResults = InMemoryLists.TestResults.Where(x => x.Id != Id)
                                .ToList();
 
             return Task.FromResult(true);
@@ -49,7 +49,18 @@ namespace DataAccess.InMemoryDb.Repository
 
         public Task<List<TEntity>> GetAllEntitiesAsync()
         {
-            throw new NotImplementedException();
+            var type = typeof(TEntity);
+            List<IEntity> list = null;
+            if (type == typeof(Group)) list =  InMemoryLists.Groups.Select(item => (IEntity)item).ToList();
+            
+            if (type == typeof(Student)) list = InMemoryLists.Students.Select(item => (IEntity)item).ToList();
+            if (type == typeof(Subject)) list = InMemoryLists.Subjects.Select(item => (IEntity)item).ToList();
+            if (type == typeof(Teacher)) list = InMemoryLists.Teachers.Select(item => (IEntity)item).ToList();
+            if (type == typeof(Test)) list = InMemoryLists.Tests.Select(item => (IEntity)item).ToList();
+            if (type == typeof(SubjectInGroup)) list = InMemoryLists.SubjectInGroups.Select(item => (IEntity)item).ToList();
+            if (type == typeof(TestResult)) list = InMemoryLists.TestResults.Select(item => (IEntity)item).ToList();
+
+            return Task.FromResult(list.Select(item => (TEntity)item).ToList());
         }
 
         public Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null)
@@ -63,43 +74,44 @@ namespace DataAccess.InMemoryDb.Repository
             {
                 case Group group:
                     {
-                        var oldEntity = InMemory.Groups.Find(o => o.Id == entity.Id);
+                        var oldEntity = InMemoryLists.Groups.Find(o => o.Id == entity.Id);
                         oldEntity = (Group)entity.Clone();
                         break;
                     }
                 case Student student:
                     {
-                        var oldEntity = InMemory.Students.Find(o => o.Id == entity.Id);
+                        var oldEntity = InMemoryLists.Students.Find(o => o.Id == entity.Id);
                         oldEntity = (Student)entity.Clone();
                         break;
                     }
                 case Subject subject:
                     {
-                        var oldEntity = InMemory.Subjects.Find(o => o.Id == entity.Id);
+                        var oldEntity = InMemoryLists.Subjects.Find(o => o.Id == entity.Id);
                         oldEntity = (Subject)entity.Clone();
                         break;
                     }
                 case Teacher teacher:
                     {
-                        var oldEntity = InMemory.Teachers.Find(o => o.Id == entity.Id);
+
+                        var oldEntity = InMemoryLists.Teachers.Find(o => o.Id == entity.Id);
                         oldEntity = (Teacher)entity.Clone();
                         break;
                     }
                 case Test test:
                     {
-                        var oldEntity = InMemory.Tests.Find(o => o.Id == entity.Id);
+                        var oldEntity = InMemoryLists.Tests.Find(o => o.Id == entity.Id);
                         oldEntity = (Test)entity.Clone();
                         break;
                     }
                 case SubjectInGroup subjectInGroup:
                     {
-                        var oldEntity = InMemory.SubjectInGroups.Find(o => o.Id == entity.Id);
+                        var oldEntity = InMemoryLists.SubjectInGroups.Find(o => o.Id == entity.Id);
                         oldEntity = (SubjectInGroup)entity.Clone();
                         break;
                     }
                 case TestResult testResult:
                     {
-                        var oldEntity = InMemory.TestResults.Find(o => o.Id == entity.Id);
+                        var oldEntity = InMemoryLists.TestResults.Find(o => o.Id == entity.Id);
                         oldEntity = (TestResult)entity.Clone();
                         break;
                     }
@@ -114,31 +126,31 @@ namespace DataAccess.InMemoryDb.Repository
             var type = typeof(TEntity);
             if (type == typeof(Group))
             {
-                InMemory.Groups.Clear();
+                InMemoryLists.Groups.Clear();
             }
             if (type == typeof(Student))
             {
-                InMemory.Students.Clear();
+                InMemoryLists.Students.Clear();
             }
             if (type == typeof(Subject))
             {
-                InMemory.Subjects.Clear();
+                InMemoryLists.Subjects.Clear();
             }
             if (type == typeof(Teacher))
             {
-                InMemory.Teachers.Clear();
+                InMemoryLists.Teachers.Clear();
             }
             if (type == typeof(Test))
             {
-                InMemory.Tests.Clear();
+                InMemoryLists.Tests.Clear();
             }
             if (type == typeof(SubjectInGroup))
             {
-                InMemory.SubjectInGroups.Clear();
+                InMemoryLists.SubjectInGroups.Clear();
             }
             if (type == typeof(TestResult))
             {
-                InMemory.TestResults.Clear();
+                InMemoryLists.TestResults.Clear();
             }
             entities.ForEach(item => CreateAsync(item));
             //throw new Exception("No such types");

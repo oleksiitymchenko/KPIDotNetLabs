@@ -16,17 +16,9 @@ namespace DataAccess.Models
         [DataMember()]
         public Guid TestId { get; set; }
         
-        public Test Test
-        {
-            get => InMemory.Tests.Find(o => o.Id == TestId);
-        }
-
         [DataMember()]
         public Guid StudentId { get; set; }
-        public Student Student
-        {
-            get => InMemory.Students.Find(o => o.Id == StudentId);
-        }
+       
 
         public object Clone() => new TestResult()
         {

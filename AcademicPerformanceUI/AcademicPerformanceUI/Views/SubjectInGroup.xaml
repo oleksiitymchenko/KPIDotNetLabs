@@ -20,8 +20,8 @@
                     <StackPanel>
                         <StackPanel Orientation="Vertical">
                             <TextBlock FontSize="15" Text="{Binding Id, StringFormat='Id: {0}'}"/>
-                            <TextBlock FontSize="15" FontWeight="Bold" Text="{Binding Subject.Name, StringFormat='Subject: {0}'}"/>
-                            <TextBlock FontSize="15" Text="{Binding Group.GroupName, StringFormat='Group name: {0}'}"/>
+                            <TextBlock FontSize="15" FontWeight="Bold" Text="{Binding SubjectId, StringFormat='Subject: {0}'}"/>
+                            <TextBlock FontSize="15" Text="{Binding GroupId, StringFormat='Group name: {0}'}"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>

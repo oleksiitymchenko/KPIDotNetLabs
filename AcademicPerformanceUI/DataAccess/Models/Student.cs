@@ -19,11 +19,7 @@ namespace DataAccess.Models
 
         [DataMember()]
         public Guid GroupId { get; set; }
-        public Group Group
-        {
-            get => InMemory.Groups.Find(g => g.Id == GroupId);
-        }
-
+       
         public object Clone() => new Student()
             {
                 Id = this.Id,

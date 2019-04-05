@@ -1,7 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using DataAccess;
-using DataAccess.InMemoryDb;
-using DataAccess.Models;
+﻿using DataAccess.Models;
 
 namespace AcademicPerformanceUI.ViewModels
 {
