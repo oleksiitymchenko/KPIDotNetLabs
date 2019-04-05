@@ -9,13 +9,12 @@ namespace AcademicPerformanceUI.ViewModels
     {
         public GroupViewModel()
         {
-            LoadData();
+            LoadConnectedData();
         }
 
-        public override void LoadData()
+        public override void LoadConnectedData()
         {
-            _SelectedEntity = new Group();
-            Entities = new ObservableCollection<Group>(InMemory.Groups);
+            SelectedEntity = new Group();
         }
     }
 }

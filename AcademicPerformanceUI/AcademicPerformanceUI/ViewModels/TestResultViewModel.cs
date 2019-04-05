@@ -1,4 +1,4 @@
-﻿using DataAccess;
+﻿using DataAccess.InMemoryDb;
 using DataAccess.Models;
 using System;
 using System.Collections.ObjectModel;
@@ -13,13 +13,12 @@ namespace AcademicPerformanceUI.ViewModels
 
         public TestResultViewModel()
         {
-            _SelectedEntity = new TestResult();
-            LoadData();
+            SelectedEntity = new TestResult();
+            LoadConnectedData();
         }
 
-        public override void LoadData()
+        public override void LoadConnectedData()
         {
-            _Entities = new ObservableCollection<TestResult>(InMemory.TestResults);
             TestIds = new ObservableCollection<Guid>(InMemory.Tests.Select(o => o.Id));
             StudentIds = new ObservableCollection<Guid>(InMemory.Students.Select(o => o.Id));
         }

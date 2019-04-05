@@ -8,13 +8,12 @@ namespace AcademicPerformanceUI.ViewModels
     {
         public SubjectViewModel()
         {
-            _SelectedEntity = new Subject();
-            LoadData();
+            SelectedEntity = new Subject();
+            LoadConnectedData();
         }
 
-        public override void LoadData()
+        public override void LoadConnectedData()
         {
-            _Entities = new ObservableCollection<Subject>(InMemory.Subjects);
         }
     }
 }

@@ -12,6 +12,10 @@ namespace AcademicPerformanceUI.ViewModels
 {
     public abstract class BaseViewModel<Entity>:INotifyPropertyChanged where Entity: IEntity
     {
+        public BaseViewModel()
+        {
+            Entities = new ObservableCollection<Entity>(Repository.GetAllEntitiesAsync().Result);
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
@@ -86,7 +90,7 @@ namespace AcademicPerformanceUI.ViewModels
 
             SelectedEntity = (Entity)InMemory.CreateNew(typeof(Entity));
         }
-        public abstract void LoadData();
+        public abstract void LoadConnectedData();
 
         public virtual void SaveEntity()
         {
@@ -112,7 +116,7 @@ namespace AcademicPerformanceUI.ViewModels
             List<Entity> entities = new List<Entity>();
             entities = service.DeserizalizeEntity<List<Entity>>(path);
             InMemory.ReplaceCollection(entities);
-            LoadData();
+            LoadConnectedData();
         }
     }
 }

@@ -13,13 +13,12 @@ namespace AcademicPerformanceUI.ViewModels
 
         public StudentViewModel()
         {
-            _SelectedEntity = new Student();
-            LoadData();
+            SelectedEntity = new Student();
+            LoadConnectedData();
         }
 
-        public override void LoadData()
+        public override void LoadConnectedData()
         {
-            Entities = new ObservableCollection<Student>(InMemory.Students);
             GroupIds = new ObservableCollection<Guid>(InMemory.Groups.Select(o => o.Id));
         }
     }
