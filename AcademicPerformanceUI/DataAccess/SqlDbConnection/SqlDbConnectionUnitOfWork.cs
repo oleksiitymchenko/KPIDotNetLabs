@@ -8,31 +8,31 @@ namespace DataAccess.SqlDbConnection
 {
     public class SqlDbConnectionUnitOfWork : IUnitOfWork
     {
-        protected SqlConnection SqlConnection;
+        protected string ConnectionString;
         public SqlDbConnectionUnitOfWork(string connectionString)
         {
-            SqlConnection = new SqlConnection(connectionString);
+            ConnectionString = connectionString;
         }
         private IRepository<Group> groupRepository;
-        public IRepository<Group> GroupRepository => groupRepository ?? (groupRepository = new GroupRepository(SqlConnection));
+        public IRepository<Group> GroupRepository => groupRepository ?? (groupRepository = new GroupRepository(ConnectionString));
 
         private IRepository<Student> studentRepository;
-        public IRepository<Student> StudentRepository => studentRepository ?? (studentRepository = new StudentRepository(SqlConnection));
+        public IRepository<Student> StudentRepository => studentRepository ?? (studentRepository = new StudentRepository(ConnectionString));
 
         private IRepository<Subject> subjectRepostitory;
-        public IRepository<Subject> SubjectRepostitory => subjectRepostitory ?? (subjectRepostitory = new SubjectRepository(SqlConnection));
+        public IRepository<Subject> SubjectRepostitory => subjectRepostitory ?? (subjectRepostitory = new SubjectRepository(ConnectionString));
 
         private IRepository<SubjectInGroup> subjectInGroupRepository;
-        public IRepository<SubjectInGroup> SubjectInGroupRepository => subjectInGroupRepository ?? (subjectInGroupRepository = new SubjectInGroupRepository(SqlConnection));
+        public IRepository<SubjectInGroup> SubjectInGroupRepository => subjectInGroupRepository ?? (subjectInGroupRepository = new SubjectInGroupRepository(ConnectionString));
 
         private IRepository<Teacher> teacherRepository;
-        public IRepository<Teacher> TeacherRepository => teacherRepository ?? (teacherRepository = new TeacherRepository(SqlConnection));
+        public IRepository<Teacher> TeacherRepository => teacherRepository ?? (teacherRepository = new TeacherRepository(ConnectionString));
 
         private IRepository<Test> testRepository;
-        public IRepository<Test> TestRepository => testRepository ?? (testRepository = new TestRepository(SqlConnection));
+        public IRepository<Test> TestRepository => testRepository ?? (testRepository = new TestRepository(ConnectionString));
 
         private IRepository<TestResult> testResultRepository;
-        public IRepository<TestResult> TestResultRepository => testResultRepository ?? (testResultRepository = new TestResultRepository(SqlConnection));
+        public IRepository<TestResult> TestResultRepository => testResultRepository ?? (testResultRepository = new TestResultRepository(ConnectionString));
 
 
 

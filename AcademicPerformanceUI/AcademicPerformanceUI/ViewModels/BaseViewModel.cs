@@ -59,25 +59,46 @@ namespace AcademicPerformanceUI.ViewModels
 
         public async virtual void AddData()
         {
-            var newEntity = (Entity)_SelectedEntity.Clone();
-            newEntity.Id = Guid.NewGuid();
-            Entities.Add(newEntity);
-            await Repository.CreateAsync(newEntity);
-            var x  = (IEntity)newEntity;
-            SelectedEntity = Repository.CreateEmptyObject();
+            try
+            {
+                var newEntity = (Entity)_SelectedEntity.Clone();
+                newEntity.Id = Guid.NewGuid();
+                Entities.Add(newEntity);
+                await Repository.CreateAsync(newEntity);
+                var x = (IEntity)newEntity;
+                SelectedEntity = Repository.CreateEmptyObject();
+            }
+            catch (Exception ex) 
+            {
+
+            }
         }
 
         public async virtual void RemoveData()
         {
-            await Repository.DeleteAsync(_SelectedEntity.Id);
-            Entities.Remove(_SelectedEntity);
-            SelectedEntity = Repository.CreateEmptyObject();
+            try
+            {
+                await Repository.DeleteAsync(_SelectedEntity.Id);
+                Entities.Remove(_SelectedEntity);
+                SelectedEntity = Repository.CreateEmptyObject();
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         public async virtual void UpdateData()
         {
-            await Repository.UpdateAsync(SelectedEntity);
-            SelectedEntity = Repository.CreateEmptyObject();
+            try
+            {
+                // await Repository.UpdateAsync(SelectedEntity);
+                SelectedEntity = Repository.CreateEmptyObject();
+            }
+            catch (Exception)
+            {
+
+            }
         }
         public abstract void LoadConnectedData();
 
@@ -101,11 +122,19 @@ namespace AcademicPerformanceUI.ViewModels
 
         public virtual void DeserializeList(string path)
         {
-            var service = SerializationServiceFactory.GetSerializationService();
-            List<Entity> entities = new List<Entity>();
-            entities = service.DeserizalizeEntity<List<Entity>>(path);
-            Repository.ReplaceCollection(entities);
-            LoadConnectedData();
+            try
+            {
+                var service = SerializationServiceFactory.GetSerializationService();
+                List<Entity> entities = new List<Entity>();
+                entities = service.DeserizalizeEntity<List<Entity>>(path);
+                Repository.ReplaceCollection(entities);
+                LoadConnectedData();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ namespace DataAccess.SqlDbConnection.Repositories
 {
     public class GroupRepository:GenericRepository<Group>
     {
-        public GroupRepository(SqlConnection sqlConnection):base(sqlConnection)
+        public GroupRepository(string sqlConnection):base(sqlConnection)
         {
 
         }
@@ -27,7 +27,21 @@ namespace DataAccess.SqlDbConnection.Repositories
 
         public override Task<List<Group>> GetAllEntitiesAsync()
         {
-            throw new NotImplementedException();
+            var text = SqlHelper.GetAllSqlText<Group>();
+            var reader = ExecuteReader(text);
+            var list = new List<Group>();
+            while (reader.Read())
+            {
+                list.Add(new Group()
+                {
+                    Id = (Guid)reader["Id"],
+                    GroupName = reader["GroupName"].ToString(),
+                    StudyYear = (int)reader["StudyYear"],
+                    MaxStudents = (int)reader["MaxStudents"],
+                });
+            }
+            reader.Close();
+            return Task.FromResult(new List<Group>());
         }
 
         public override Task<Group> GetFirstOrDefaultAsync(Expression<Func<Group, bool>> predicate = null)

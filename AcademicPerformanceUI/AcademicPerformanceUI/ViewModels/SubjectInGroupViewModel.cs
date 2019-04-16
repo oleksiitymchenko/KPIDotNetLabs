@@ -19,8 +19,8 @@ namespace AcademicPerformanceUI.ViewModels
 
         public override void LoadConnectedData()
         {
-            SubjectIds = new ObservableCollection<Guid>(InMemoryLists.Subjects.Select(o => o.Id));
-            GroupsIds = new ObservableCollection<Guid>(InMemoryLists.Groups.Select(o => o.Id));
+            //SubjectIds = new ObservableCollection<Guid>(InMemoryLists.Subjects.Select(o => o.Id));
+            //GroupsIds = new ObservableCollection<Guid>(InMemoryLists.Groups.Select(o => o.Id));
         }
     }
 }

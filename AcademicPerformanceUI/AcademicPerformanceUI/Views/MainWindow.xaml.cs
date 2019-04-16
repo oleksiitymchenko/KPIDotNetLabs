@@ -4,7 +4,6 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using AcademicPerformanceUI.ViewModels;
 using MahApps.Metro.Controls;
-using MahApps.Metro.Controls.Dialogs;
 using MenuItem = AcademicPerformanceUI.ViewModels.MenuItem;
 
 
@@ -14,11 +13,15 @@ namespace AcademicPerformanceUI.Views
     {
         public MainWindow()
         {
-            InitializeComponent();
-            Navigation.Navigation.Frame = new Frame() { NavigationUIVisibility = NavigationUIVisibility.Hidden };
-            Navigation.Navigation.Frame.Navigated += SplitViewFrame_OnNavigated;
+            try
+            {
+                InitializeComponent();
+                Navigation.Navigation.Frame = new Frame() { NavigationUIVisibility = NavigationUIVisibility.Hidden };
+                Navigation.Navigation.Frame.Navigated += SplitViewFrame_OnNavigated;
 
-            //this.Loaded += (sender, args) => Navigation.Navigation.Navigate(new Uri("Views/ScheduleView.xaml", UriKind.RelativeOrAbsolute));
+                this.Loaded += (sender, args) => Navigation.Navigation.Navigate(new Uri("Views/SubjectView.xaml", UriKind.RelativeOrAbsolute));
+            }
+            catch (Exception) { }
         }
 
         private void SplitViewFrame_OnNavigated(object sender, NavigationEventArgs e)

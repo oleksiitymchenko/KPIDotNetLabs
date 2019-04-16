@@ -10,7 +10,7 @@ namespace DataAccess.SqlDbConnection.Repositories
 {
     public class SubjectRepository : GenericRepository<Subject>
     {
-        public SubjectRepository(SqlConnection sqlConnection):base(sqlConnection)
+        public SubjectRepository(string sqlConnection):base(sqlConnection)
         {
 
         }
@@ -27,7 +27,21 @@ namespace DataAccess.SqlDbConnection.Repositories
 
         public override Task<List<Subject>> GetAllEntitiesAsync()
         {
-            throw new NotImplementedException();
+            var text = SqlHelper.GetAllSqlText<Subject>();
+            var reader = ExecuteReader(text);
+            var list = new List<Subject>();
+            while (reader.Read())
+            {
+                list.Add(new Subject()
+                {
+                    Id = (Guid)reader["Id"],
+                    Name = reader["Name"].ToString(),
+                    Hours = (int)reader["Hours"],
+                    FinalTestType = (FinalTestType)reader["FinalTestType"]
+                });
+            }
+            reader.Close();
+            return Task.FromResult(new List<Subject>());
         }
 
         public override Task<Subject> GetFirstOrDefaultAsync(Expression<Func<Subject, bool>> predicate = null)

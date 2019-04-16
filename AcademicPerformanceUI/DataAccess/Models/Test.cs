@@ -18,7 +18,7 @@ namespace DataAccess.Models
         public DateTime Date { get; set; }
 
         [DataMember()]
-        public Guid TeacherId;
+        public Guid TeacherId { get; set; }
         
         public object Clone() => new Test()
         {
