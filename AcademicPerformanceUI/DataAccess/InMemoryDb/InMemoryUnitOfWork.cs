@@ -5,7 +5,7 @@ using System;
 
 namespace DataAccess.InMemoryDb
 {
-    public class InMemoryUnitOfWork : IUnitOfWork
+    public class SqlDbConnectionUnitOfWork : IUnitOfWork
     {
         private IRepository<Group> groupRepository;
         public IRepository<Group> GroupRepository => groupRepository ?? (groupRepository = new GroupRepository());
