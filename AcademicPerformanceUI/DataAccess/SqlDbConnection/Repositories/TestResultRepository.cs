@@ -10,15 +10,6 @@ namespace DataAccess.SqlDbConnection.Repositories
     {
         public TestResultRepository(string sqlConnection):base(sqlConnection)
         {
-
-        }
-
-        public override Task<TestResult> CreateAsync(TestResult entity)
-        {
-            var sqltext = $"insert into [TestResult] (Id, Mark, StudentId, TestId) " +
-                 $"values('{entity.Id}', '{entity.Mark}', '{entity.StudentId}', '{entity.TestId}')";
-            var result = ExecuteNonQuery(sqltext);
-            return Task.FromResult(result == 0 ? null : entity);
         }
 
         public override Task<List<TestResult>> GetAllEntitiesAsync()
@@ -38,16 +29,6 @@ namespace DataAccess.SqlDbConnection.Repositories
             }
             reader.Close();
             return Task.FromResult(list);
-        }
-
-        public override Task<TestResult> UpdateAsync(TestResult entity)
-        {
-            var sqltext = $"update [TestResult] set Mark = '{entity.Mark}', StudentId = '{entity.StudentId}', " +
-               $"TestId = '{entity.TestId}'";
-
-            var result = ExecuteNonQuery(sqltext);
-
-            return Task.FromResult(result == 0 ? null : entity);
         }
     }
 }

@@ -70,7 +70,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
@@ -106,10 +105,10 @@
     </Compile>
     <Compile Include="Navigation.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\DelegateCommand.cs" />
+    <Compile Include="ViewModels\SystemViewModels\DelegateCommand.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
-    <Compile Include="ViewModels\MenuItem.cs" />
-    <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\SystemViewModels\MenuItem.cs" />
+    <Compile Include="ViewModels\SystemViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\StudentViewModel.cs" />
     <Compile Include="ViewModels\SubjectInGroupViewModel.cs" />
     <Compile Include="ViewModels\SubjectViewModel.cs" />

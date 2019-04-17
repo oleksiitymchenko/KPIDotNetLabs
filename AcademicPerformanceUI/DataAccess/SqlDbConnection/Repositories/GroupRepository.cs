@@ -10,15 +10,6 @@ namespace DataAccess.SqlDbConnection.Repositories
     {
         public GroupRepository(string sqlConnection):base(sqlConnection)
         {
-
-        }
-
-        public override Task<Group> CreateAsync(Group entity)
-        {
-            var sqltext = $"insert into [Group] (Id, GroupName, MaxStudents, PhoneNumber, StudyYear) " +
-                $"values('{entity.Id}', '{entity.GroupName}', '{entity.MaxStudents}', '{entity.StudyYear}')";
-            var result = ExecuteNonQuery(sqltext);
-            return Task.FromResult(result == 0 ? null : entity);
         }
 
         public override Task<List<Group>> GetAllEntitiesAsync()
@@ -38,17 +29,6 @@ namespace DataAccess.SqlDbConnection.Repositories
             }
             reader.Close();
             return Task.FromResult(list);
-        }
-
-
-        public override Task<Group> UpdateAsync(Group entity)
-        {
-            var sqltext = $"update [Group] set GroupName = '{entity.GroupName}', MaxStudents = '{entity.MaxStudents}', " +
-                $"StudyYear = '{entity.StudyYear}'";
-
-            var result = ExecuteNonQuery(sqltext);
-
-            return Task.FromResult(result == 0 ? null : entity);
         }
     }
 }

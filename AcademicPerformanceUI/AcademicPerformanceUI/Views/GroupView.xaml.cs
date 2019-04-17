@@ -8,7 +8,7 @@ namespace AcademicPerformanceUI.Views
     /// <summary>
     /// Interaction logic for GroupView.xaml
     /// </summary>
-    public partial class GroupView : Page
+    public partial class GroupView: Page
     {
         private GroupViewModel ViewModel { get; set; }
 

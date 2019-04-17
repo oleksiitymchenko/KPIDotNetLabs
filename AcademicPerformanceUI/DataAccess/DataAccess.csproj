@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <Folder Include="LinqToSql\" />
-    <Folder Include="SqlDbConnection\Repositories\" />
   </ItemGroup>
 
 </Project>

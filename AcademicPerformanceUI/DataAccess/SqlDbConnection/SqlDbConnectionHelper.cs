@@ -1,12 +1,14 @@
 ﻿using DataAccess.Interfaces;
 using System;
 using System.Text;
+using System.Linq;
+using System.Reflection;
 
 namespace DataAccess.SqlDbConnection
 {
     public class SqlDbConnectionHelper
     {
-        public string CreateTableSqlText<Entity>()where Entity : IEntity
+        public string CreateTableSqlText<Entity>() where Entity : IEntity
         {
             var sqltext = new StringBuilder();
             sqltext.Append("create table ");
@@ -48,10 +50,68 @@ namespace DataAccess.SqlDbConnection
             return $"select * from [{tableName}] with (nolock)";
         }
 
-        public string GetDeleteByIdText<Entity>(Guid Id) where Entity: IEntity
+        public string GetDeleteByIdText<Entity>(Guid Id) where Entity : IEntity
         {
             var tableName = typeof(Entity).Name;
             return $"delete from [{tableName}] where Id = '{Id.ToString()}'";
+        }
+
+        public string GetInsertText<Entity>(Entity entity) where Entity : IEntity
+        {
+            var sqltext = new StringBuilder();
+            var tableName = typeof(Entity).Name;
+            var properties = typeof(Entity).GetProperties();
+            sqltext.Append($"insert into [{tableName}] (");
+
+            foreach (var property in properties)
+            {
+                sqltext.Append($" {property.Name},");
+            }
+
+            sqltext.Remove(sqltext.Length - 1, 1);
+            sqltext.Append(" ) values( ");
+
+            foreach (var property in properties)
+            {
+                var info = typeof(Entity).GetProperty(property.Name).GetValue(entity);
+
+                if (property.PropertyType.BaseType.Name == "Enum")
+                {
+                    sqltext.Append($" '{(int)info}',");
+                    continue;
+                }
+                
+                sqltext.Append($" '{info}',");
+            }
+            sqltext.Remove(sqltext.Length - 1, 1);
+            sqltext.Append(" ); ");
+
+            return sqltext.ToString();
+        }
+
+        public string GetUpdateText<Entity>(Entity entity) where Entity : IEntity
+        {
+            var sqltext = new StringBuilder();
+            var tableName = typeof(Entity).Name;
+            var properties = typeof(Entity).GetProperties();
+            sqltext.Append($"update [{tableName}] set");
+
+            foreach (var property in properties)
+            {
+                object info = null;
+                if (property.PropertyType.BaseType.Name == "Enum")
+                {
+                    info = typeof(Entity).GetProperty(property.Name).GetValue(entity);
+                    sqltext.Append($"{property.Name} = '{(int)info}',");
+                    continue;
+                }
+                info = typeof(Entity).GetProperty(property.Name).GetValue(entity);
+                sqltext.Append($" {property.Name} = '{info}',");
+            }
+
+            sqltext.Remove(sqltext.Length - 1, 1);
+            sqltext.Append($" where Id = '{entity.Id}'");
+            return sqltext.ToString();
         }
     }
 }

@@ -73,7 +73,6 @@ namespace AcademicPerformanceUI.ViewModels
             }
             catch (Exception ex) 
             {
-
             }
         }
 
@@ -89,7 +88,6 @@ namespace AcademicPerformanceUI.ViewModels
             }
             catch (Exception)
             {
-
             }
         }
 
@@ -103,27 +101,39 @@ namespace AcademicPerformanceUI.ViewModels
             }
             catch (Exception ex)
             {
-
             }
         }
         public abstract void LoadConnectedData();
 
         public virtual void SaveEntity()
         {
-            var service = SerializationServiceFactory.GetSerializationService();
-            service.SerializeEntity(SelectedEntity, $"{typeof(Entity)}");
+            try
+            {
+                var service = SerializationServiceFactory.GetSerializationService();
+                service.SerializeEntity(SelectedEntity, $"{typeof(Entity)}");
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public virtual async void SaveAllEntities()
         {
-            var service = SerializationServiceFactory.GetSerializationService();
-            List<Entity> entities = new List<Entity>();
-
-            foreach (var item in Entities)
+            try
             {
-                await Repository.CreateAsync(item);
+                var service = SerializationServiceFactory.GetSerializationService();
+                List<Entity> entities = new List<Entity>();
+
+                foreach (var item in Entities)
+                {
+                    await Repository.CreateAsync(item);
+                }
+                service.SerializeEntity(entities, $"{typeof(Entity)}List");
             }
-            service.SerializeEntity(entities, $"{typeof(Entity)}List");
+            catch (Exception)
+            {
+
+            }
         }
 
         public virtual void DeserializeList(string path)
@@ -133,13 +143,12 @@ namespace AcademicPerformanceUI.ViewModels
                 var service = SerializationServiceFactory.GetSerializationService();
                 List<Entity> entities = new List<Entity>();
                 entities = service.DeserizalizeEntity<List<Entity>>(path);
-                Repository.ReplaceCollection(entities);
+                Repository.AddCollection(entities);
                 LoadConnectedData();
             }
             catch (Exception)
             {
 
-                throw;
             }
         }
     }

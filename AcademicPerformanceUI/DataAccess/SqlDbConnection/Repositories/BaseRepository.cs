@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.SqlDbConnection.Repository
 {
-    public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : IEntity
+    public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity 
     {
         protected string ConnectionString;
         protected SqlDbConnectionHelper SqlHelper;
@@ -18,30 +18,35 @@ namespace DataAccess.SqlDbConnection.Repository
         {
             this.ConnectionString = connectionString;
             this.SqlHelper = new SqlDbConnectionHelper();
-            //ExecuteNonQuery(SqlHelper.CreateTableSqlText<Test>());
-            //ExecuteNonQuery(SqlHelper.CreateTableSqlText<Group>());
-            //ExecuteNonQuery(SqlHelper.CreateTableSqlText<Student>());
-            //ExecuteNonQuery(SqlHelper.CreateTableSqlText<Subject>());
-            //ExecuteNonQuery(SqlHelper.CreateTableSqlText<SubjectInGroup>());
-            //ExecuteNonQuery(SqlHelper.CreateTableSqlText<Teacher>());
-            //ExecuteNonQuery(SqlHelper.CreateTableSqlText<TestResult>());
         }
-        public abstract Task<TEntity> CreateAsync(TEntity entity);
 
+        public virtual Task<TEntity> CreateAsync(TEntity entity)
+        {
+            var sqltext = SqlHelper.GetInsertText(entity);
+            var result = ExecuteNonQuery(sqltext);
+
+            return Task.FromResult(result == 0 ? null : entity);
+        }
+
+        public virtual Task<TEntity> UpdateAsync(TEntity entity)
+        {
+            var sqltext = SqlHelper.GetUpdateText(entity);
+            var result = ExecuteNonQuery(sqltext);
+            return Task.FromResult(result == 0 ? null : entity);
+        }
+
+        public abstract Task<List<TEntity>> GetAllEntitiesAsync();
+        public virtual Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null) { throw new NotImplementedException(); }
+        
         public virtual Task<bool> DeleteAsync(Guid Id)
         {
             var sqlHelper = new SqlDbConnectionHelper();
-            var sqltext = sqlHelper.GetDeleteByIdText<Student>(Id);
+            var sqltext = sqlHelper.GetDeleteByIdText<TEntity>(Id);
             var result = ExecuteNonQuery(sqltext);
             return Task.FromResult(result != 0);
         }
 
-        public abstract Task<List<TEntity>> GetAllEntitiesAsync();
-        public abstract Task<TEntity> UpdateAsync(TEntity entity);
-
-        public virtual Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null) { throw new NotImplementedException(); }
-
-        public virtual void ReplaceCollection(List<TEntity> entities) { throw new NotImplementedException();  }
+        public virtual void AddCollection(List<TEntity> entities) { throw new NotImplementedException();  }
 
         public TEntity CreateEmptyObject()
         {
@@ -61,8 +66,18 @@ namespace DataAccess.SqlDbConnection.Repository
             return (TEntity)newObject;
         }
 
+        private void CreateTables()
+        {
+            ExecuteNonQuery(SqlHelper.CreateTableSqlText<Test>());
+            ExecuteNonQuery(SqlHelper.CreateTableSqlText<Group>());
+            ExecuteNonQuery(SqlHelper.CreateTableSqlText<Student>());
+            ExecuteNonQuery(SqlHelper.CreateTableSqlText<Subject>());
+            ExecuteNonQuery(SqlHelper.CreateTableSqlText<SubjectInGroup>());
+            ExecuteNonQuery(SqlHelper.CreateTableSqlText<Teacher>());
+            ExecuteNonQuery(SqlHelper.CreateTableSqlText<TestResult>());
+        }
 
-        public virtual int ExecuteNonQuery(string commandText, CommandType commandType = CommandType.Text, params SqlParameter[] parameters)
+        protected virtual int ExecuteNonQuery(string commandText, CommandType commandType = CommandType.Text, params SqlParameter[] parameters)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -81,8 +96,7 @@ namespace DataAccess.SqlDbConnection.Repository
             }
         }
 
-
-        public virtual SqlDataReader ExecuteReader(string commandText, CommandType commandType = CommandType.Text, params SqlParameter[] parameters)
+        protected virtual SqlDataReader ExecuteReader(string commandText, CommandType commandType = CommandType.Text, params SqlParameter[] parameters)
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand(commandText, conn);

@@ -121,7 +121,7 @@ namespace DataAccess.InMemoryDb.Repository
             return Task.FromResult(entity);
         }
 
-        public void ReplaceCollection(List<TEntity> entities)
+        public void AddCollection(List<TEntity> entities)
         {
             var type = typeof(TEntity);
             if (type == typeof(Group))

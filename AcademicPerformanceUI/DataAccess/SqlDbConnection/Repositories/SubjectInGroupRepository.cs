@@ -6,18 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataAccess.SqlDbConnection.Repositories
 {
-    public class SubjectInGroupRepository:BaseRepository<SubjectInGroup>
+    public class SubjectInGroupRepository : BaseRepository<SubjectInGroup>
     {
-        public SubjectInGroupRepository(string sqlConnection):base(sqlConnection)
+        public SubjectInGroupRepository(string sqlConnection) : base(sqlConnection)
         {
-        }
-
-        public override Task<SubjectInGroup> CreateAsync(SubjectInGroup entity)
-        {
-            var sqltext = $"insert into [SubjectInGroup] (Id, GroupId, SubjectId) " +
-               $"values('{entity.Id}', '{entity.GroupId}', '{entity.SubjectId}')";
-            var result = ExecuteNonQuery(sqltext);
-            return Task.FromResult(result == 0 ? null : entity);
         }
 
         public override Task<List<SubjectInGroup>> GetAllEntitiesAsync()
@@ -36,15 +28,6 @@ namespace DataAccess.SqlDbConnection.Repositories
             }
             reader.Close();
             return Task.FromResult(list);
-        }
-
-        public override Task<SubjectInGroup> UpdateAsync(SubjectInGroup entity)
-        {
-            var sqltext = $"update [SubjectInGroup] set GroupId = '{entity.GroupId}', SubjectId = '{entity.SubjectId}'";
-
-            var result = ExecuteNonQuery(sqltext);
-
-            return Task.FromResult(result == 0 ? null : entity);
         }
     }
 }

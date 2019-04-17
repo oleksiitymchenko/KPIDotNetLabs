@@ -12,7 +12,7 @@ namespace DataAccess.Interfaces
         Task<TEntity> UpdateAsync(TEntity entity);
         Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null);
         Task<List<TEntity>> GetAllEntitiesAsync();
-        void ReplaceCollection(List<TEntity> entities);
+        void AddCollection(List<TEntity> entities);
         TEntity CreateEmptyObject();
     }
 }
