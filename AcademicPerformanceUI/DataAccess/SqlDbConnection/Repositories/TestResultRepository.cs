@@ -2,13 +2,11 @@
 using DataAccess.SqlDbConnection.Repository;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace DataAccess.SqlDbConnection.Repositories
 {
-    public class TestResultRepository:GenericRepository<TestResult>
+    public class TestResultRepository:BaseRepository<TestResult>
     {
         public TestResultRepository(string sqlConnection):base(sqlConnection)
         {
@@ -17,12 +15,10 @@ namespace DataAccess.SqlDbConnection.Repositories
 
         public override Task<TestResult> CreateAsync(TestResult entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Task<bool> DeleteAsync(Guid Id)
-        {
-            throw new NotImplementedException();
+            var sqltext = $"insert into [TestResult] (Id, Mark, StudentId, TestId) " +
+                 $"values('{entity.Id}', '{entity.Mark}', '{entity.StudentId}', '{entity.TestId}')";
+            var result = ExecuteNonQuery(sqltext);
+            return Task.FromResult(result == 0 ? null : entity);
         }
 
         public override Task<List<TestResult>> GetAllEntitiesAsync()
@@ -44,19 +40,14 @@ namespace DataAccess.SqlDbConnection.Repositories
             return Task.FromResult(list);
         }
 
-        public override Task<TestResult> GetFirstOrDefaultAsync(Expression<Func<TestResult, bool>> predicate = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void ReplaceCollection(List<TestResult> entities)
-        {
-            throw new NotImplementedException();
-        }
-
         public override Task<TestResult> UpdateAsync(TestResult entity)
         {
-            throw new NotImplementedException();
+            var sqltext = $"update [TestResult] set Mark = '{entity.Mark}', StudentId = '{entity.StudentId}', " +
+               $"TestId = '{entity.TestId}'";
+
+            var result = ExecuteNonQuery(sqltext);
+
+            return Task.FromResult(result == 0 ? null : entity);
         }
     }
 }

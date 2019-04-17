@@ -2,13 +2,11 @@
 using DataAccess.SqlDbConnection.Repository;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace DataAccess.SqlDbConnection.Repositories
 {
-    public class GroupRepository:GenericRepository<Group>
+    public class GroupRepository:BaseRepository<Group>
     {
         public GroupRepository(string sqlConnection):base(sqlConnection)
         {
@@ -17,12 +15,10 @@ namespace DataAccess.SqlDbConnection.Repositories
 
         public override Task<Group> CreateAsync(Group entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Task<bool> DeleteAsync(Guid Id)
-        {
-            throw new NotImplementedException();
+            var sqltext = $"insert into [Group] (Id, GroupName, MaxStudents, PhoneNumber, StudyYear) " +
+                $"values('{entity.Id}', '{entity.GroupName}', '{entity.MaxStudents}', '{entity.StudyYear}')";
+            var result = ExecuteNonQuery(sqltext);
+            return Task.FromResult(result == 0 ? null : entity);
         }
 
         public override Task<List<Group>> GetAllEntitiesAsync()
@@ -44,19 +40,15 @@ namespace DataAccess.SqlDbConnection.Repositories
             return Task.FromResult(list);
         }
 
-        public override Task<Group> GetFirstOrDefaultAsync(Expression<Func<Group, bool>> predicate = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void ReplaceCollection(List<Group> entities)
-        {
-            throw new NotImplementedException();
-        }
 
         public override Task<Group> UpdateAsync(Group entity)
         {
-            throw new NotImplementedException();
+            var sqltext = $"update [Group] set GroupName = '{entity.GroupName}', MaxStudents = '{entity.MaxStudents}', " +
+                $"StudyYear = '{entity.StudyYear}'";
+
+            var result = ExecuteNonQuery(sqltext);
+
+            return Task.FromResult(result == 0 ? null : entity);
         }
     }
 }

@@ -2,27 +2,22 @@
 using DataAccess.SqlDbConnection.Repository;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace DataAccess.SqlDbConnection.Repositories
 {
-    public class SubjectInGroupRepository:GenericRepository<SubjectInGroup>
+    public class SubjectInGroupRepository:BaseRepository<SubjectInGroup>
     {
         public SubjectInGroupRepository(string sqlConnection):base(sqlConnection)
         {
-
         }
 
         public override Task<SubjectInGroup> CreateAsync(SubjectInGroup entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Task<bool> DeleteAsync(Guid Id)
-        {
-            throw new NotImplementedException();
+            var sqltext = $"insert into [SubjectInGroup] (Id, GroupId, SubjectId) " +
+               $"values('{entity.Id}', '{entity.GroupId}', '{entity.SubjectId}')";
+            var result = ExecuteNonQuery(sqltext);
+            return Task.FromResult(result == 0 ? null : entity);
         }
 
         public override Task<List<SubjectInGroup>> GetAllEntitiesAsync()
@@ -43,19 +38,13 @@ namespace DataAccess.SqlDbConnection.Repositories
             return Task.FromResult(list);
         }
 
-        public override Task<SubjectInGroup> GetFirstOrDefaultAsync(Expression<Func<SubjectInGroup, bool>> predicate = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void ReplaceCollection(List<SubjectInGroup> entities)
-        {
-            throw new NotImplementedException();
-        }
-
         public override Task<SubjectInGroup> UpdateAsync(SubjectInGroup entity)
         {
-            throw new NotImplementedException();
+            var sqltext = $"update [SubjectInGroup] set GroupId = '{entity.GroupId}', SubjectId = '{entity.SubjectId}'";
+
+            var result = ExecuteNonQuery(sqltext);
+
+            return Task.FromResult(result == 0 ? null : entity);
         }
     }
 }

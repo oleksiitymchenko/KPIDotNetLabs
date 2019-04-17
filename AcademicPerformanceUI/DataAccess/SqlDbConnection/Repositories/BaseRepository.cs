@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.SqlDbConnection.Repository
 {
-    public abstract class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : IEntity
+    public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : IEntity
     {
         protected string ConnectionString;
         protected SqlDbConnectionHelper SqlHelper;
 
-        public GenericRepository(string connectionString)
+        public BaseRepository(string connectionString)
         {
             this.ConnectionString = connectionString;
             this.SqlHelper = new SqlDbConnectionHelper();
@@ -28,20 +28,20 @@ namespace DataAccess.SqlDbConnection.Repository
         }
         public abstract Task<TEntity> CreateAsync(TEntity entity);
 
-        public abstract Task<bool> DeleteAsync(Guid Id);
-
-        public abstract Task<List<TEntity>> GetAllEntitiesAsync();
-
-        private static void ReadSingleRow(IDataRecord record)
+        public virtual Task<bool> DeleteAsync(Guid Id)
         {
-            Console.WriteLine(String.Format("{0}, {1}", record[0], record[1]));
+            var sqlHelper = new SqlDbConnectionHelper();
+            var sqltext = sqlHelper.GetDeleteByIdText<Student>(Id);
+            var result = ExecuteNonQuery(sqltext);
+            return Task.FromResult(result != 0);
         }
 
-        public abstract Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null);
-
+        public abstract Task<List<TEntity>> GetAllEntitiesAsync();
         public abstract Task<TEntity> UpdateAsync(TEntity entity);
 
-        public abstract void ReplaceCollection(List<TEntity> entities);
+        public virtual Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null) { throw new NotImplementedException(); }
+
+        public virtual void ReplaceCollection(List<TEntity> entities) { throw new NotImplementedException();  }
 
         public TEntity CreateEmptyObject()
         {

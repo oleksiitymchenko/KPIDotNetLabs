@@ -2,13 +2,11 @@
 using DataAccess.SqlDbConnection.Repository;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace DataAccess.SqlDbConnection.Repositories
 {
-    public class SubjectRepository : GenericRepository<Subject>
+    public class SubjectRepository : BaseRepository<Subject>
     {
         public SubjectRepository(string sqlConnection):base(sqlConnection)
         {
@@ -17,12 +15,10 @@ namespace DataAccess.SqlDbConnection.Repositories
 
         public override Task<Subject> CreateAsync(Subject entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Task<bool> DeleteAsync(Guid Id)
-        {
-            throw new NotImplementedException();
+            var sqltext = $"insert into [Subject] (Id, Name, Hours, FinalTestType) " +
+                 $"values('{entity.Id}', '{entity.Name}', '{entity.Hours}', '{entity.FinalTestType}')";
+            var result = ExecuteNonQuery(sqltext);
+            return Task.FromResult(result == 0 ? null : entity);
         }
 
         public override Task<List<Subject>> GetAllEntitiesAsync()
@@ -44,19 +40,14 @@ namespace DataAccess.SqlDbConnection.Repositories
             return Task.FromResult(list);
         }
 
-        public override Task<Subject> GetFirstOrDefaultAsync(Expression<Func<Subject, bool>> predicate = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void ReplaceCollection(List<Subject> entities)
-        {
-            throw new NotImplementedException();
-        }
-
         public override Task<Subject> UpdateAsync(Subject entity)
         {
-            throw new NotImplementedException();
+            var sqltext = $"update [Subject] set Name = '{entity.Name}', Hours = '{entity.Hours}', " +
+                $"FinalTestType = '{entity.FinalTestType}'";
+
+            var result = ExecuteNonQuery(sqltext);
+
+            return Task.FromResult(result == 0 ? null : entity);
         }
     }
 }
