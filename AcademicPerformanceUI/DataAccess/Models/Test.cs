@@ -34,5 +34,17 @@ namespace DataAccess.Models
             Date = this.Date,
             TeacherId = this.TeacherId
         };
+
+        public IEntity MapFrom(IEntity mapFrom)
+        {
+            var entity = (Test)mapFrom;
+            this.Id = entity.Id;
+            this.Name = entity.Name;
+            this.Theme = entity.Theme;
+            this.Date = entity.Date;
+            this.TeacherId = entity.TeacherId;
+
+            return this;
+        }
     }
 }

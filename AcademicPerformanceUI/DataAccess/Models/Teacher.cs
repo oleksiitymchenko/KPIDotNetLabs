@@ -34,5 +34,17 @@ namespace DataAccess.Models
             PhoneNumber = this.PhoneNumber,
             SubjectId = this.SubjectId
         };
+
+        public IEntity MapFrom(IEntity mapFrom)
+        {
+            var entity = (Teacher)mapFrom;
+            this.Id = entity.Id;
+            this.SubjectId = entity.SubjectId;
+            this.FirstName = entity.FirstName;
+            this.LastName = entity.LastName;
+            this.PhoneNumber = entity.PhoneNumber;
+
+            return this;
+        }
     }
 }

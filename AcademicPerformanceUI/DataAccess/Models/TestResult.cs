@@ -7,7 +7,7 @@ namespace DataAccess.Models
 {
     [Table(Name = "TestResult")]
     [Serializable]
-    public class TestResult:IEntity
+    public class TestResult : IEntity
     {
         [Column(IsPrimaryKey = true, IsDbGenerated = false)]
         [DataMember()]
@@ -19,11 +19,11 @@ namespace DataAccess.Models
         [Column]
         [DataMember()]
         public Guid TestId { get; set; }
-        
+
         [Column]
         [DataMember()]
         public Guid StudentId { get; set; }
-       
+
 
         public object Clone() => new TestResult()
         {
@@ -32,5 +32,16 @@ namespace DataAccess.Models
             TestId = this.TestId,
             StudentId = this.StudentId
         };
+
+        public IEntity MapFrom(IEntity mapFrom)
+        {
+            var entity = (TestResult)mapFrom;
+            this.Id = entity.Id;
+            this.Mark = entity.Mark;
+            this.TestId = entity.TestId;
+            this.StudentId = entity.StudentId;
+
+            return this;
+        }
     }
 }

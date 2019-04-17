@@ -32,5 +32,17 @@ namespace DataAccess.Models
             FinalTestType = this.FinalTestType,
             Hours = this.Hours
         };
+
+
+        public IEntity MapFrom(IEntity mapFrom)
+        {
+            var entity = (Subject)mapFrom;
+            this.Id = entity.Id;
+            this.Name = entity.Name;
+            this.Hours = entity.Hours;
+            this.FinalTestType = entity.FinalTestType;
+
+            return this;
+        }
     }
 }

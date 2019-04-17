@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="LinqToSql\" />
+    <Reference Include="System.Data.Linq" />
   </ItemGroup>
 
 </Project>

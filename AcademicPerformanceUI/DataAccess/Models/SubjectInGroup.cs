@@ -27,5 +27,15 @@ namespace DataAccess.Models
             SubjectId = this.SubjectId,
             GroupId = this.GroupId
         };
+
+        public IEntity MapFrom(IEntity mapFrom)
+        {
+            var entity = (SubjectInGroup)mapFrom;
+            this.Id = entity.Id;
+            this.SubjectId = entity.SubjectId;
+            this.GroupId = entity.GroupId;
+
+            return this;
+        }
     }
 }

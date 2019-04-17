@@ -1,14 +1,14 @@
 ﻿using DataAccess.Interfaces;
 using DataAccess.Models;
-using DataAccess.SqlDbConnection.Repositories;
+using DataAccess.LinqToSql.Repositories;
 using System;
 
-namespace DataAccess.SqlDbConnection
+namespace DataAccess.LinqToSql
 {
-    public class SqlDbConnectionUnitOfWork : IUnitOfWork
+    public class LinqToSqlUnitOfWork
     {
         protected string ConnectionString;
-        public SqlDbConnectionUnitOfWork(string connectionString)
+        public LinqToSqlUnitOfWork(string connectionString)
         {
             ConnectionString = connectionString;
         }

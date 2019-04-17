@@ -35,5 +35,16 @@ namespace DataAccess.Models
                 StudyYear = this.StudyYear
             };
         }
+
+        public IEntity MapFrom(IEntity mapFrom)
+        {
+            var entity = (Group)mapFrom;
+            this.Id = entity.Id;
+            this.GroupName = entity.GroupName;
+            this.MaxStudents = entity.MaxStudents;
+            this.StudyYear = entity.StudyYear;
+
+            return this;
+        }
     }
 }
