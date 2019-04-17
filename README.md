@@ -1,2 +1,2 @@
 # KPIDotNetLabs
-Educational project foruniversity.
+Educational project for university.
