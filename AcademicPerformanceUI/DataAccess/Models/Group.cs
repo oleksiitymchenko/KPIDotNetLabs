@@ -1,19 +1,28 @@
 ﻿using System;
 using DataAccess.Interfaces;
 using System.Runtime.Serialization;
+using System.Data.Linq.Mapping;
 
 namespace DataAccess.Models
 {
     [Serializable]
+    [Table(Name = "Group")]
     public class Group : IEntity
     {
         [DataMember()]
+        [Column(IsPrimaryKey = true, IsDbGenerated = false)]
         public Guid Id { get; set; }
+
         [DataMember()]
+        [Column]
         public string GroupName { get; set; }
+
         [DataMember()]
+        [Column]
         public int MaxStudents { get; set; }
+
         [DataMember()]
+        [Column]
         public int StudyYear { get; set; }
 
         public object Clone()

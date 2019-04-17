@@ -1,8 +1,6 @@
 ﻿using DataAccess.Interfaces;
 using System;
 using System.Text;
-using System.Linq;
-using System.Reflection;
 
 namespace DataAccess.SqlDbConnection
 {

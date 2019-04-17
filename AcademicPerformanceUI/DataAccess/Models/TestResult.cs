@@ -1,21 +1,26 @@
 ﻿using System;
+using System.Data.Linq.Mapping;
 using System.Runtime.Serialization;
-using DataAccess.InMemoryDb;
 using DataAccess.Interfaces;
 
 namespace DataAccess.Models
 {
+    [Table(Name = "TestResult")]
     [Serializable]
     public class TestResult:IEntity
     {
+        [Column(IsPrimaryKey = true, IsDbGenerated = false)]
         [DataMember()]
         public Guid Id { get; set; }
+        [Column]
         [DataMember()]
         public int Mark { get; set; }
 
+        [Column]
         [DataMember()]
         public Guid TestId { get; set; }
         
+        [Column]
         [DataMember()]
         public Guid StudentId { get; set; }
        

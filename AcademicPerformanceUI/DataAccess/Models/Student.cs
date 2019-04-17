@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Linq.Mapping;
 using System.Runtime.Serialization;
 using DataAccess.InMemoryDb;
 using DataAccess.Interfaces;
@@ -6,18 +7,23 @@ using DataAccess.Interfaces;
 namespace DataAccess.Models
 {
     [Serializable]
+    [Table(Name = "Student")]
     public class Student : IEntity
     {
         [DataMember()]
+        [Column(IsPrimaryKey = true, IsDbGenerated = false)]
         public Guid Id { get; set; }
         [DataMember()]
+        [Column]
         public string FirstName { get; set; }
         [DataMember()]
+        [Column]
         public string LastName { get; set; }
         [DataMember()]
+        [Column]
         public string PhoneNumber { get; set; }
-
         [DataMember()]
+        [Column]
         public Guid GroupId { get; set; }
        
         public object Clone() => new Student()
