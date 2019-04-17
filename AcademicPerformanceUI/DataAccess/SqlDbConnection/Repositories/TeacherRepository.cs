@@ -42,7 +42,7 @@ namespace DataAccess.SqlDbConnection.Repositories
                 });
             }
             reader.Close();
-            return Task.FromResult(new List<Teacher>());
+            return Task.FromResult(list);
         }
 
         public override Task<Teacher> GetFirstOrDefaultAsync(Expression<Func<Teacher, bool>> predicate = null)

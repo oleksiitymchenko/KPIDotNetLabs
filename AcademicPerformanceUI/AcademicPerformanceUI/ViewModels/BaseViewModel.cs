@@ -63,8 +63,11 @@ namespace AcademicPerformanceUI.ViewModels
             {
                 var newEntity = (Entity)_SelectedEntity.Clone();
                 newEntity.Id = Guid.NewGuid();
+
+                var res = await Repository.CreateAsync(newEntity);
+                if (res == null) return;
+
                 Entities.Add(newEntity);
-                await Repository.CreateAsync(newEntity);
                 var x = (IEntity)newEntity;
                 SelectedEntity = Repository.CreateEmptyObject();
             }
@@ -78,7 +81,9 @@ namespace AcademicPerformanceUI.ViewModels
         {
             try
             {
-                await Repository.DeleteAsync(_SelectedEntity.Id);
+                var result  = await Repository.DeleteAsync(_SelectedEntity.Id);
+                if (!result) return;
+
                 Entities.Remove(_SelectedEntity);
                 SelectedEntity = Repository.CreateEmptyObject();
             }
@@ -92,10 +97,11 @@ namespace AcademicPerformanceUI.ViewModels
         {
             try
             {
-                // await Repository.UpdateAsync(SelectedEntity);
+                var res = await Repository.UpdateAsync(SelectedEntity);
+                if (res == null) return;
                 SelectedEntity = Repository.CreateEmptyObject();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }

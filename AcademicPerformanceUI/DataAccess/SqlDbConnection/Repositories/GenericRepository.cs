@@ -45,15 +45,19 @@ namespace DataAccess.SqlDbConnection.Repository
 
         public TEntity CreateEmptyObject()
         {
-            var type = typeof(TEntity);
+            var type = typeof(TEntity).Name;
             IEntity newObject = null;
-            if (type == typeof(Group)) newObject = new Group();
-            if (type == typeof(Student)) newObject = new Student();
-            if (type == typeof(Subject)) newObject = new Subject();
-            if (type == typeof(Teacher)) newObject = new Teacher();
-            if (type == typeof(Test)) newObject = new Test();
-            if (type == typeof(SubjectInGroup)) newObject = new SubjectInGroup();
-            if (type == typeof(TestResult)) newObject = new TestResult();
+            switch (type)
+            {
+                case "Group": newObject = new Group(); break;
+                case "Student": newObject = new Student(); break;
+                case "Subject": newObject = new Subject(); break;
+                case "Teacher": newObject = new Teacher(); break;
+                case "Test": newObject = new Test(); break;
+                case "SubjectInGroup": newObject = new SubjectInGroup(); break;
+                case "TestResult": newObject = new TestResult(); break;
+                default: throw new Exception("No such type");
+            }
             return (TEntity)newObject;
         }
 

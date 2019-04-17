@@ -17,7 +17,7 @@ namespace DataAccess.SqlDbConnection.Repositories
         public override Task<Student> CreateAsync(Student entity)
         {
             var sqltext = $"insert into Student (Id, FirstName, LastName, PhoneNumber, GroupId) " +
-                $"values({entity.Id}, {entity.FirstName}, {entity.LastName}, {entity.PhoneNumber}, '{entity.GroupId}')";
+                $"values('{entity.Id}', '{entity.FirstName}', '{entity.LastName}', '{entity.PhoneNumber}', '{entity.GroupId}')";
             var result  = ExecuteNonQuery(sqltext);
             return Task.FromResult(result == 0 ? null : entity);
         }
@@ -42,7 +42,12 @@ namespace DataAccess.SqlDbConnection.Repositories
 
         public override Task<Student> UpdateAsync(Student entity)
         {
-            throw new NotImplementedException();
+            var sqltext = $"update [Student] set FirstName = '{entity.FirstName}', LastName = '{entity.LastName}', " +
+                $"PhoneNumber = '{entity.PhoneNumber}', GroupId = '{entity.GroupId}'";
+
+            var result = ExecuteNonQuery(sqltext);
+
+            return Task.FromResult(result == 0 ? null : entity);
         }
 
         public override Task<List<Student>> GetAllEntitiesAsync()
@@ -62,7 +67,7 @@ namespace DataAccess.SqlDbConnection.Repositories
                 });
             }
             reader.Close();
-            return Task.FromResult(new List<Student>());
+            return Task.FromResult(list);
         }
     }
 }

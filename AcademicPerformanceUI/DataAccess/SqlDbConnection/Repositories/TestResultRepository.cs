@@ -41,7 +41,7 @@ namespace DataAccess.SqlDbConnection.Repositories
                 });
             }
             reader.Close();
-            return Task.FromResult(new List<TestResult>());
+            return Task.FromResult(list);
         }
 
         public override Task<TestResult> GetFirstOrDefaultAsync(Expression<Func<TestResult, bool>> predicate = null)
