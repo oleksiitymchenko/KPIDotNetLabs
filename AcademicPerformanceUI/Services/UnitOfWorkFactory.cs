@@ -3,23 +3,24 @@ using DataAccess.SqlDbConnection;
 using DataAccess.Interfaces;
 using Services.Settings;
 using System;
+using DataAccess.LinqToSql;
 
 namespace Services
 {
     public static class UnitOfWorkFactory
     {
         private static Lazy<SqlDbConnectionUnitOfWork> SqlDbConnectionUnitOfWorkInstance = new Lazy<SqlDbConnectionUnitOfWork>(()=> new SqlDbConnectionUnitOfWork(SettingList.GetConnectionString));
-        private static Lazy<SqlDbConnectionUnitOfWork> InMemoryUnitOfWorkInstance = new Lazy<SqlDbConnectionUnitOfWork>(()=> new SqlDbConnectionUnitOfWork(SettingList.GetConnectionString));
-        private static Lazy<InMemoryUnitOfWork> LinqToSqlUnitOfWorkInstance = new Lazy<InMemoryUnitOfWork>(()=> new InMemoryUnitOfWork());
+        private static Lazy<LinqToSqlUnitOfWork> LinqToSqlUnitOfWorkInstance = new Lazy<LinqToSqlUnitOfWork>(()=> new LinqToSqlUnitOfWork(SettingList.GetConnectionString));
+        private static Lazy<InMemoryUnitOfWork> InMemoryUnitOfWorkInstance = new Lazy<InMemoryUnitOfWork>(()=> new InMemoryUnitOfWork());
 
         public static IUnitOfWork GetUnitOfWork()
         {
             var type = SettingList.GetDataProvider;
             switch (type)
             {
-                case DataProvider.InMemory: return SqlDbConnectionUnitOfWorkInstance.Value;
+                case DataProvider.InMemory: return InMemoryUnitOfWorkInstance.Value;
                 case DataProvider.SqlDbConnection: return SqlDbConnectionUnitOfWorkInstance.Value;
-                case DataProvider.LinqToSql: return SqlDbConnectionUnitOfWorkInstance.Value;
+                case DataProvider.LinqToSql: return LinqToSqlUnitOfWorkInstance.Value;
                 default: return null;
             }
         }

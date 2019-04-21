@@ -3,8 +3,8 @@
     public static class SettingList
     {
         public static SerializationType GetSerializationType { get; set; } = SerializationType.Xml;
-        public static DataProvider GetDataProvider { get; set; } = DataProvider.SqlDbConnection;
-        public static string GetConnectionString { get; set; } = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\A.Timchenko\Downloads\TestDb.mdf;Integrated Security=True;Connect Timeout=30";
+        public static DataProvider GetDataProvider { get; set; } = DataProvider.LinqToSql;
+        public static string GetConnectionString { get; set; } = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\olexi\Downloads\TestDb.mdf;Integrated Security=True;Connect Timeout=30";
     }
 
     public enum SerializationType

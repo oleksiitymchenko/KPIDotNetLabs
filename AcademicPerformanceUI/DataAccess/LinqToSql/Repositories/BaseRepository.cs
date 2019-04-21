@@ -29,7 +29,7 @@ namespace DataAccess.LinqToSql.Repository
 
         public virtual Task<TEntity> UpdateAsync(TEntity newEntity)
         {
-            var oldEntity = DataContext.GetTable<TEntity>().Where(entity => entity.Id == newEntity.Id).FirstOrDefault();
+            var oldEntity = DataContext.GetTable<TEntity>().Where(entity => entity.Id.Equals(newEntity.Id)).FirstOrDefault();
             oldEntity.MapFrom(newEntity);
             DataContext.SubmitChanges();
             return Task.FromResult<TEntity>(newEntity);
@@ -37,17 +37,23 @@ namespace DataAccess.LinqToSql.Repository
 
         public virtual Task<List<TEntity>> GetAllEntitiesAsync()
         {
-            return Task.FromResult(DataContext.GetTable<TEntity>().ToList());
+            var table = DataContext.GetTable<TEntity>();
+
+            return Task.FromResult(table.ToList());
         }
 
         public virtual Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null)
         {
-            return Task.FromResult(DataContext.GetTable<TEntity>().Where(predicate).FirstOrDefault());
+            return Task.FromResult(DataContext.GetTable<TEntity>()
+                .Where(predicate)
+                .FirstOrDefault());
         }
         
         public virtual Task<bool> DeleteAsync(Guid Id)
         {
-            var entityToDelete = DataContext.GetTable<TEntity>().Where(entity => entity.Id == Id).FirstOrDefault();
+            var entityToDelete = DataContext.GetTable<TEntity>()
+                                            .Where(entity => entity.Id.Equals(Id))
+                                            .FirstOrDefault();
 
             DataContext.GetTable<TEntity>().DeleteOnSubmit(entityToDelete);
             DataContext.SubmitChanges();
@@ -55,7 +61,12 @@ namespace DataAccess.LinqToSql.Repository
             return Task.FromResult(true);
         }
 
-        public virtual void AddCollection(List<TEntity> entities) { throw new NotImplementedException();  }
+        public virtual void AddCollection(List<TEntity> entities)
+        {
+            DataContext.GetTable<TEntity>()
+                .InsertAllOnSubmit(entities);
+            DataContext.SubmitChanges();
+        }
 
         public TEntity CreateEmptyObject()
         {

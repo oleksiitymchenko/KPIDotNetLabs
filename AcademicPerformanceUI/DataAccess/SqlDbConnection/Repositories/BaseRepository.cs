@@ -18,6 +18,7 @@ namespace DataAccess.SqlDbConnection.Repository
         {
             this.ConnectionString = connectionString;
             this.SqlHelper = new SqlDbConnectionHelper();
+            //CreateTables();
         }
 
         public virtual Task<TEntity> CreateAsync(TEntity entity)
@@ -68,10 +69,10 @@ namespace DataAccess.SqlDbConnection.Repository
 
         private void CreateTables()
         {
+            ExecuteNonQuery(SqlHelper.CreateTableSqlText<Subject>());
             ExecuteNonQuery(SqlHelper.CreateTableSqlText<Test>());
             ExecuteNonQuery(SqlHelper.CreateTableSqlText<Group>());
             ExecuteNonQuery(SqlHelper.CreateTableSqlText<Student>());
-            ExecuteNonQuery(SqlHelper.CreateTableSqlText<Subject>());
             ExecuteNonQuery(SqlHelper.CreateTableSqlText<SubjectInGroup>());
             ExecuteNonQuery(SqlHelper.CreateTableSqlText<Teacher>());
             ExecuteNonQuery(SqlHelper.CreateTableSqlText<TestResult>());

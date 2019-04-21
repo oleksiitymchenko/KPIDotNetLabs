@@ -5,7 +5,7 @@ using DataAccess.Interfaces;
 
 namespace DataAccess.Models
 {
-    [Table(Name = "Subject")]
+    [Table(Name = "Teacher")]
     [Serializable]
     public class Teacher : IEntity
     {

@@ -5,7 +5,7 @@ using System;
 
 namespace DataAccess.LinqToSql
 {
-    public class LinqToSqlUnitOfWork
+    public class LinqToSqlUnitOfWork:IUnitOfWork
     {
         protected string ConnectionString;
         public LinqToSqlUnitOfWork(string connectionString)
