@@ -1,20 +1,20 @@
-﻿using System.Collections.Generic;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.ServiceModel.Web;
+using WCFRestFullCrudService.DTOModels;
 
 namespace WCFRestFullCrudService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
-    public interface IGroupService<TEntity>
+    public interface IGroupService
     {
         [OperationContract]
         [WebInvoke(
             Method = "GET",
-            UriTemplate = "Group",
+            UriTemplate = "Groups",
             ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json)]
-        List<TEntity> GetEntities();
+        string GetEntities();
+        //List<Group> GetEntities();
 
         [OperationContract]
         [WebInvoke(
@@ -22,7 +22,7 @@ namespace WCFRestFullCrudService
             UriTemplate = "Group",
             ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json)]
-        TEntity CreateEntity(TEntity entity);
+        Group CreateEntity(Group entity);
 
         [OperationContract]
         [WebInvoke(
@@ -38,6 +38,6 @@ namespace WCFRestFullCrudService
            UriTemplate = "Group",
            ResponseFormat = WebMessageFormat.Json,
            RequestFormat = WebMessageFormat.Json)]
-        bool UpdateEntity(TEntity entity);
+        bool UpdateEntity(Group entity);
     }
 }

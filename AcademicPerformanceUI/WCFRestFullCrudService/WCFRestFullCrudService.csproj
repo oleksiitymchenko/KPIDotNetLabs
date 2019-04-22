@@ -18,9 +18,9 @@
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -67,7 +67,9 @@
     <Content Include="Services\TeacherService.svc" />
     <Content Include="Services\SubjectSerivce.svc" />
     <Content Include="Services\SubjectInGroupService.svc" />
-    <Content Include="Services\GroupService.svc" />
+    <Content Include="Services\GroupService.svc">
+      <BrowseToURL>~/Services/GroupService.svc</BrowseToURL>
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

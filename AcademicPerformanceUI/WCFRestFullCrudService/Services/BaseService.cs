@@ -8,12 +8,12 @@ using WCFRestFullCrudService.DTOModels;
 
 namespace WCFRestFullCrudService
 {
-    public class BaseService<T> where T: class, IBaseDto
+    public class BaseService<T> where T: IBaseDto
     {
         private static string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\olexi\Downloads\TestDb.mdf;Integrated Security=True;Connect Timeout=30";
         public static Lazy<SqlDbConnectionUnitOfWork> UnitOfWork = new Lazy<SqlDbConnectionUnitOfWork>(() => new SqlDbConnectionUnitOfWork(connectionString));
         private static Mapper mapper { get; set; } =  new Mapper(); 
-        public T CreateEntity(T entity)
+        public virtual T CreateEntity(T entity)
         {
             try
             {
@@ -22,11 +22,11 @@ namespace WCFRestFullCrudService
             }
             catch (Exception ex)
             {
-                return null;
+                return default;
             }
         }
 
-        public bool DeleteEntity(string id)
+        public virtual bool DeleteEntity(string id)
         {
             try
             {
@@ -39,8 +39,11 @@ namespace WCFRestFullCrudService
             }
         }
 
-        public List<T> GetEntities()
+        public virtual List<T> GetEntities()
         {
+            var group = new Group { GroupName = "12321", StudyYear = 2, MaxStudents = 20 };
+            var x = (IBaseDto)group;
+            return new List<T>() { (T)x };
             try
             {
                 var list = GetRepository().GetAllEntitiesAsync().Result;
@@ -54,7 +57,7 @@ namespace WCFRestFullCrudService
             }
         }
 
-        public bool UpdateEntity(T entity)
+        public virtual bool UpdateEntity(T entity)
         {
             try
             {
