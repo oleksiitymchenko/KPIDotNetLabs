@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using CrudWebService.DTOModels;
+using CrudWebService.Services;
+using DataAccess.Models;
 using System.Web.Services;
 
 namespace CrudWebService
@@ -14,13 +13,7 @@ namespace CrudWebService
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     // [System.Web.Script.Services.ScriptService]
-    public class GroupService : System.Web.Services.WebService
+    public class GroupService : GenericWebService<GroupDto, Group>
     {
-
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
     }
 }
