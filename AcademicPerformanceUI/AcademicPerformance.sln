@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{AF1923E5-567D-4ECE-9CB4-4424E840D209}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFRestFullCrudService", "WCFRestFullCrudService\WCFRestFullCrudService.csproj", "{E6A3B641-8DD9-4689-8904-A50702B7528F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfRestService", "WcfRestService\WcfRestService.csproj", "{FB7846AC-4EC7-4F5A-914A-A7B84C1CBF81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{AF1923E5-567D-4ECE-9CB4-4424E840D209}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF1923E5-567D-4ECE-9CB4-4424E840D209}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF1923E5-567D-4ECE-9CB4-4424E840D209}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6A3B641-8DD9-4689-8904-A50702B7528F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6A3B641-8DD9-4689-8904-A50702B7528F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6A3B641-8DD9-4689-8904-A50702B7528F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6A3B641-8DD9-4689-8904-A50702B7528F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB7846AC-4EC7-4F5A-914A-A7B84C1CBF81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB7846AC-4EC7-4F5A-914A-A7B84C1CBF81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB7846AC-4EC7-4F5A-914A-A7B84C1CBF81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB7846AC-4EC7-4F5A-914A-A7B84C1CBF81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
