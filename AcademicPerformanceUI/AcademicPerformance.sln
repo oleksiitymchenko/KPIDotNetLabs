@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfRestService", "WcfRestService\WcfRestService.csproj", "{FB7846AC-4EC7-4F5A-914A-A7B84C1CBF81}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudWebService", "CrudWebService\CrudWebService.csproj", "{E70CDEB2-64F4-4A87-B6E4-2FDD8BE56127}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FB7846AC-4EC7-4F5A-914A-A7B84C1CBF81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB7846AC-4EC7-4F5A-914A-A7B84C1CBF81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB7846AC-4EC7-4F5A-914A-A7B84C1CBF81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E70CDEB2-64F4-4A87-B6E4-2FDD8BE56127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E70CDEB2-64F4-4A87-B6E4-2FDD8BE56127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E70CDEB2-64F4-4A87-B6E4-2FDD8BE56127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E70CDEB2-64F4-4A87-B6E4-2FDD8BE56127}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
