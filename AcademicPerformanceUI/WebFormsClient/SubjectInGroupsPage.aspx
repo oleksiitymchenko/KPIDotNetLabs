@@ -9,8 +9,10 @@
             <ItemTemplate>
                 <div>
                     <span>Id: <%#Eval("Id") %></span>
-                    <span>Shift Id: <%#Eval("Subject.Id") %></span>
-                    <span>Shift Id: <%#Eval("Group.Id") %></span>
+                    <br />
+                    <span>SubjectId: <%#Eval("SubjectId") %></span>
+                    <br />
+                    <span>GroupId: <%#Eval("GroupId") %></span>
                 </div>
                 <asp:Button ID="test" runat="server" CommandName="Update" CommandArgument='<%# Eval("Id") %>' class='btn btn-info' Text="Update"></asp:Button>
                 <asp:Button ID="btnDelete" runat="server" CommandName="Delete" CommandArgument='<%# Eval("Id") %>' class='btn btn-info' Text="Delete"></asp:Button>

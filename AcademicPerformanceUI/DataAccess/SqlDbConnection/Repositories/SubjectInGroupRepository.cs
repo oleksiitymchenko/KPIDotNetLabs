@@ -14,7 +14,7 @@ namespace DataAccess.SqlDbConnection.Repositories
 
         public override Task<List<SubjectInGroup>> GetAllEntitiesAsync()
         {
-            var text = SqlHelper.GetAllSqlText<Student>();
+            var text = SqlHelper.GetAllSqlText<SubjectInGroup>();
             var reader = ExecuteReader(text);
             var list = new List<SubjectInGroup>();
             while (reader.Read())

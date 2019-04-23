@@ -240,6 +240,7 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebClientCrudService.cs" />
     <Compile Include="WebServiceConnector.cs" />
   </ItemGroup>
   <ItemGroup>

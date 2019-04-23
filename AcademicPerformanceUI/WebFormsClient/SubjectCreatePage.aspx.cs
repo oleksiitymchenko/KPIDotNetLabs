@@ -1,10 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System;
 using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading;
 using System.Transactions;
 using System.Web.UI.WebControls;
@@ -15,94 +10,20 @@ namespace WebFormsClient
     public partial class SubjectCreatePage : System.Web.UI.Page
     {
         private Guid _id;
-        private List<SubjectDto> GetEntities()
-        {
-            string site = FormsSettings.HostUrl + "SubjectService.svc/Entities";
-
-            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(site);
-            req.Method = "GET";
-            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-            var text = "";
-            using (StreamReader stream = new StreamReader(
-                 resp.GetResponseStream(), Encoding.UTF8))
-            {
-                text = stream.ReadToEnd();
-            }
-            return JsonConvert.DeserializeObject<List<SubjectDto>>(text);
-        }
-
-        private void CreateEntity(SubjectDto subjectDto)
-        {
-            subjectDto.Id = Guid.NewGuid();
-            string site = FormsSettings.HostUrl + "SubjectService.svc/Entities";
-
-            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(site);
-            req.Method = "POST";
-
-            var data = JsonConvert.SerializeObject(subjectDto);
-            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
-           
-            req.ContentType = "application/json";
-            req.ContentLength = byteArray.Length;
-
-            using (Stream dataStream = req.GetRequestStream())
-            {
-                dataStream.Write(byteArray, 0, byteArray.Length);
-            }
-
-            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-
-            var text = "";
-            using (StreamReader stream = new StreamReader(
-                 resp.GetResponseStream(), Encoding.UTF8))
-            {
-                text = stream.ReadToEnd();
-            }
-        }
-
-        private void UpdateEntity(SubjectDto subjectDto)
-        {
-            string site = FormsSettings.HostUrl + "SubjectService.svc/Entities";
-
-            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(site);
-            req.Method = "PUT";
-
-            var data = JsonConvert.SerializeObject(subjectDto);
-            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
-            req.ContentType = "application/json";
-            req.ContentLength = byteArray.Length;
-
-            using (Stream dataStream = req.GetRequestStream())
-            {
-                dataStream.Write(byteArray, 0, byteArray.Length);
-            }
-
-            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-
-            var text = "";
-            using (StreamReader stream = new StreamReader(
-                 resp.GetResponseStream(), Encoding.UTF8))
-            {
-                text = stream.ReadToEnd();
-            }
-        }
-
+        private string serviceName = "SubjectService.svc";
+        private WebClientCrudService<SubjectDto> client = new WebClientCrudService<SubjectDto>();
         protected void Page_Load(object sender, EventArgs e)
         {
             var id = Request.QueryString["Id"];
-
             if (id != null)
             {
                 _id = Guid.Parse(id);
-
             }
-
             if (!IsPostBack)
             {
-
                 if (id != null)
                 {
-                    var _loadedSubject = GetEntities().Where(i => i.Id == Guid.Parse(id)).FirstOrDefault();
+                    var _loadedSubject = client.GetEntities(serviceName).Where(i => i.Id == Guid.Parse(id)).FirstOrDefault();
 
                     subjectName.Text = _loadedSubject.Name;
                     subjectHours.Text = _loadedSubject.Hours.ToString();
@@ -130,7 +51,7 @@ namespace WebFormsClient
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
             {
-                CreateEntity(subject);
+                client.CreateEntity(serviceName,subject);
 
                 scope.Complete();
             }
@@ -142,7 +63,7 @@ namespace WebFormsClient
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            var subject = GetEntities().Where(sub => sub.Id == _id).FirstOrDefault();
+            var subject = client.GetEntities(serviceName).Where(sub => sub.Id == _id).FirstOrDefault();
             subject.Name = subjectName.Text;
             subject.Hours = int.Parse(subjectHours.Text);
             Enum.TryParse(subjectTestType.Text, out FinalTestType rang);
@@ -150,9 +71,7 @@ namespace WebFormsClient
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
             {
-
-                UpdateEntity(subject);
-
+                client.UpdateEntity(serviceName,subject);
                 scope.Complete();
             }
 
