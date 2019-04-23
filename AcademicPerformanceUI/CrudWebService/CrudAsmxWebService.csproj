@@ -67,8 +67,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Services\GroupService.asmx" />
+    <Content Include="WebServices\GroupService.asmx" />
     <Content Include="Web.config" />
+    <Content Include="WebServices\StudentService.asmx" />
+    <Content Include="WebServices\SubjectInGroupService.asmx" />
+    <Content Include="WebServices\SubjectService.asmx" />
+    <Content Include="WebServices\TeacherWebService.asmx" />
+    <Content Include="WebServices\TestResultWebService.asmx" />
+    <Content Include="WebServices\TestWebService.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTOModels\FinalTestType.cs" />
@@ -81,15 +87,39 @@
     <Compile Include="DTOModels\TestDto.cs" />
     <Compile Include="DTOModels\TestResultDto.cs" />
     <Compile Include="Services\BaseService.cs" />
-    <Compile Include="Services\GenericWebService.cs">
+    <Compile Include="WebServices\GenericWebService.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Services\GroupService.asmx.cs">
+    <Compile Include="WebServices\GroupService.asmx.cs">
       <DependentUpon>GroupService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Mapper.cs" />
+    <Compile Include="WebServices\StudentService.asmx.cs">
+      <DependentUpon>StudentService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebServices\SubjectInGroupService.asmx.cs">
+      <DependentUpon>SubjectInGroupService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebServices\SubjectService.asmx.cs">
+      <DependentUpon>SubjectService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebServices\TeacherWebService.asmx.cs">
+      <DependentUpon>TeacherWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebServices\TestResultWebService.asmx.cs">
+      <DependentUpon>TestResultWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebServices\TestWebService.asmx.cs">
+      <DependentUpon>TestWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
