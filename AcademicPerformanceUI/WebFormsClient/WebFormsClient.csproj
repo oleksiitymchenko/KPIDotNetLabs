@@ -161,6 +161,8 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="SubjectCreatePage.aspx" />
+    <Content Include="SubjectInGroupCreatePage.aspx" />
+    <Content Include="SubjectInGroupsPage.aspx" />
     <Content Include="SubjectsPage.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -209,6 +211,20 @@
     </Compile>
     <Compile Include="SubjectCreatePage.aspx.designer.cs">
       <DependentUpon>SubjectCreatePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectInGroupCreatePage.aspx.cs">
+      <DependentUpon>SubjectInGroupCreatePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubjectInGroupCreatePage.aspx.designer.cs">
+      <DependentUpon>SubjectInGroupCreatePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectInGroupsPage.aspx.cs">
+      <DependentUpon>SubjectInGroupsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubjectInGroupsPage.aspx.designer.cs">
+      <DependentUpon>SubjectInGroupsPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="SubjectsPage.aspx.cs">
       <DependentUpon>SubjectsPage.aspx</DependentUpon>
