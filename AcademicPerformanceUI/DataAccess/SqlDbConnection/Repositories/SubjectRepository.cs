@@ -23,7 +23,7 @@ namespace DataAccess.SqlDbConnection.Repositories
                 {
                     Id = (Guid)reader["Id"],
                     Name = reader["Name"].ToString(),
-                    Hours = (float)reader["Hours"],
+                    Hours = (double)reader["Hours"],
                     FinalTestType = ((FinalTestType)reader["FinalTestType"])
                 });
             }

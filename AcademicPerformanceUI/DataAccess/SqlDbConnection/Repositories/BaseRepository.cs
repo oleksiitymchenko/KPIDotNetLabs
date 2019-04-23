@@ -18,7 +18,6 @@ namespace DataAccess.SqlDbConnection.Repository
         {
             this.ConnectionString = connectionString;
             this.SqlHelper = new SqlDbConnectionHelper();
-            //CreateTables();
         }
 
         public virtual Task<TEntity> CreateAsync(TEntity entity)
