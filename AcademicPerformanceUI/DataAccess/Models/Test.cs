@@ -5,19 +5,22 @@ using DataAccess.Interfaces;
 
 namespace DataAccess.Models
 {
-    [Table(Name = "Subject")]
+    [Table(Name = "Test")]
     [Serializable]
     public class Test : IEntity
     {
         [Column(IsPrimaryKey = true, IsDbGenerated = false)]
         [DataMember()]
         public Guid Id { get; set; }
+
         [Column]
         [DataMember()]
         public string Name { get; set; }
+
         [DataMember()]
         [Column]
         public string Theme { get; set; }
+
         [Column]
         [DataMember()]
         public DateTime Date { get; set; }

@@ -5,7 +5,7 @@ using DataAccess.Interfaces;
 
 namespace DataAccess.Models
 {
-    [Table(Name = "Subject")]
+    [Table(Name = "SubjectInGroup")]
     [Serializable]
     public class SubjectInGroup : IEntity
     {
