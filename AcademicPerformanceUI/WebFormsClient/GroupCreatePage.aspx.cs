@@ -12,12 +12,12 @@ using WcfRestService.DTOModels;
 
 namespace WebFormsClient
 {
-    public partial class SubjectCreatePage : System.Web.UI.Page
+    public partial class GroupCreatePage : System.Web.UI.Page
     {
         private Guid _id;
-        private List<SubjectDto> GetEntities()
+        private List<GroupDto> GetEntities()
         {
-            string site = FormsSettings.HostUrl + "SubjectService.svc/Entities";
+            string site = FormsSettings.HostUrl + "GroupService.svc/Entities";
 
             HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(site);
             req.Method = "GET";
@@ -28,20 +28,20 @@ namespace WebFormsClient
             {
                 text = stream.ReadToEnd();
             }
-            return JsonConvert.DeserializeObject<List<SubjectDto>>(text);
+            return JsonConvert.DeserializeObject<List<GroupDto>>(text);
         }
 
-        private void CreateEntity(SubjectDto subjectDto)
+        private void CreateEntity(GroupDto subjectDto)
         {
             subjectDto.Id = Guid.NewGuid();
-            string site = FormsSettings.HostUrl + "SubjectService.svc/Entities";
+            string site = FormsSettings.HostUrl + "GroupService.svc/Entities";
 
             HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(site);
             req.Method = "POST";
 
             var data = JsonConvert.SerializeObject(subjectDto);
             byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
-           
+
             req.ContentType = "application/json";
             req.ContentLength = byteArray.Length;
 
@@ -51,7 +51,6 @@ namespace WebFormsClient
             }
 
             HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-
             var text = "";
             using (StreamReader stream = new StreamReader(
                  resp.GetResponseStream(), Encoding.UTF8))
@@ -60,9 +59,9 @@ namespace WebFormsClient
             }
         }
 
-        private void UpdateEntity(SubjectDto subjectDto)
+        private void UpdateEntity(GroupDto subjectDto)
         {
-            string site = FormsSettings.HostUrl + "SubjectService.svc/Entities";
+            string site = FormsSettings.HostUrl + "GroupService.svc/Entities";
 
             HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(site);
             req.Method = "PUT";
@@ -104,29 +103,29 @@ namespace WebFormsClient
                 {
                     var _loadedSubject = GetEntities().Where(i => i.Id == Guid.Parse(id)).FirstOrDefault();
 
-                    subjectName.Text = _loadedSubject.Name;
-                    subjectHours.Text = _loadedSubject.Hours.ToString();
-                    subjectTestType.Text = _loadedSubject.FinalTestType.ToString();
+                    groupName.Text = _loadedSubject.GroupName;
+                    groupMaxStudents.Text = _loadedSubject.MaxStudents.ToString();
+                    groupStudyYear.Text = _loadedSubject.StudyYear.ToString();
 
                     btnCreate.Visible = false;
-                    Label.Text = "Update subject";
+                    Label.Text = "Update group";
                 }
                 else
                 {
                     btnUpdate.Visible = false;
-                    Label.Text = "Create new subject";
+                    Label.Text = "Create new group";
                 }
             }
         }
 
         protected void btnCreate_Click(object sender, EventArgs e)
         {
-            SubjectDto subject = new SubjectDto();
+            GroupDto subject = new GroupDto();
 
-            subject.Name = subjectName.Text;
-            subject.Hours = int.Parse(subjectHours.Text);
-            Enum.TryParse(subjectTestType.Text, out FinalTestType rang);
-            subject.FinalTestType = rang;
+            subject.GroupName = groupName.Text;
+            subject.MaxStudents = int.Parse(groupMaxStudents.Text);
+            subject.StudyYear = int.Parse(groupStudyYear.Text);
+            
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
             {
@@ -137,26 +136,25 @@ namespace WebFormsClient
 
             Thread.Sleep(3000);
 
-            Response.Redirect("subjectsPage");
+            Response.Redirect("groupsPage");
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            var subject = GetEntities().Where(sub => sub.Id == _id).FirstOrDefault();
-            subject.Name = subjectName.Text;
-            subject.Hours = int.Parse(subjectHours.Text);
-            Enum.TryParse(subjectTestType.Text, out FinalTestType rang);
-            subject.FinalTestType = rang;
+            var group = GetEntities().Where(sub => sub.Id == _id).FirstOrDefault();
+            group.GroupName = groupName.Text;
+            group.MaxStudents = int.Parse(groupMaxStudents.Text);
+            group.StudyYear = int.Parse(groupStudyYear.Text);
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
             {
 
-                UpdateEntity(subject);
+                UpdateEntity(group);
 
                 scope.Complete();
             }
 
-            Response.Redirect("subjectsPage");
+            Response.Redirect("groupsPage");
         }
     }
 }
