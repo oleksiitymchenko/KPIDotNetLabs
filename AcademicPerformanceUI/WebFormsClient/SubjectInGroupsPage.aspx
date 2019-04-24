@@ -2,7 +2,7 @@
 
 <asp:Content ID="ShiftPage" ContentPlaceHolderID="MainContent" runat="server">
     <div>
-        <h1>Routes list </h1>
+        <h1>SubjectInGroups list </h1>
         <asp:Button runat="server" class='btn btn-warning' OnClick="OnClick" Text="Create" role='button'></asp:Button>
         <hr>
         <asp:Repeater ID="Repeater" runat="server" onitemcommand="Repeater1_ItemCommand">

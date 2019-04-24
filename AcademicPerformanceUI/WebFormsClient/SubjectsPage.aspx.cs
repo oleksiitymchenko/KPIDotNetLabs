@@ -8,13 +8,12 @@ namespace WebFormsClient
 {
     public partial class SubjectsPage : System.Web.UI.Page
     {
-        private WebClientCrudService<SubjectDto> client = new WebClientCrudService<SubjectDto>();
-        private string serviceName = "SubjectService.svc";
+        private WebClientCrudService<SubjectDto> client = new WebClientCrudService<SubjectDto>("SubjectService.svc");
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                Repeater.DataSource = client.GetEntities(serviceName);
+                Repeater.DataSource = client.GetEntities();
                 Repeater.DataBind();
             }
         }
@@ -26,7 +25,7 @@ namespace WebFormsClient
                 case "Delete":
                     using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
                     {
-                        client.DeleteEntity(serviceName,e.CommandArgument.ToString());
+                        client.DeleteEntity(e.CommandArgument.ToString());
                         scope.Complete();
                     }
                     Thread.Sleep(3000);

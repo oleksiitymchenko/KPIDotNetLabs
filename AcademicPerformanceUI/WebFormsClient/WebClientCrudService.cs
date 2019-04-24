@@ -10,7 +10,13 @@ namespace WebFormsClient
 {
     public class WebClientCrudService<TEntity> where TEntity:IBaseDto
     {
-        public List<TEntity> GetEntities(string serviceName)
+        private string serviceName;
+
+        public WebClientCrudService(string ServiceName)
+        {
+            serviceName = ServiceName;
+        }
+        public List<TEntity> GetEntities()
         {
             string url = $"{FormsSettings.HostUrl}/{serviceName}/Entities";
 
@@ -26,7 +32,7 @@ namespace WebFormsClient
             return JsonConvert.DeserializeObject<List<TEntity>>(text);
         }
 
-        public string DeleteEntity(string serviceName, string id)
+        public string DeleteEntity(string id)
         {
             string url = $"{FormsSettings.HostUrl}/{serviceName}/Entities/{id}";
             HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(url);
@@ -35,7 +41,7 @@ namespace WebFormsClient
             return resp.StatusCode.ToString();
         }
 
-        public string CreateEntity(string serviceName, TEntity subjectDto)
+        public string CreateEntity(TEntity subjectDto)
         {
             subjectDto.Id = Guid.NewGuid();
             string url = $"{FormsSettings.HostUrl}/{serviceName}/Entities";
@@ -65,7 +71,7 @@ namespace WebFormsClient
             return text;
         }
 
-        public string UpdateEntity(string serviceName,  TEntity subjectDto)
+        public string UpdateEntity(TEntity subjectDto)
         {
             string url = $"{FormsSettings.HostUrl}/{serviceName}/Entities";
 

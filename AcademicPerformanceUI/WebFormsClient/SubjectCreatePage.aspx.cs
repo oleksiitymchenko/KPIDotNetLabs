@@ -10,8 +10,7 @@ namespace WebFormsClient
     public partial class SubjectCreatePage : System.Web.UI.Page
     {
         private Guid _id;
-        private string serviceName = "SubjectService.svc";
-        private WebClientCrudService<SubjectDto> client = new WebClientCrudService<SubjectDto>();
+        private WebClientCrudService<SubjectDto> client = new WebClientCrudService<SubjectDto>("SubjectService.svc");
         protected void Page_Load(object sender, EventArgs e)
         {
             var id = Request.QueryString["Id"];
@@ -23,7 +22,7 @@ namespace WebFormsClient
             {
                 if (id != null)
                 {
-                    var _loadedSubject = client.GetEntities(serviceName).Where(i => i.Id == Guid.Parse(id)).FirstOrDefault();
+                    var _loadedSubject = client.GetEntities().Where(i => i.Id == Guid.Parse(id)).FirstOrDefault();
 
                     subjectName.Text = _loadedSubject.Name;
                     subjectHours.Text = _loadedSubject.Hours.ToString();
@@ -51,7 +50,7 @@ namespace WebFormsClient
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
             {
-                client.CreateEntity(serviceName,subject);
+                client.CreateEntity(subject);
 
                 scope.Complete();
             }
@@ -63,7 +62,7 @@ namespace WebFormsClient
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            var subject = client.GetEntities(serviceName).Where(sub => sub.Id == _id).FirstOrDefault();
+            var subject = client.GetEntities().Where(sub => sub.Id == _id).FirstOrDefault();
             subject.Name = subjectName.Text;
             subject.Hours = int.Parse(subjectHours.Text);
             Enum.TryParse(subjectTestType.Text, out FinalTestType rang);
@@ -71,7 +70,7 @@ namespace WebFormsClient
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
             {
-                client.UpdateEntity(serviceName,subject);
+                client.UpdateEntity(subject);
                 scope.Complete();
             }
 
