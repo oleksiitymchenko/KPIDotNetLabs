@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace WcfMsMqService.DTOModels
+namespace WebServicesShared.DTOModels
 {
     [DataContract]
     public class SubjectInGroupDto : IBaseDto

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WcfMsmqService")]
+[assembly: AssemblyTitle("WebServicesShared")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WcfMsmqService")]
+[assembly: AssemblyProduct("WebServicesShared")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("63e22add-ef48-41b0-988f-5ecdf84accf0")]
+[assembly: Guid("5211e666-ee73-4b7c-839e-10a907e0828c")]
 
 // Version information for an assembly consists of the following four values:
 //

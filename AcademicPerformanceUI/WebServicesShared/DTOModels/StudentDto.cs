@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace WcfMsMqService.DTOModels
+namespace WebServicesShared.DTOModels
 {
     [DataContract]
-    public class TeacherDto : IBaseDto
+    public class StudentDto : IBaseDto
     {
         [DataMember]
         public Guid Id { get; set; }
@@ -19,6 +19,6 @@ namespace WcfMsMqService.DTOModels
         public string PhoneNumber { get; set; }
 
         [DataMember]
-        public Guid SubjectId { get; set; }
+        public Guid GroupId { get; set; }
     }
 }

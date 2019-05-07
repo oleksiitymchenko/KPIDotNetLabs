@@ -1,4 +1,4 @@
-﻿namespace WcfMsMqService.DTOModels
+﻿namespace WebServicesShared.DTOModels
 {
     public enum FinalTestType
     {

@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebFormsClient", "WebFormsC
 		{FB7846AC-4EC7-4F5A-914A-A7B84C1CBF81} = {FB7846AC-4EC7-4F5A-914A-A7B84C1CBF81}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfMsmqService", "WcfMsmqService\WcfMsmqService.csproj", "{3539DE49-F7D8-4CB9-906C-84B2E55C6B83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{830E8EC2-3768-476A-AB82-CC04D4AA3F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{830E8EC2-3768-476A-AB82-CC04D4AA3F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{830E8EC2-3768-476A-AB82-CC04D4AA3F8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3539DE49-F7D8-4CB9-906C-84B2E55C6B83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3539DE49-F7D8-4CB9-906C-84B2E55C6B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3539DE49-F7D8-4CB9-906C-84B2E55C6B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3539DE49-F7D8-4CB9-906C-84B2E55C6B83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
