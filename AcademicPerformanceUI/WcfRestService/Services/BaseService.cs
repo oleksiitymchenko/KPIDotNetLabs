@@ -13,13 +13,25 @@ namespace WcfRestService
         public static Lazy<SqlDbConnectionUnitOfWork> UnitOfWork = new Lazy<SqlDbConnectionUnitOfWork>(() => new SqlDbConnectionUnitOfWork(connectionString));
         private Mapper mapper { get; set; } =  new Mapper();
 
+        IRepository<ModelType> Repository = null;
+        public BaseService(IRepository<ModelType> repository)
+        {
+            Repository = repository;
+        }
+
+        public BaseService()
+        {
+
+        }
+
         public virtual DtoType CreateEntity(DtoType entity)
         {
             try
             {
                 mapper = new Mapper();
                 Console.WriteLine(entity);
-                var repository = UnitOfWork.Value.GetRepositoryByEntityType<ModelType>();
+                IRepository<ModelType> repository = null;
+                repository = Repository ?? UnitOfWork.Value.GetRepositoryByEntityType<ModelType>();
                 var modelEntity = (ModelType)mapper.MapToModel((IBaseDto)entity);
                 var createdEntity = repository.CreateAsync(modelEntity).Result;
                 return (DtoType)mapper.MapToDto<DtoType>(createdEntity);
@@ -34,7 +46,9 @@ namespace WcfRestService
         {
             try
             {
-                var isDeleted = UnitOfWork.Value.GetRepositoryByEntityType<ModelType>().DeleteAsync(Guid.Parse(id)).Result;
+                IRepository<ModelType> repository = null;
+                repository = Repository ?? UnitOfWork.Value.GetRepositoryByEntityType<ModelType>();
+                var isDeleted = repository.DeleteAsync(Guid.Parse(id)).Result;
                 return isDeleted;
             }
             catch (Exception ex)
@@ -47,7 +61,9 @@ namespace WcfRestService
         {
             try
             {
-                var list = UnitOfWork.Value.GetRepositoryByEntityType<ModelType>().GetAllEntitiesAsync().Result;
+                IRepository<ModelType> repository = null;
+                repository = Repository ?? UnitOfWork.Value.GetRepositoryByEntityType<ModelType>();
+                var list = repository.GetAllEntitiesAsync().Result;
                 var newList = new List<DtoType>();
                 list.ForEach(item => newList.Add((DtoType)mapper.MapToDto<DtoType>(item)));
                 return newList;
@@ -62,7 +78,9 @@ namespace WcfRestService
         {
             try
             {
-                var updatedEntity = UnitOfWork.Value.GetRepositoryByEntityType<ModelType>().UpdateAsync((ModelType)mapper.MapToModel(entity)).Result;
+                IRepository<ModelType> repository = null;
+                repository = Repository ?? UnitOfWork.Value.GetRepositoryByEntityType<ModelType>();
+                var updatedEntity = repository.UpdateAsync((ModelType)mapper.MapToModel(entity)).Result;
                 return updatedEntity != null;
             }
             catch (Exception ex)
