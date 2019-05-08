@@ -37,7 +37,9 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,7 +52,7 @@
     <Compile Include="Interfaces\IAcademicService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\AcademicSercice.cs" />
+    <Compile Include="Services\AcademicService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -60,10 +62,6 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{c89962c7-21ec-4603-99bb-55a50312f19a}</Project>
       <Name>DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebServicesShared\WebServicesShared.csproj">
-      <Project>{5211e666-ee73-4b7c-839e-10a907e0828c}</Project>
-      <Name>WebServicesShared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

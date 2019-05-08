@@ -1,18 +1,23 @@
-﻿using System;
+﻿using DataAccess.Interfaces;
+using DataAccess.Models;
+using Newtonsoft.Json;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Transactions;
 using System.Web.UI.WebControls;
 using WcfRestService.DTOModels;
+using WebFormsClient.AcademicService;
 
 namespace WebFormsMsMqClient
 {
     public partial class SubjectInGroupCreatePage : System.Web.UI.Page
     {
+        private readonly IRepository<Subject> SubjectRepository = Singleton.UnitOfWork.SubjectRepostitory;
+        private readonly IRepository<Group> GroupRepository = Singleton.UnitOfWork.GroupRepository;
+        private readonly IRepository<SubjectInGroup> SubjectInGroupRepository = Singleton.UnitOfWork.SubjectInGroupRepository;
+        private readonly AcademicServiceClient serviceClient = new AcademicServiceClient();
         private Guid _id;
-        private WebClientCrudService<SubjectInGroupDto> webClientSubjectInGroup = new WebClientCrudService<SubjectInGroupDto>("SubjectInGroupService.svc");
-        private WebClientCrudService<SubjectDto> webClientSubject = new WebClientCrudService<SubjectDto>("SubjectService.svc");
-        private WebClientCrudService<GroupDto> webClientGroup = new WebClientCrudService<GroupDto>("GroupService.svc");
         protected void Page_Load(object sender, EventArgs e)
         {
             var id = Request.QueryString["ID"];
@@ -26,7 +31,7 @@ namespace WebFormsMsMqClient
             {
                 if (id != null)
                 {
-                    var _loadedRoute = webClientSubjectInGroup.GetEntities().Where(x => x.Id == _id).FirstOrDefault();
+                    var _loadedRoute = SubjectInGroupRepository.GetAllEntitiesAsync().Result.Where(x => x.Id == _id).FirstOrDefault();
                     dropdownGroup.SelectedValue = _loadedRoute.GroupId.ToString();
                     dropdownSubject.SelectedValue = _loadedRoute.SubjectId.ToString();
 
@@ -39,8 +44,8 @@ namespace WebFormsMsMqClient
                     Label.Text = "Create new subject in group";
                 }
 
-                dropdownGroup.DataSource = webClientGroup.GetEntities().Select(item => item.Id);
-                dropdownSubject.DataSource = webClientSubject.GetEntities().Select(item => item.Id);
+                dropdownGroup.DataSource = GroupRepository.GetAllEntitiesAsync().Result.Select(item => item.Id);
+                dropdownSubject.DataSource = SubjectRepository.GetAllEntitiesAsync().Result.Select(item => item.Id);
                 DataBind();
             }
         }
@@ -54,7 +59,8 @@ namespace WebFormsMsMqClient
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
             {
-                webClientSubjectInGroup.CreateEntity(route);
+                var serialized = JsonConvert.SerializeObject(route);
+                serviceClient.CreateSiG(serialized);
                 scope.Complete();
             }
 
@@ -64,14 +70,15 @@ namespace WebFormsMsMqClient
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            var route = webClientSubjectInGroup.GetEntities().Where(x => x.Id == _id).FirstOrDefault();
+            var route = SubjectInGroupRepository.GetAllEntitiesAsync().Result.Where(x => x.Id == _id).FirstOrDefault();
 
             route.GroupId = new Guid(dropdownGroup.SelectedValue);
             route.SubjectId = new Guid(dropdownSubject.SelectedValue);
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
             {
-                webClientSubjectInGroup.UpdateEntity(route);
+                var serialized = JsonConvert.SerializeObject(route);
+                serviceClient.UpdateSiG(serialized);
                 scope.Complete();
             }
 

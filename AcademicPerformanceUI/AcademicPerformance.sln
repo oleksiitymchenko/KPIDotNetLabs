@@ -13,12 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfRestService", "WcfRestSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudAsmxWebService", "CrudWebService\CrudAsmxWebService.csproj", "{E70CDEB2-64F4-4A87-B6E4-2FDD8BE56127}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebFormsClient", "WebFormsClient\WebFormsClient.csproj", "{830E8EC2-3768-476A-AB82-CC04D4AA3F8B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{FB7846AC-4EC7-4F5A-914A-A7B84C1CBF81} = {FB7846AC-4EC7-4F5A-914A-A7B84C1CBF81}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebFormsMsMqClient", "WebFormsMsMqClient\WebFormsMsMqClient.csproj", "{830E8EC2-3768-476A-AB82-CC04D4AA3F8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfMsmqService", "WcfMsmqService\WcfMsmqService.csproj", "{3539DE49-F7D8-4CB9-906C-84B2E55C6B83}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebFormsClient", "WebFormsClient\WebFormsClient.csproj", "{270DB62E-950F-406B-ADC4-EF91CF2187D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfMsmqService", "WcfMsmqService\WcfMsmqService.csproj", "{63E22ADD-EF48-41B0-988F-5ECDF84ACCF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,10 +49,14 @@ Global
 		{830E8EC2-3768-476A-AB82-CC04D4AA3F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{830E8EC2-3768-476A-AB82-CC04D4AA3F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{830E8EC2-3768-476A-AB82-CC04D4AA3F8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3539DE49-F7D8-4CB9-906C-84B2E55C6B83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3539DE49-F7D8-4CB9-906C-84B2E55C6B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3539DE49-F7D8-4CB9-906C-84B2E55C6B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3539DE49-F7D8-4CB9-906C-84B2E55C6B83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{270DB62E-950F-406B-ADC4-EF91CF2187D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{270DB62E-950F-406B-ADC4-EF91CF2187D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{270DB62E-950F-406B-ADC4-EF91CF2187D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{270DB62E-950F-406B-ADC4-EF91CF2187D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63E22ADD-EF48-41B0-988F-5ECDF84ACCF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63E22ADD-EF48-41B0-988F-5ECDF84ACCF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63E22ADD-EF48-41B0-988F-5ECDF84ACCF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63E22ADD-EF48-41B0-988F-5ECDF84ACCF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

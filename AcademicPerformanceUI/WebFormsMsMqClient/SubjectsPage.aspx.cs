@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using System.Transactions;
-using WcfRestService.DTOModels;
 using System.Threading;
+using DataAccess.Models;
+using DataAccess.Interfaces;
+using WebFormsClient.AcademicService;
 
 namespace WebFormsMsMqClient
 {
     public partial class SubjectsPage : System.Web.UI.Page
     {
-        private WebClientCrudService<SubjectDto> client = new WebClientCrudService<SubjectDto>("SubjectService.svc");
+        private readonly IRepository<Subject> Repository = Singleton.UnitOfWork.SubjectRepostitory;
+        private readonly AcademicServiceClient serviceClient = new AcademicServiceClient();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                Repeater.DataSource = client.GetEntities();
+                Repeater.DataSource = Repository.GetAllEntitiesAsync().Result;
                 Repeater.DataBind();
             }
         }
@@ -25,7 +28,7 @@ namespace WebFormsMsMqClient
                 case "Delete":
                     using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
                     {
-                        client.DeleteEntity(e.CommandArgument.ToString());
+                        serviceClient.RemoveSubject(e.CommandArgument.ToString());
                         scope.Complete();
                     }
                     Thread.Sleep(3000);

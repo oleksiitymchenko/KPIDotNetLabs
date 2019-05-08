@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="AcademicService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetMsmqBinding_IAcademicService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6666/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6666/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IAcademicService_CreateSubject_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSubject" />
+  </wsdl:message>
+  <wsdl:message name="IAcademicService_UpdateSubject_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSubject" />
+  </wsdl:message>
+  <wsdl:message name="IAcademicService_RemoveSubject_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveSubject" />
+  </wsdl:message>
+  <wsdl:message name="IAcademicService_CreateGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGroup" />
+  </wsdl:message>
+  <wsdl:message name="IAcademicService_UpdateGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGroup" />
+  </wsdl:message>
+  <wsdl:message name="IAcademicService_RemoveGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveGroup" />
+  </wsdl:message>
+  <wsdl:message name="IAcademicService_CreateSiG_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSiG" />
+  </wsdl:message>
+  <wsdl:message name="IAcademicService_UpdateSiG_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSiG" />
+  </wsdl:message>
+  <wsdl:message name="IAcademicService_RemoveSiG_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveSiG" />
+  </wsdl:message>
+  <wsdl:portType name="IAcademicService">
+    <wsdl:operation name="CreateSubject">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAcademicService/CreateSubject" message="tns:IAcademicService_CreateSubject_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSubject">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAcademicService/UpdateSubject" message="tns:IAcademicService_UpdateSubject_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSubject">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAcademicService/RemoveSubject" message="tns:IAcademicService_RemoveSubject_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAcademicService/CreateGroup" message="tns:IAcademicService_CreateGroup_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAcademicService/UpdateGroup" message="tns:IAcademicService_UpdateGroup_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAcademicService/RemoveGroup" message="tns:IAcademicService_RemoveGroup_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateSiG">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAcademicService/CreateSiG" message="tns:IAcademicService_CreateSiG_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSiG">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAcademicService/UpdateSiG" message="tns:IAcademicService_UpdateSiG_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSiG">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAcademicService/RemoveSiG" message="tns:IAcademicService_RemoveSiG_InputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetMsmqBinding_IAcademicService" type="tns:IAcademicService">
+    <wsp:PolicyReference URI="#NetMsmqBinding_IAcademicService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/msmq" />
+    <wsdl:operation name="CreateSubject">
+      <soap12:operation soapAction="http://tempuri.org/IAcademicService/CreateSubject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSubject">
+      <soap12:operation soapAction="http://tempuri.org/IAcademicService/UpdateSubject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSubject">
+      <soap12:operation soapAction="http://tempuri.org/IAcademicService/RemoveSubject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="CreateGroup">
+      <soap12:operation soapAction="http://tempuri.org/IAcademicService/CreateGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGroup">
+      <soap12:operation soapAction="http://tempuri.org/IAcademicService/UpdateGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveGroup">
+      <soap12:operation soapAction="http://tempuri.org/IAcademicService/RemoveGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="CreateSiG">
+      <soap12:operation soapAction="http://tempuri.org/IAcademicService/CreateSiG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSiG">
+      <soap12:operation soapAction="http://tempuri.org/IAcademicService/UpdateSiG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSiG">
+      <soap12:operation soapAction="http://tempuri.org/IAcademicService/RemoveSiG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AcademicService">
+    <wsdl:port name="NetMsmqBinding_IAcademicService" binding="tns:NetMsmqBinding_IAcademicService">
+      <soap12:address location="net.msmq://localhost/private/academic-performance" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.msmq://localhost/private/academic-performance</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

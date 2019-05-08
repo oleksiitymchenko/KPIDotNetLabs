@@ -1,19 +1,22 @@
-﻿using System;
+﻿using DataAccess.Interfaces;
+using DataAccess.Models;
+using System;
 using System.Transactions;
 using System.Web.UI.WebControls;
-using WcfRestService.DTOModels;
+using WebFormsClient.AcademicService;
 
 namespace WebFormsMsMqClient
 {
     public partial class GroupsPage : System.Web.UI.Page
     {
-        private WebClientCrudService<GroupDto> webClient = new WebClientCrudService<GroupDto>("GroupService.svc");
+        private readonly IRepository<Group> Repository = Singleton.UnitOfWork.GroupRepository;
+        private readonly AcademicServiceClient serviceClient = new AcademicServiceClient();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                Repeater.DataSource = webClient.GetEntities();
+                Repeater.DataSource = Repository.GetAllEntitiesAsync().Result;
                 Repeater.DataBind();
             }
         }
@@ -25,7 +28,7 @@ namespace WebFormsMsMqClient
                 case "Delete":
                     using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
                     {
-                        webClient.DeleteEntity(e.CommandArgument.ToString());
+                        serviceClient.RemoveGroup(e.CommandArgument.ToString());
 
                         scope.Complete();
                     }

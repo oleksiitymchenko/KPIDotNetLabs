@@ -1,16 +1,20 @@
-﻿using System;
+﻿using DataAccess.Interfaces;
+using DataAccess.Models;
+using Newtonsoft.Json;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Transactions;
 using System.Web.UI.WebControls;
-using WcfRestService.DTOModels;
+using WebFormsClient.AcademicService;
 
 namespace WebFormsMsMqClient
 {
     public partial class SubjectCreatePage : System.Web.UI.Page
     {
+        private readonly IRepository<Subject> Repository = Singleton.UnitOfWork.SubjectRepostitory;
+        private readonly AcademicServiceClient serviceClient = new AcademicServiceClient();
         private Guid _id;
-        private WebClientCrudService<SubjectDto> client = new WebClientCrudService<SubjectDto>("SubjectService.svc");
         protected void Page_Load(object sender, EventArgs e)
         {
             var id = Request.QueryString["Id"];
@@ -22,7 +26,7 @@ namespace WebFormsMsMqClient
             {
                 if (id != null)
                 {
-                    var _loadedSubject = client.GetEntities().Where(i => i.Id == Guid.Parse(id)).FirstOrDefault();
+                    var _loadedSubject = Repository.GetAllEntitiesAsync().Result.Where(i => i.Id == Guid.Parse(id)).FirstOrDefault();
 
                     subjectName.Text = _loadedSubject.Name;
                     subjectHours.Text = _loadedSubject.Hours.ToString();
@@ -41,17 +45,17 @@ namespace WebFormsMsMqClient
 
         protected void btnCreate_Click(object sender, EventArgs e)
         {
-            SubjectDto subject = new SubjectDto();
+            Subject subject = new Subject();
 
             subject.Name = subjectName.Text;
             subject.Hours = int.Parse(subjectHours.Text);
-            Enum.TryParse(subjectTestType.Text, out FinalTestType rang);
+            Enum.TryParse(subjectTestType.Text, out DataAccess.Models.FinalTestType rang);
             subject.FinalTestType = rang;
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
             {
-                client.CreateEntity(subject);
-
+                var serialized = JsonConvert.SerializeObject(subject);
+                serviceClient.CreateSubject(serialized);
                 scope.Complete();
             }
 
@@ -62,7 +66,7 @@ namespace WebFormsMsMqClient
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            var subject = client.GetEntities().Where(sub => sub.Id == _id).FirstOrDefault();
+            var subject = Repository.GetAllEntitiesAsync().Result.Where(sub => sub.Id == _id).FirstOrDefault();
             subject.Name = subjectName.Text;
             subject.Hours = int.Parse(subjectHours.Text);
             Enum.TryParse(subjectTestType.Text, out FinalTestType rang);
@@ -70,7 +74,8 @@ namespace WebFormsMsMqClient
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
             {
-                client.UpdateEntity(subject);
+                var serialized = JsonConvert.SerializeObject(subject);
+                serviceClient.UpdateSubject(serialized);
                 scope.Complete();
             }
 
