@@ -8,7 +8,7 @@ using WcfMsmqService.Interfaces;
 
 namespace WcfMsmqService.Services
 {
-    public class AcademicSercice:IAcademicService
+    public class AcademicService:IAcademicService
     {
         private static string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\a.timchenko\DOCUMENTS\TestTest.mdf;Integrated Security=True;Connect Timeout=30";
         public static Lazy<SqlDbConnectionUnitOfWork> UnitOfWork = new Lazy<SqlDbConnectionUnitOfWork>(() => new SqlDbConnectionUnitOfWork(connectionString));
@@ -138,15 +138,12 @@ namespace WcfMsmqService.Services
         {
             try
             {
-                Console.WriteLine("Recieved route: " + route);
+                Console.WriteLine("Recieved Group: " + route);
 
                 var routeObj = JsonConvert.DeserializeObject<Group>(route);
 
-                var shift = _shiftsRepo.Get(x => x.ShiftId == routeObj.RouteId);
 
-                routeObj.Shift = shift;
-
-                _routesRepo.Create(routeObj);
+                _ = UnitOfWork.Value.GroupRepository.CreateAsync(routeObj).Result;
             }
             catch (Exception e)
             {
@@ -160,20 +157,19 @@ namespace WcfMsmqService.Services
         {
             try
             {
-                Console.WriteLine("Recieved updated route: " + route);
+                Console.WriteLine("Recieved updated Group: " + route);
                 var routeObj = JsonConvert.DeserializeObject<Group>(route);
 
-                var guid = routeObj.RouteId;
+                var guid = routeObj.Id;
 
-                var item = _routesRepo.Get(x => x.RouteId == guid);
+                var item = UnitOfWork.Value.GroupRepository.GetAllEntitiesAsync().Result.FirstOrDefault(x => x.Id == guid);
 
-                item.EstimatedTime = routeObj.EstimatedTime;
-                item.IsTrafficJam = routeObj.IsTrafficJam;
-                item.Length = routeObj.Length;
+                item.GroupName = routeObj.GroupName;
+                item.StudyYear = routeObj.StudyYear;
+                item.MaxStudents = routeObj.MaxStudents;
 
-                item.Shift = _shiftsRepo.Get(x => x.ShiftId == routeObj.RouteId);
 
-                _routesRepo.Update(item);
+                _ = UnitOfWork.Value.GroupRepository.UpdateAsync(item).Result;
             }
             catch (Exception e)
             {
@@ -187,9 +183,9 @@ namespace WcfMsmqService.Services
         {
             try
             {
-                Console.WriteLine("Remove route with id: " + routeId);
+                Console.WriteLine("Remove Group with id: " + routeId);
                 var guid = Guid.Parse(routeId);
-                _routesRepo.Remove(_routesRepo.Get(x => x.RouteId == guid));
+                _ = UnitOfWork.Value.GroupRepository.DeleteAsync(guid).Result;
             }
             catch (Exception e)
             {
@@ -198,6 +194,5 @@ namespace WcfMsmqService.Services
         }
 
         #endregion
-
     }
 }
