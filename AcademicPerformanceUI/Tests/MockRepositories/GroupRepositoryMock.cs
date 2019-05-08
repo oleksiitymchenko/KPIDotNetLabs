@@ -43,7 +43,16 @@ namespace Tests.MockRepositories
 
         public Task<Group> UpdateAsync(Group entity)
         {
+            var group = groups.FirstOrDefault(item => item.Id == entity.Id);
+            group.GroupName = entity.GroupName;
+            group.MaxStudents = entity.MaxStudents;
+            group.StudyYear = entity.StudyYear;
             return Task.FromResult(entity);
+        }
+
+        public void Clear()
+        {
+            groups = new List<Group>();
         }
     }
 }
