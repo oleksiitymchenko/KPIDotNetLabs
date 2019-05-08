@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Transactions;
 using System.Web.UI.WebControls;
-using WebFormsClient.AcademicService;
+using WebFormsMsMqClient.AcademicService;
 
 namespace WebFormsMsMqClient
 {

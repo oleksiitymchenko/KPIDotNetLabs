@@ -3,7 +3,7 @@ using DataAccess.Models;
 using System;
 using System.Transactions;
 using System.Web.UI.WebControls;
-using WebFormsClient.AcademicService;
+using WebFormsMsMqClient.AcademicService;
 
 namespace WebFormsMsMqClient
 {

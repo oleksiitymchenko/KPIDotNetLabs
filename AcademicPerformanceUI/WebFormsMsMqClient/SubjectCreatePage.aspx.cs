@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Transactions;
 using System.Web.UI.WebControls;
-using WebFormsClient.AcademicService;
+using WebFormsMsMqClient.AcademicService;
 
 namespace WebFormsMsMqClient
 {
@@ -46,7 +46,7 @@ namespace WebFormsMsMqClient
         protected void btnCreate_Click(object sender, EventArgs e)
         {
             Subject subject = new Subject();
-
+            subject.Id = Guid.NewGuid();
             subject.Name = subjectName.Text;
             subject.Hours = int.Parse(subjectHours.Text);
             Enum.TryParse(subjectTestType.Text, out DataAccess.Models.FinalTestType rang);

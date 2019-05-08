@@ -4,7 +4,7 @@ using System.Transactions;
 using System.Threading;
 using DataAccess.Models;
 using DataAccess.Interfaces;
-using WebFormsClient.AcademicService;
+using WebFormsMsMqClient.AcademicService;
 
 namespace WebFormsMsMqClient
 {

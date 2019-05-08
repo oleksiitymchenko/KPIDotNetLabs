@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebFormsClient.AcademicService {
+namespace WebFormsMsMqClient.AcademicService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -71,12 +71,12 @@ namespace WebFormsClient.AcademicService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IAcademicServiceChannel : WebFormsClient.AcademicService.IAcademicService, System.ServiceModel.IClientChannel {
+    public interface IAcademicServiceChannel : WebFormsMsMqClient.AcademicService.IAcademicService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class AcademicServiceClient : System.ServiceModel.ClientBase<WebFormsClient.AcademicService.IAcademicService>, WebFormsClient.AcademicService.IAcademicService {
+    public partial class AcademicServiceClient : System.ServiceModel.ClientBase<WebFormsMsMqClient.AcademicService.IAcademicService>, WebFormsMsMqClient.AcademicService.IAcademicService {
         
         public AcademicServiceClient() {
         }
